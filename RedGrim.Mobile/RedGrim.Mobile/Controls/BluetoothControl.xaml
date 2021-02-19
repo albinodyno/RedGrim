@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:gauge="clr-namespace:Syncfusion.SfGauge.XForms;assembly=Syncfusion.SfGauge.XForms"
+             x:Class="RedGrim.Mobile.Controls.BluetoothControl">
+  <ContentView.Content>
+        <Grid x:Name="grdGauges">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height=".10*"/>
+            </Grid.RowDefinitions>
+
+            <gauge:SfCircularGauge Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="10">
+                <gauge:SfCircularGauge.Headers>
+                    <gauge:Header Text="Coolant Temp" ForegroundColor="DarkCyan" TextSize="15" />
+                </gauge:SfCircularGauge.Headers>
+                <gauge:SfCircularGauge.Scales>
+                    <gauge:Scale>
+                        <gauge:Scale.Ranges>
+                            <gauge:Range StartValue="0" EndValue="40"/>
+                            <gauge:Range StartValue="50" EndValue="80" Color="Red"/>
+                        </gauge:Scale.Ranges>
+                        <gauge:Scale.Pointers>
+                            <gauge:NeedlePointer  Value="90" />
+                            <gauge:RangePointer Value="60" />
+                            <gauge:MarkerPointer Value="70" />
+                        </gauge:Scale.Pointers>
+                    </gauge:Scale>
+                </gauge:SfCircularGauge.Scales>
+            </gauge:SfCircularGauge>
+
+            <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <gauge:SfCircularGauge VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="10" Grid.Row="0" Grid.Column="0">
+                    <gauge:SfCircularGauge.Headers>
+                        <gauge:Header Text="Coolant Temp" ForegroundColor="DarkCyan" TextSize="15" />
+                    </gauge:SfCircularGauge.Headers>
+                    <gauge:SfCircularGauge.Scales>
+                        <gauge:Scale>
+                            <gauge:Scale.Ranges>
+                                <gauge:Range StartValue="0" EndValue="40"/>
+                            </gauge:Scale.Ranges>
+                            <gauge:Scale.Pointers>
+                                <gauge:NeedlePointer  Value="60" />
+                                <gauge:RangePointer Value="60" />
+                                <gauge:MarkerPointer Value="70" />
+                            </gauge:Scale.Pointers>
+                        </gauge:Scale>
+                    </gauge:SfCircularGauge.Scales>
+                </gauge:SfCircularGauge>
+
+                <gauge:SfCircularGauge VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="10" Grid.Row="0" Grid.Column="1">
+                    <gauge:SfCircularGauge.Headers>
+                        <gauge:Header Text="Intake Temp" ForegroundColor="DarkCyan" TextSize="15" />
+                    </gauge:SfCircularGauge.Headers>
+                    <gauge:SfCircularGauge.Scales>
+                        <gauge:Scale>
+                            <gauge:Scale.Ranges>
+                                <gauge:Range StartValue="0" EndValue="40"/>
+                            </gauge:Scale.Ranges>
+                            <gauge:Scale.Pointers>
+                                <gauge:NeedlePointer  Value="60" />
+                                <gauge:RangePointer Value="60" />
+                                <gauge:MarkerPointer Value="70" />
+                            </gauge:Scale.Pointers>
+                        </gauge:Scale>
+                    </gauge:SfCircularGauge.Scales>
+                </gauge:SfCircularGauge>
+
+                <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".4*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width=".4*"/>
+                        <ColumnDefinition Width=".4*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width=".4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height=".4*"/>
+                        <RowDefinition />
+                        <RowDefinition Height=".4*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!--Bottom Left Box Gauge-->
+                    <StackLayout Grid.Row="0" Grid.Column="1" VerticalOptions="EndAndExpand">
+                        <Label Text="Voltage" HorizontalOptions="CenterAndExpand" TextColor="DarkCyan" Margin="5"/>
+                    </StackLayout>
+                    
+                    <StackLayout Grid.Row="1" Grid.Column="1" VerticalOptions="EndAndExpand">
+                        <StackLayout Orientation="Horizontal">
+                            <Label x:Name="gagTbk1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text="0" TextColor="DarkCyan"/>
+                            <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text="V" TextColor="DarkCyan"/>
+                        </StackLayout>
+                    </StackLayout>
+
+
+                    <!--Bottom Right Box Gauge-->
+                    <StackLayout Grid.Row="0" Grid.Column="4" VerticalOptions="EndAndExpand">
+                        <Label Text="NULL" HorizontalOptions="CenterAndExpand" TextColor="DarkCyan" Margin="5"/>
+                    </StackLayout>
+
+                    <StackLayout  Grid.Row="1" Grid.Column="4" VerticalOptions="EndAndExpand">
+                        <StackLayout Orientation="Horizontal">
+                            <Label x:Name="gagTbk2" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text="0" TextColor="DarkCyan"/>
+                            <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text="mg" TextColor="DarkCyan"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                </Grid>
+            </Grid>
+
+            <!--BT Status-->
+            <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" x:Name="tbkStatus" TextColor="Purple" Margin="5"/>
+
+            <!--BT Settings Panel-->
+            <Grid x:Name="pnlBTSettings" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2" IsVisible="false" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" Background="Gray">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".15*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height=".5*"/>
+                    <RowDefinition Height=".5*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" Text="OBDII Connection" TextColor="OrangeRed"/>
+
+                <StackLayout Grid.Row="1" HorizontalOptions="StartAndExpand">
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Device: " TextColor="Cyan" Margin="5" FontSize="18"></Label>
+                        <Label x:Name="tbkOBDDevice" HorizontalOptions="StartAndExpand" Text="None" TextColor="Cyan" FontSize="14" Margin="5" Width="200"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Status: " TextColor="Cyan" Margin="5" FontSize="18"></Label>
+                        <Label x:Name="tbkOBDStatus" HorizontalOptions="StartAndExpand" Text="Not Started" TextColor="Cyan" FontSize="14" Margin="5" Width="200"/>
+                    </StackLayout>
+
+                    <Label x:Name="tbkDebug" HorizontalOptions="StartAndExpand" TextColor="Cyan" Margin="5"/>
+                </StackLayout>
+
+
+            </Grid>
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

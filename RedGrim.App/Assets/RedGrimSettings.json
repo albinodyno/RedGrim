@@ -1,0 +1,10 @@
+{
+  "aux1": "AUX 1",
+  "aux2": "AUX 2",
+  "aux3": "AUX 3",
+  "aux4": "AUX 4",
+  "theme": "dark",
+  "frontCam": true,
+  "backCam": true,
+  "topCam": true
+}

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:RedGrim.Mobile.Controls"
+             x:Class="RedGrim.Mobile.MainPage">
+
+    <Grid Background="Black" x:Name="grdMainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".15*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width=".4*"/>
+            <ColumnDefinition Width=".15*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height=".1*"/>
+        </Grid.RowDefinitions>
+
+        <!--Side Menu-->
+        <Grid x:Name="pnlSideMenu" Grid.Row="1" Grid.Column="5" Grid.RowSpan="2" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf03d;" FontSize="48" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Background="Black" TextColor="DarkCyan" x:Name="btnCamLaunch"/>
+            <Button Grid.Row="1" FontFamily="{StaticResource FontAwesomeBrands}" Text="&#xf294;" FontSize="48" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Background="Black" TextColor="DarkCyan" x:Name="btnBTSetup" Clicked="btnBTSetup_Clicked"/>
+
+            <Label Grid.Row="2" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf0e7;" FontSize="48" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Background="Black" TextColor="DarkCyan" x:Name="btnAuxLaunch" />
+            <Label Grid.Row="3" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf013;" FontSize="48" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Background="Black" TextColor="OrangeRed" x:Name="btnSettings"/>
+           
+        </Grid>
+        <local:BluetoothControl x:Name="pnlBT" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="2" Margin="5"/>
+
+        <StackLayout HorizontalOptions="CenterAndExpand"
+                 VerticalOptions="CenterAndExpand" IsVisible="false">
+            <Label x:Name="time"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="CenterAndExpand"
+               Text="At runtime, this Label will display the current time.">
+            </Label>
+            <StackLayout Orientation="Horizontal">
+                <Button HorizontalOptions="End"
+                    VerticalOptions="End"
+                    Text="Up"/>
+                <Button HorizontalOptions="Start"
+                    VerticalOptions="End"
+                    Text="Down"/>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+    
+
+</ContentPage>

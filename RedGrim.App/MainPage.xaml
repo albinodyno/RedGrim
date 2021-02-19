@@ -1,0 +1,94 @@
+﻿<Page
+    x:Class="RedGrim.App.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:RedGrim.App.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="Black" x:Name="grdMainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".15*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width=".4*"/>
+            <ColumnDefinition Width=".15*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height=".1*"/>
+        </Grid.RowDefinitions>
+        
+        <!--Side Menu-->
+        <Grid x:Name="pnlSideMenu" Grid.Row="1" Grid.Column="5" Grid.RowSpan="2" BorderBrush="DarkCyan" BorderThickness="3" CornerRadius="15" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Viewbox Grid.Row="0">
+                <Button FontFamily="Segoe MDL2 Assets" FontSize="48" Content="&#xEDAD;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Foreground="DarkCyan" x:Name="btnCamLaunch" />
+            </Viewbox>
+            <Viewbox Grid.Row="1">
+                <Button FontFamily="Segoe MDL2 Assets" FontSize="48" Content="&#xEC4A;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Foreground="DarkCyan" x:Name="btnBTSetup" Click="btnBTSetup_Click"/>
+            </Viewbox>
+            <Viewbox Grid.Row="2">
+                <Button FontFamily="Segoe MDL2 Assets" FontSize="48" Content="&#xE945;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Foreground="DarkCyan" x:Name="btnAuxLaunch" Click="btnAuxLaunch_Click"/>
+            </Viewbox>
+            <Viewbox Grid.Row="3">
+                <Button FontFamily="Segoe MDL2 Assets" FontSize="48" Content="&#xE115;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Foreground="OrangeRed" x:Name="btnSettings" Click="btnSettings_Click"/>
+            </Viewbox>
+        </Grid>
+     
+        <local:BluetoothControl x:Name="pnlBT" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="2" Margin="5"/>
+
+        <local:AuxControl x:Name="pnlAux" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="5" Visibility="Collapsed"/>
+
+        <local:SettingsController x:Name="pnlSettings" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="2" Margin="5" Visibility="Collapsed"/>
+
+        <!--Camera Grid-->
+        <Grid x:Name="grdCamera" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="2" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width=".1*"/>
+            </Grid.ColumnDefinitions>
+
+            <CaptureElement Grid.Column="0" Grid.Row="0" x:Name="camBackCamera" Stretch="Uniform" FlowDirection="RightToLeft" VerticalAlignment="Center" Visibility="Visible" Margin="10"/>
+            <CaptureElement Grid.Column="0" Grid.Row="0" x:Name="camFrontCamera" Stretch="Uniform"  FlowDirection="RightToLeft" VerticalAlignment="Center" Visibility="Collapsed" Margin="10"/>
+            <CaptureElement Grid.Column="0" Grid.Row="0" x:Name="camTopCamera" Stretch="Uniform" FlowDirection="RightToLeft" VerticalAlignment="Center" Visibility="Collapsed" Margin="10"/>
+
+            <Grid Grid.Row="1" Grid.Column="5" Grid.RowSpan="2" x:Name="pnlCamMenu" BorderBrush="DarkCyan" BorderThickness="4" CornerRadius="15" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!--Camera Menu-->
+                <Viewbox Grid.Row="0">
+                    <Button FontFamily="Segoe MDL2 Assets" FontSize="48" Content="&#xE111;" FontWeight="Bold" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Foreground="DarkCyan" x:Name="btnFrontCam" Click="btnFrontCam_Click"/>
+                </Viewbox>
+                <Viewbox Grid.Row="1">
+                    <Button FontFamily="Segoe MDL2 Assets" FontSize="48" Content="&#xE112;" FontWeight="Bold" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Foreground="DarkCyan" x:Name="btnBackCam" Click="btnBackCam_Click"/>
+                </Viewbox>
+                <Viewbox Grid.Row="2">
+                    <Button FontFamily="Segoe MDL2 Assets" FontSize="48" Content="&#xE143;" FontWeight="Bold" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Foreground="DarkCyan" x:Name="btnTopCam" Click="btnTopCam_Click"/>
+                </Viewbox>
+                <Viewbox Grid.Row="3">
+                    <Button FontFamily="Segoe MDL2 Assets" FontSize="48" Content="&#xE106;" FontWeight="Bold" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Foreground="OrangeRed" x:Name="btnCloseCam" Click="btnCamLaunch_Click"/>
+                </Viewbox>
+                
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
