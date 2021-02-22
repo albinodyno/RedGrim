@@ -1,21 +1,11 @@
 ﻿using RedGrim.App.Models;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace RedGrim.App.Controls
 {
@@ -24,27 +14,14 @@ namespace RedGrim.App.Controls
         //To load from json file
         public static CurrentSettings SavedSettings = new CurrentSettings();
         static string savedSettingsJson;
-
-        //To store to json file
-        //public static CurrentSettings CurrentSettings = new CurrentSettings();
-        //static string currentSettingsJson;
-
-        public static bool settingsReady;
+        bool settingsReady = false;
 
         public SettingsController()
         {
             this.InitializeComponent();
-            LoadSettings();
         }
 
-        public async void LoadSettings()
-        {
-            await GetSavedSettings();
-            LoadValues();
-            settingsReady = true;
-        }
-
-        public static async Task GetSavedSettings()
+        public async Task<bool> GetSavedSettings()
         {
             try
             {
@@ -54,64 +31,87 @@ namespace RedGrim.App.Controls
                 //load object with settings from json string
                 SavedSettings = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.CurrentSettings>(savedSettingsJson);
                 if (SavedSettings == null || SavedSettings.aux1 == null)
-                    throw new Exception();
-                
+                    throw new Exception();               
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry("Saved json not found or blank, loading default settings...");
-                LoadDefaults();
+                MainPage.SystemLogEntry($"Saved json not found or blank, loading default settings - {ex.Message}");
+                settingsReady = await LoadDefaults();
+            }
+
+            if(settingsReady)
+                settingsReady = await LoadValues();
+
+            return settingsReady;
+        }
+
+        public static async Task<bool> LoadDefaults()
+        {
+            try
+            {
+                SavedSettings = new CurrentSettings();
+                //Load object with default values
+                SavedSettings.aux1 = "AUX 1";
+                SavedSettings.aux2 = "AUX 2";
+                SavedSettings.aux3 = "AUX 3";
+                SavedSettings.aux4 = "AUX 4";
+                SavedSettings.backCam = true;
+                SavedSettings.frontCam = true;
+                SavedSettings.topCam = true;
+                SavedSettings.theme = "Dark";
+                SavedSettings.obdProtocol = "AT SP 0";
+                SavedSettings.btDeviceID = "";
+                SavedSettings.btDeviceName = "";
+                SavedSettings.elmDelay = 2000;
+                SavedSettings.pidDelay = 1000;
+
+                //serialize object to json
+                savedSettingsJson = Newtonsoft.Json.JsonConvert.SerializeObject(SavedSettings);
+
+                //Create json file because it wasnt found
+                StorageFile saveFile = await ApplicationData.Current.LocalFolder.CreateFileAsync("RedGrimSettings.json", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteTextAsync(saveFile, savedSettingsJson);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                MainPage.SystemLogEntry("Error loading default settings");
+                return false;
             }
         }
 
-        public static async void LoadDefaults()
+        private async Task<bool> LoadValues()
         {
-            SavedSettings = new CurrentSettings();
-            //Load object with default values
-            SavedSettings.aux1 = "AUX 1";
-            SavedSettings.aux2 = "AUX 2";
-            SavedSettings.aux3 = "AUX 3";
-            SavedSettings.aux4 = "AUX 4";
-            SavedSettings.backCam = true;
-            SavedSettings.frontCam = true;
-            SavedSettings.topCam = true;
-            SavedSettings.theme = "Dark";
-            SavedSettings.obdProtocol = "AT SP 0";
-            SavedSettings.btDeviceID = "";
-            SavedSettings.btDeviceName = "";
-            SavedSettings.elmDelay = 2000;
-            SavedSettings.pidDelay = 1000;
-
-            //serialize object to json
-            savedSettingsJson = Newtonsoft.Json.JsonConvert.SerializeObject(SavedSettings);
-
-            //Create json file because it wasnt found
-            StorageFile saveFile = await ApplicationData.Current.LocalFolder.CreateFileAsync("RedGrimSettings.json", CreationCollisionOption.ReplaceExisting);
-            await FileIO.WriteTextAsync(saveFile, savedSettingsJson);
-        }
-
-        private void LoadValues()
-        {
-            txbAux1.Text = SavedSettings.aux1;
-            txbAux2.Text = SavedSettings.aux2;
-            txbAux3.Text = SavedSettings.aux3;
-            txbAux4.Text = SavedSettings.aux4;
-
-            if (SavedSettings.theme == "Dark")
+            try
             {
-                rbtDark.IsChecked = true;
+                txbAux1.Text = SavedSettings.aux1;
+                txbAux2.Text = SavedSettings.aux2;
+                txbAux3.Text = SavedSettings.aux3;
+                txbAux4.Text = SavedSettings.aux4;
+
+                if (SavedSettings.theme == "Dark")
+                {
+                    rbtDark.IsChecked = true;
+                }
+                else if (SavedSettings.theme == "Light")
+                {
+                    rbtLight.IsChecked = true;
+                }
+
+                tgbFCam.IsChecked = SavedSettings.frontCam;
+                tgbBCam.IsChecked = SavedSettings.backCam;
+                tgbTCam.IsChecked = SavedSettings.topCam;
+
+                tbkELMDelay.Text = Convert.ToString(SavedSettings.elmDelay);
+                tbkPIDDelay.Text = Convert.ToString(SavedSettings.pidDelay);
+                return true;
             }
-            else if(SavedSettings.theme == "Light")
+            catch(Exception ex)
             {
-                rbtLight.IsChecked = true;
+                MainPage.SystemLogEntry("Error loading values");
+                return false;
             }
 
-            tgbFCam.IsChecked = SavedSettings.frontCam;
-            tgbBCam.IsChecked = SavedSettings.backCam;
-            tgbTCam.IsChecked = SavedSettings.topCam;
-
-            tbkELMDelay.Text = Convert.ToString(SavedSettings.elmDelay);
-            tbkPIDDelay.Text = Convert.ToString(SavedSettings.pidDelay);
         }
 
         private void btnSaveSettings_Click(object sender, RoutedEventArgs e)

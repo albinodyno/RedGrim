@@ -1,6 +1,5 @@
 ﻿using RedGrim.App.Models;
 using System;
-using System.Threading.Tasks;
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.Rfcomm;
 using Windows.Devices.Enumeration;
@@ -29,6 +28,7 @@ namespace RedGrim.App.Controls
         public BluetoothControl()
         {
             this.InitializeComponent();
+            ConnectSavedBTOBD();
         }
 
         public void LoadBTSettings()
