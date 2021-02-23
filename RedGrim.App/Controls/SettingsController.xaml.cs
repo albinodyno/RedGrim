@@ -31,7 +31,9 @@ namespace RedGrim.App.Controls
                 //load object with settings from json string
                 SavedSettings = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.CurrentSettings>(savedSettingsJson);
                 if (SavedSettings == null || SavedSettings.aux1 == null)
-                    throw new Exception();               
+                    throw new Exception();
+                else
+                    settingsReady = true;
             }
             catch (Exception ex)
             {
