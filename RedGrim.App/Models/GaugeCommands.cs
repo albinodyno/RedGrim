@@ -18,6 +18,8 @@ namespace RedGrim.App.Models
         DataWriter obdWriter;
         DataReader obdReader;
 
+        public static int SuccessLoops = 0;
+
         public int elmDelay;
         public int pidDelay;
         bool success;
@@ -40,7 +42,7 @@ namespace RedGrim.App.Models
         public GaugeCommands(StreamSocket stream, int eDelay, int pDelay)
         {
             streamSocket = stream;
-            stream.Control.KeepAlive = true;
+            //stream.Control.KeepAlive = true;
 
             obdWriter = new DataWriter(streamSocket.OutputStream);
             obdReader = new DataReader(streamSocket.InputStream);
@@ -70,7 +72,7 @@ namespace RedGrim.App.Models
             }
             catch(Exception ex)
             {
-                MainPage.SystemLogEntry($"ELM setup failed - {ex.Message}");
+                MainPage.SystemLogEntry($"ELM Setup failed - {ex.Message}");
                 return false;
             }
         }
@@ -87,7 +89,7 @@ namespace RedGrim.App.Models
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry($"ELM Write setup failed - {ex.Message}");
+                MainPage.SystemLogEntry($"ELM Write failed - {ex.Message}");
             }
         }
 
@@ -101,7 +103,7 @@ namespace RedGrim.App.Models
             }
             catch(Exception ex)
             {
-                MainPage.SystemLogEntry($"ELM Read setup failed - {ex.Message}");
+                MainPage.SystemLogEntry($"ELM Read failed - {ex.Message}");
             }
         }
         #endregion
@@ -109,20 +111,37 @@ namespace RedGrim.App.Models
 
         #region Execute PID Commands
         public async Task<bool> ExecutePIDs()
-        {    
-            await WritePID(botLeft.OBDCommand);   //CoolantTemp
-            await WritePID(botRight.OBDCommand);   //IntakeTemp
-            await WritePID(mainGauge.OBDCommand);   //Voltage
-            await Task.Delay(pidDelay);
+        {
+            try
+            {
+               success = await WritePID(botLeft.OBDCommand);   //CoolantTemp
+                if (success)
+                    success = await WritePID(botRight.OBDCommand);  //IntakeTemp
+                if (success)
+                    success = await WritePID(mainGauge.OBDCommand); //Voltage
+                else
+                {
+                    MainPage.SystemLogEntry($"Writing PIDS was unsuccessful");
+                    ClearBuffer();
+                    return true;
+                }
+                await Task.Delay(pidDelay);
 
-            success = await ReadPID();
-            return true;
+                success = await ReadPID();
+                SuccessLoops++;
+                return success;
+            }
+            catch(Exception ex)
+            {
+                MainPage.SystemLogEntry($"PID Loop failed - {ex.Message}");
+                return false;
+            }
         }
         #endregion
 
 
         #region Write/Read PID
-        public async Task WritePID(string command)        //Write in PID code
+        public async Task<bool> WritePID(string command)        //Write in PID code
         {
             try
             {
@@ -130,10 +149,12 @@ namespace RedGrim.App.Models
                 await obdWriter.StoreAsync();
                 await obdWriter.FlushAsync();
                 await Task.Delay(pidDelay);  //Can i remove this if we wait for pid delay to read?
+                return true;
             }
             catch(Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                MainPage.SystemLogEntry($"Error at Writing PID - {ex.Message}");
+                return false;
             }
         }
 
@@ -153,8 +174,22 @@ namespace RedGrim.App.Models
             }
             catch(Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                MainPage.SystemLogEntry($"Error at Reading PID - {ex.Message}");
                 return false;
+            }
+        }
+
+        public async void ClearBuffer()
+        {
+            try
+            {
+                uint buffer = await obdReader.LoadAsync(512);
+                string value = obdReader.ReadString(buffer);
+                BluetoothControl.log = BluetoothControl.log + value + "\r\rBUFFER CLEARED";
+            }
+            catch (Exception ex)
+            {
+                MainPage.SystemLogEntry($"Error Clearing Buffer");
             }
         }
         #endregion

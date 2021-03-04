@@ -56,7 +56,7 @@ namespace RedGrim.App
         public static void SystemLogEntry(string entry)
         {
             //Add date time, but need interenet connection....
-            errorLog = errorLog + $"{entry}\r";
+            errorLog = errorLog + $"{entry}\r\r";
         }
 
         #region Side Menu Buttons

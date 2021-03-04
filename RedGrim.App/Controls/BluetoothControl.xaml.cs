@@ -3,6 +3,7 @@ using System;
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.Rfcomm;
 using Windows.Devices.Enumeration;
+using Windows.Devices.SerialCommunication;
 using Windows.Foundation;
 using Windows.Networking.Sockets;
 using Windows.UI;
@@ -19,6 +20,8 @@ namespace RedGrim.App.Controls
         BluetoothDevice btDevice;
         GaugeCommands commands;
 
+        //SerialDevice serialDevice;
+
         string savedDeviceID;
         string savedDeviceName;
         
@@ -28,7 +31,6 @@ namespace RedGrim.App.Controls
         public BluetoothControl()
         {
             this.InitializeComponent();
-            ConnectSavedBTOBD();
         }
 
         public void LoadBTSettings()
@@ -36,9 +38,13 @@ namespace RedGrim.App.Controls
             savedDeviceID = SettingsController.SavedSettings.btDeviceID;
             savedDeviceName = SettingsController.SavedSettings.btDeviceName;
             if (SettingsController.SavedSettings.btDeviceID != "")
+            {
                 savedDeviceID = SettingsController.SavedSettings.btDeviceID;
+                ConnectSavedBTOBD();
+            }
         }
 
+        #region Bluetooth Device Setup
         public async void ConnectBTOBD(bool newDevice)
         {
             var bounds = Window.Current.Bounds;
@@ -70,9 +76,6 @@ namespace RedGrim.App.Controls
 
         public async void ConnectSavedBTOBD()
         {
-            if (savedDeviceID == null || savedDeviceID == "")
-                return;
-
             try
             {
                 tbkStatus.Text = "Status : Connecting to last device...";
@@ -88,7 +91,7 @@ namespace RedGrim.App.Controls
             {
                 MainPage.SystemLogEntry(ex.Message);
                 UnsuccessfulConnection(ex.Message);
-                DisconnectBluetooth();
+                //DisconnectBluetooth();
             }
         }
 
@@ -103,6 +106,7 @@ namespace RedGrim.App.Controls
                     throw new Exception();
 
                 streamSocket = new StreamSocket();
+                //streamSocket.Control.KeepAlive = true;
                 await streamSocket.ConnectAsync(service.ConnectionHostName, service.ConnectionServiceName);
 
                 commands = new GaugeCommands(streamSocket, SettingsController.SavedSettings.elmDelay, SettingsController.SavedSettings.pidDelay);
@@ -113,14 +117,12 @@ namespace RedGrim.App.Controls
             }
             catch (UnauthorizedAccessException ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
-                UnsuccessfulConnection(ex.Message);
+                UnsuccessfulConnection($"Bluetooth Device not found - {ex.Message}");
                 DisconnectBluetooth();
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
-                UnsuccessfulConnection(ex.Message);
+                UnsuccessfulConnection($"Bluetooth Device not found - {ex.Message}");
             }
         }
 
@@ -170,6 +172,7 @@ namespace RedGrim.App.Controls
             streamSocket = null;
             //write code to clear and save settings for saved bt device
         }
+        #endregion
 
         #region Gauges
         public async void StartGauges()
@@ -181,7 +184,9 @@ namespace RedGrim.App.Controls
                 loopPid = await commands.SetupCommands();
 
             if (loopPid)
-                SetupGauges();    
+                SetupGauges();
+            else
+                MainPage.SystemLogEntry("Setup Commands Failed");
 
             while(loopPid)
                 try
@@ -200,23 +205,6 @@ namespace RedGrim.App.Controls
 
             MainPage.SystemLogEntry($"Stopped Looping");      
         }
-
-        //public async Task<bool> UpdateGauges()
-        //{
-        //    try
-        //    {
-        //        gagTbk1.Text = Convert.ToString(commands.botLeft.GaugeValue);
-        //        gagTbk2.Text = Convert.ToString(commands.botRight.GaugeValue);
-        //        gagMainGauge.Value = commands.mainGauge.GaugeValue;
-
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MainPage.SystemLogEntry(ex.Message);
-        //        return true;
-        //    }
-        //}
 
         public void SetupGauges()
         {

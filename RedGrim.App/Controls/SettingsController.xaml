@@ -29,16 +29,16 @@
 
                 <!--AUX Buttons-->
                 <StackPanel Grid.Row="0" BorderBrush="Purple" BorderThickness="1" CornerRadius="5" Padding="5" Margin="2">
-                    <TextBlock Text="AUX Buttons" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DarkCyan"/>
-                    <TextBox x:Name="txbAux1" Background="Black" BorderBrush="DarkCyan"/>
-                    <TextBox x:Name="txbAux2" Background="Black" BorderBrush="DarkCyan"/>
-                    <TextBox x:Name="txbAux3" Background="Black" BorderBrush="DarkCyan"/>
-                    <TextBox x:Name="txbAux4" Background="Black" BorderBrush="DarkCyan"/>
+                    <TextBlock Text="AUX Buttons" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Cyan"/>
+                    <TextBox x:Name="txbAux1" Background="Black" BorderBrush="Cyan"/>
+                    <TextBox x:Name="txbAux2" Background="Black" BorderBrush="Cyan"/>
+                    <TextBox x:Name="txbAux3" Background="Black" BorderBrush="Cyan"/>
+                    <TextBox x:Name="txbAux4" Background="Black" BorderBrush="Cyan"/>
                 </StackPanel>
 
                 <!--Camera-->
                 <StackPanel Grid.Row="1" BorderBrush="Purple" BorderThickness="1" CornerRadius="5" Padding="5" Margin="2">
-                    <TextBlock Text="Cameras" HorizontalAlignment="Center" Foreground="DarkCyan"/>
+                    <TextBlock Text="Cameras" HorizontalAlignment="Center" Foreground="Cyan"/>
                     <ToggleButton x:Name="tgbFCam" Content="Front Camera" VerticalAlignment="Center" Margin="2" MinWidth="200" HorizontalAlignment="Center"/>
                     <ToggleButton x:Name="tgbBCam" Content="Back Camera" VerticalAlignment="Center" Margin="2" MinWidth="200" HorizontalAlignment="Center"/>
                     <ToggleButton x:Name="tgbTCam" Content="Top Camera" VerticalAlignment="Center" Margin="2" MinWidth="200" HorizontalAlignment="Center"/>
@@ -68,24 +68,24 @@
                 <!--WIFI-->
                 <Border Grid.Row="1" HorizontalAlignment="Stretch" />
                 <StackPanel Grid.Row="1" BorderBrush="Purple" BorderThickness="1" CornerRadius="5" Padding="5" Margin="2">
-                    <TextBlock Text="WIFI" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DarkCyan"/>
-                    <TextBlock Text="None" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="DarkCyan" Margin="2" Padding="5"/>
-                    <Button x:Name="btnConnectWiFi" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Connect" Background="DarkCyan" MinWidth="230" Padding="5" Margin="2"/>
+                    <TextBlock Text="WIFI" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Cyan"/>
+                    <TextBlock Text="None" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Cyan" Margin="2" Padding="5"/>
+                    <Button x:Name="btnConnectWiFi" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Connect" Background="Cyan" Foreground="Black" MinWidth="230" Padding="5" Margin="2"/>
                 </StackPanel>
 
                 <!--OBD-->
                 <StackPanel Grid.Row="2" BorderBrush="Purple" BorderThickness="1" CornerRadius="5" Padding="5" Margin="2">
-                    <TextBlock Text="OBD" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DarkCyan"/>
-                    <Button x:Name="btnGaugeSettings" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Gauge Settings" Click="btnGaugeSettings_Click" Background="DarkCyan" MinWidth="230" Padding="5" Margin="2"/>
-                    <Button x:Name="btnShowLog" VerticalAlignment="Center" HorizontalAlignment="Center" Content="OBD Log" Click="btnShowLog_Click" Background="DarkCyan" MinWidth="230" Padding="5" Margin="2"/>
+                    <TextBlock Text="OBD" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Cyan"/>
+                    <Button x:Name="btnGaugeSettings" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Gauge Settings" Click="btnGaugeSettings_Click" Background="Cyan" Foreground="Black" MinWidth="230" Padding="5" Margin="2"/>
+                    <Button x:Name="btnShowLog" VerticalAlignment="Center" HorizontalAlignment="Center" Content="OBD Log" Click="btnShowLog_Click" Background="Cyan" Foreground="Black" MinWidth="230" Padding="5" Margin="2"/>
                 </StackPanel>
 
                 <!--System-->
                 <StackPanel Grid.Row="3" BorderBrush="Purple" BorderThickness="1" CornerRadius="5" Padding="5" Margin="2">
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="System" Foreground="DarkCyan"/>
-                    <Button x:Name="btnShowErrorLog" VerticalAlignment="Center" HorizontalAlignment="Center" Content="System Logs" Click="btnShowErrorLog_Click" Background="DarkCyan" Width="230" Padding="5" Margin="2"/>
-                    <Button x:Name="btnSaveSettings" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Save" Click="btnSaveSettings_Click" Background="DarkCyan" Width="230" Padding="5" Margin="2"/>
-                    <Button x:Name="btnResetSettings" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Reset To Default" Click="btnResetSettings_Click" Background="DarkCyan" Width="230" Padding="5" Margin="2"/>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="System" Foreground="Cyan"/>
+                    <Button x:Name="btnShowErrorLog" VerticalAlignment="Center" HorizontalAlignment="Center" Content="System Logs" Click="btnShowErrorLog_Click" Background="Cyan" Foreground="Black" Width="230" Padding="5" Margin="2"/>
+                    <Button x:Name="btnSaveSettings" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Save" Click="btnSaveSettings_Click" Background="Cyan" Foreground="Black" Width="230" Padding="5" Margin="2"/>
+                    <Button x:Name="btnResetSettings" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Reset To Default" Click="btnResetSettings_Click" Background="Cyan" Foreground="Black" Width="230" Padding="5" Margin="2"/>
                     <TextBlock x:Name="tbkSettingsStatus" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="WrapWholeWords" MaxWidth="230"/>
                 </StackPanel>
 
@@ -150,6 +150,11 @@
                         <Button x:Name="btnAddPID" FontFamily="Segoe MDL2 Assets" Content="&#xE948;" Click="btnAddPID_Click" Foreground="DarkCyan" Background="Black" BorderBrush="DarkCyan" BorderThickness="1" Margin="2" Padding="5"/>
                         <Button x:Name="btnSubPID" FontFamily="Segoe MDL2 Assets" Content="&#xE949;" Click="btnSubPID_Click" Foreground="OrangeRed" Background="Black" BorderBrush="OrangeRed" BorderThickness="1" Margin="2" Padding="5"/>
                     </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" BorderBrush="Purple" BorderThickness="1" CornerRadius="5" Padding="5" Margin="2" Orientation="Horizontal">
+                    <TextBlock Text="Successful Loops: " Foreground="DarkCyan" Margin="2" Padding="5"/>
+                    <TextBlock x:Name="tbkLoopSuccess" Foreground="DarkCyan" Margin="2" Padding="5"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="2" BorderBrush="Purple" BorderThickness="1" CornerRadius="5" Padding="5" Margin="2" Visibility="Collapsed">

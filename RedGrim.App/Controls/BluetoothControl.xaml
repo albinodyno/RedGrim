@@ -1,11 +1,12 @@
 ﻿<UserControl
-    x:Class="RedGrim.App.Controls.BluetoothControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:RedGrim.App.Controls"
     xmlns:Custom="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Custom1="using:DevExpress.UI.Xaml.Gauges"
+    x:Class="RedGrim.App.Controls.BluetoothControl"
     mc:Ignorable="d"
     d:DesignHeight="400"
     d:DesignWidth="600">
@@ -26,8 +27,8 @@
 
         <!--Main Gauge-->
         <Viewbox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="10">
-            <Custom:RadialGauge x:Name="gagMainGauge" Height="Auto" TickSpacing="10"
-                                ScaleTickBrush="Black" TickBrush="Purple" NeedleBrush="DarkCyan" TrailBrush="OrangeRed" Value="0" Foreground="DarkCyan"/>
+            <Custom:RadialGauge x:Name="gagMainGauge" Height="Auto" Foreground="OrangeRed" NeedleBrush="Transparent" TrailBrush="OrangeRed" ScaleTickBrush="Transparent" TickBrush="Purple" ScaleBrush="Transparent"
+                                   Value="0" TickSpacing="10" ScaleWidth="40" NeedleWidth="5" Unit="---" Maximum="100" TickLength="15"/>
         </Viewbox>
 
         <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2">
@@ -40,15 +41,14 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <!--Small Gauges-->
-            <Custom:RadialGauge x:Name="gagSm1" Height="Auto" Width="Auto" Margin="10" Unit="Null" Maximum="300" TickSpacing="20" Grid.Row="0" Grid.Column="0"
-                            TickBrush="DarkCyan" NeedleBrush="OrangeRed" TrailBrush="Purple" ScaleBrush="Black" ScaleTickBrush="Black" ScaleWidth="10" Value="0" Foreground="OrangeRed"/>
-            <Custom:RadialGauge x:Name="gagSm2" Height="Auto" Width="Auto" Margin="10" Unit="Null" Maximum="300" TickSpacing="20" Grid.Row="0" Grid.Column="1"
-                            TickBrush="DarkCyan" NeedleBrush="OrangeRed" TrailBrush="Purple" ScaleBrush="Black" ScaleTickBrush="Black" ScaleWidth="10" Value="0" Foreground="OrangeRed"/>
-
-            <!--TB Gauges-->
-            <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" BorderBrush="DarkCyan" BorderThickness="3" Margin="10,10,1,1" CornerRadius="10"/>
-            <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" BorderBrush="DarkCyan" BorderThickness="3" Margin="10,10,1,1" CornerRadius="10"/>
+            <Custom:RadialGauge x:Name="gagSm1" Height="Auto" Width="Auto" Margin="10" Unit="---" Maximum="300" TickSpacing="20" Grid.Row="0" Grid.Column="0"
+                            TickBrush="Cyan" NeedleBrush="OrangeRed" TrailBrush="Purple" ScaleBrush="Transparent" ScaleTickBrush="Transparent" ScaleWidth="10" Value="0" Foreground="OrangeRed"/>
+            <Custom:RadialGauge x:Name="gagSm2" Height="Auto" Width="Auto" Margin="10" Unit="---" Maximum="300" TickSpacing="20" Grid.Row="0" Grid.Column="1"
+                            TickBrush="Cyan" NeedleBrush="OrangeRed" TrailBrush="Purple" ScaleBrush="Transparent" ScaleTickBrush="Transparent" ScaleWidth="10" Value="0" Foreground="OrangeRed"/>
+           
+            
+            <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" BorderBrush="Cyan" BorderThickness="3" Margin="10,10,1,1" CornerRadius="10"/>
+            <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" BorderBrush="Cyan" BorderThickness="3" Margin="10,10,1,1" CornerRadius="10"/>
 
             <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
@@ -67,27 +67,27 @@
 
                 <!--Bottom Left Box Gauge-->
                 <Viewbox Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom">
-                    <TextBlock x:Name="gagTbk1Name" HorizontalAlignment="Center" Foreground="DarkCyan" Margin="5"/>
+                    <TextBlock x:Name="gagTbk1Name" HorizontalAlignment="Center" Foreground="Cyan" Margin="5"/>
                 </Viewbox>
 
                 <Viewbox  Grid.Row="1" Grid.Column="1">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="gagTbk1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="0" Foreground="DarkCyan"/>
-                        <TextBlock x:Name="gagTbk1Uom" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DarkCyan"/>
+                        <TextBlock x:Name="gagTbk1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="0" Foreground="Cyan"/>
+                        <TextBlock x:Name="gagTbk1Uom" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Cyan"/>
                     </StackPanel>
                 </Viewbox>
 
 
-                
+
                 <!--Bottom Right Box Gauge-->
                 <Viewbox Grid.Row="0" Grid.Column="4" VerticalAlignment="Bottom">
-                    <TextBlock x:Name="gagTbk2Name" HorizontalAlignment="Center" Foreground="DarkCyan" Margin="5"/>
+                    <TextBlock x:Name="gagTbk2Name" HorizontalAlignment="Center" Foreground="Cyan" Margin="5"/>
                 </Viewbox>
-                
+
                 <Viewbox  Grid.Row="1" Grid.Column="4">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="gagTbk2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="0" Foreground="DarkCyan"/>
-                        <TextBlock x:Name="gagTbk2Uom" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DarkCyan"/>
+                        <TextBlock x:Name="gagTbk2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="0" Foreground="Cyan"/>
+                        <TextBlock x:Name="gagTbk2Uom" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Cyan"/>
                     </StackPanel>
                 </Viewbox>
 
@@ -118,11 +118,11 @@
 
             <StackPanel Grid.Row="1" HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock HorizontalAlignment="Left" Text="Device: " Foreground="Cyan" Margin="5" FontSize="18"></TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Text="Device: " Foreground="Cyan" Margin="5" FontSize="18"/>
                     <TextBlock x:Name="tbkOBDDevice" HorizontalAlignment="Left" Text="None" Foreground="Cyan" TextWrapping="WrapWholeWords" FontSize="14" Margin="5" Width="200"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock HorizontalAlignment="Left" Text="Status: " Foreground="Cyan" Margin="5" FontSize="18"></TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Text="Status: " Foreground="Cyan" Margin="5" FontSize="18"/>
                     <TextBlock x:Name="tbkOBDStatus" HorizontalAlignment="Left" Text="Not Started" Foreground="Cyan" FontSize="14" TextWrapping="WrapWholeWords" Margin="5" Width="200"/>
                 </StackPanel>
 
@@ -139,7 +139,7 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" x:Name="pnlErrorButtons" Visibility="Visible" HorizontalAlignment="Center">
-                        <Button x:Name="btnErrorCodes" Click="btnErrorCodes_Click" Content="Error Codes" Foreground="Purple" BorderBrush="Purple" BorderThickness="1" Background="Transparent" Margin="5" Width="100"/>
+                        <Button x:Name="btnErrorCodes" Click="btnErrorCodes_Click" Content="Error Codes" Foreground="Cyan" BorderBrush="Cyan" BorderThickness="1" Background="Transparent" Margin="5" Width="100"/>
                         <Button x:Name="btnStartGauges" Click="btnStartGauges_Click" Content="Force Start" Foreground="Cyan" BorderBrush="Cyan" BorderThickness="1" Background="Transparent" Margin="5" Width="100"/>
                         <Button x:Name="btnStopGauges" Click="btnStopGauges_Click"  Content="Stop Gauges" Foreground="OrangeRed" BorderBrush="OrangeRed" BorderThickness="1" Background="Transparent" Margin="5" Width="100"/>
                     </StackPanel>

@@ -18,7 +18,7 @@ namespace RedGrim.App.Models
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                MainPage.SystemLogEntry($"Error at Coolant Temp Read - {ex.Message}");
                 return 0;
             }
             return value;
@@ -34,7 +34,7 @@ namespace RedGrim.App.Models
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                MainPage.SystemLogEntry($"Error at Intake Temp Read - {ex.Message}");
                 return 0;
             }
             return value;
@@ -50,7 +50,7 @@ namespace RedGrim.App.Models
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                MainPage.SystemLogEntry($"Error at RPM Read - {ex.Message}");
                 return 0;
             }
             return value;
@@ -59,7 +59,6 @@ namespace RedGrim.App.Models
         public static double MPH(string hex)
         {
             double value;
-
             try
             {
                 value = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
@@ -67,7 +66,7 @@ namespace RedGrim.App.Models
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                MainPage.SystemLogEntry($"Error at MPH Read - {ex.Message}");
                 return 0;
             }
             return value;
@@ -85,7 +84,7 @@ namespace RedGrim.App.Models
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                MainPage.SystemLogEntry($"Error at Voltage Read - {ex.Message}");
                 return 0;
             }
                 return value;

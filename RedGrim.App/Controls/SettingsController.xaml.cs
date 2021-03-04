@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -242,6 +243,7 @@ namespace RedGrim.App.Controls
         //Gauge Buttons
         private void btnGaugeSettings_Click(object sender, RoutedEventArgs e)
         {
+            tbkLoopSuccess.Text = Convert.ToString(GaugeCommands.SuccessLoops);
             pnlGaugeSettings.Visibility = Visibility.Visible;
         }
 
@@ -279,5 +281,6 @@ namespace RedGrim.App.Controls
             tbkELMDelay.Text = Convert.ToString(value);
         }
         #endregion
+
     }
 }
