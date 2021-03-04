@@ -112,6 +112,7 @@ namespace RedGrim.App.Models
         #region Execute PID Commands
         public async Task<bool> ExecutePIDs()
         {
+            success = true;
             try
             {
                success = await WritePID(botLeft.OBDCommand);   //CoolantTemp
