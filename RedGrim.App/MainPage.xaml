@@ -36,7 +36,7 @@
             </Grid.RowDefinitions>
 
             <Viewbox Grid.Row="0">
-                <Button FontFamily="Segoe MDL2 Assets" FontSize="48" Content="&#xEDAD;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Foreground="Cyan" x:Name="btn" />
+                <Button FontFamily="Segoe MDL2 Assets" FontSize="48" Content="&#xE826;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Foreground="Cyan" x:Name="btnMapLaunch" Click="btnMapLaunch_Click" />
             </Viewbox>
             <Viewbox Grid.Row="1">
                 <Button FontFamily="Segoe MDL2 Assets" FontSize="48" Content="&#xEC4A;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Foreground="Cyan" x:Name="btnBTSetup" Click="btnBTSetup_Click"/>
@@ -54,6 +54,8 @@
         <local:AuxControl x:Name="pnlAux" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="5" Visibility="Collapsed"/>
 
         <local:SettingsController x:Name="pnlSettings" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="2" Margin="5" Visibility="Collapsed"/>
+
+        <local:MapControl x:Name="pnlMap" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="2" Margin="5" Visibility="Collapsed"/>
 
         <!--Camera Grid-->
         <!--<Grid x:Name="grdCamera" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="2" Visibility="Collapsed">

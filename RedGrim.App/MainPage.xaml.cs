@@ -18,6 +18,7 @@ namespace RedGrim.App
 
         bool settingsPaneActive = false;
         bool auxPaneActive = false;
+        bool mapPaneActive = false;
         //bool settingsReady;
 
         public MainPage()
@@ -70,6 +71,8 @@ namespace RedGrim.App
             pnlSideMenu.Visibility = Visibility.Visible;
             pnlSettings.Visibility = Visibility.Collapsed;
             settingsPaneActive = false;
+            pnlMap.Visibility = Visibility.Collapsed;
+            mapPaneActive = false;
         }
 
         private void btnAuxLaunch_Click(object sender, RoutedEventArgs e)
@@ -80,6 +83,8 @@ namespace RedGrim.App
                 pnlBT.Visibility = Visibility.Visible;
                 pnlSettings.Visibility = Visibility.Collapsed;
                 settingsPaneActive = false;
+                pnlMap.Visibility = Visibility.Collapsed;
+                mapPaneActive = false;
                 auxPaneActive = true;
             }
             else
@@ -98,6 +103,8 @@ namespace RedGrim.App
             {
                 pnlAux.Visibility = Visibility.Collapsed;
                 pnlBT.Visibility = Visibility.Collapsed;
+                pnlMap.Visibility = Visibility.Collapsed;
+                mapPaneActive = false;
                 pnlSettings.Visibility = Visibility.Visible;
                 settingsPaneActive = true;
             }
@@ -108,6 +115,26 @@ namespace RedGrim.App
                 pnlSettings.Visibility = Visibility.Collapsed;
                 pnlBT.Visibility = Visibility.Visible;
                 settingsPaneActive = false;
+            }
+        }
+
+        private void btnMapLaunch_Click(object sender, RoutedEventArgs e)
+        {
+            if(!mapPaneActive)
+            {
+                pnlAux.Visibility = Visibility.Collapsed;
+                pnlBT.Visibility = Visibility.Collapsed;
+                pnlSettings.Visibility = Visibility.Collapsed;
+                pnlMap.Visibility = Visibility.Visible;
+                mapPaneActive = true;
+            }
+            else
+            {
+                if (auxPaneActive)
+                    pnlAux.Visibility = Visibility.Visible;
+                pnlMap.Visibility = Visibility.Collapsed;
+                pnlBT.Visibility = Visibility.Visible;
+                mapPaneActive = false;
             }
         }
         #endregion
@@ -219,5 +246,6 @@ namespace RedGrim.App
         //    //StartTopVidStream();
         //}
         #endregion
+
     }
 }
