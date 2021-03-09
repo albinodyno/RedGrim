@@ -190,7 +190,7 @@ namespace RedGrim.App.Models
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry($"Error Clearing Buffer");
+                MainPage.SystemLogEntry($"Error Clearing Buffer - {ex.Message}");
             }
         }
         #endregion

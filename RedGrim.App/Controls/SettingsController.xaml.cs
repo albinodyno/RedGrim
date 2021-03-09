@@ -78,7 +78,7 @@ namespace RedGrim.App.Controls
             }
             catch(Exception ex)
             {
-                MainPage.SystemLogEntry("Error loading default settings");
+                MainPage.SystemLogEntry($"Error loading default settings - {ex.Message}");
                 return false;
             }
         }
@@ -111,7 +111,7 @@ namespace RedGrim.App.Controls
             }
             catch(Exception ex)
             {
-                MainPage.SystemLogEntry("Error loading values");
+                MainPage.SystemLogEntry($"Error loading values - {ex.Message}");
                 return false;
             }
 
@@ -155,7 +155,7 @@ namespace RedGrim.App.Controls
             catch (Exception ex)
             {
                 tbkSettingsStatus.Foreground = new SolidColorBrush(Colors.OrangeRed);
-                tbkSettingsStatus.Text = "Save Unsuccessful";
+                tbkSettingsStatus.Text = $"Save Unsuccessful - {ex.Message}";
             }
         }
 
@@ -170,7 +170,7 @@ namespace RedGrim.App.Controls
                 StorageFile saveFile = await ApplicationData.Current.LocalFolder.CreateFileAsync("RedGrimSettings.json", CreationCollisionOption.ReplaceExisting);
                 await FileIO.WriteTextAsync(saveFile, savedSettingsJson);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return;
             }
