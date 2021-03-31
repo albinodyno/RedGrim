@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGrim.Mobile.Android", "R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGrim.Mobile.iOS", "RedGrim.Mobile\RedGrim.Mobile.iOS\RedGrim.Mobile.iOS.csproj", "{BFF67D90-84FB-4601-99AD-1EC6856FA04C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGrim.Mobile", "RedGrim.Mobile\RedGrim.Mobile\RedGrim.Mobile.csproj", "{BEB06E1F-55BC-4876-847C-D99BF4F5E6CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedGrim.Mobile", "RedGrim.Mobile\RedGrim.Mobile\RedGrim.Mobile.csproj", "{BEB06E1F-55BC-4876-847C-D99BF4F5E6CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UwpBluetoothObd", "UwpBluetoothObd\UwpBluetoothObd.csproj", "{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -175,6 +177,32 @@ Global
 		{BEB06E1F-55BC-4876-847C-D99BF4F5E6CA}.Release|x64.Build.0 = Release|Any CPU
 		{BEB06E1F-55BC-4876-847C-D99BF4F5E6CA}.Release|x86.ActiveCfg = Release|Any CPU
 		{BEB06E1F-55BC-4876-847C-D99BF4F5E6CA}.Release|x86.Build.0 = Release|Any CPU
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Debug|ARM.ActiveCfg = Debug|ARM
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Debug|ARM.Build.0 = Debug|ARM
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Debug|ARM.Deploy.0 = Debug|ARM
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Debug|ARM64.ActiveCfg = Debug|x86
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Debug|iPhone.ActiveCfg = Debug|x86
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Debug|iPhoneSimulator.ActiveCfg = Debug|x86
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Debug|x64.ActiveCfg = Debug|x64
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Debug|x64.Build.0 = Debug|x64
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Debug|x64.Deploy.0 = Debug|x64
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Debug|x86.ActiveCfg = Debug|x86
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Debug|x86.Build.0 = Debug|x86
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Debug|x86.Deploy.0 = Debug|x86
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Release|Any CPU.ActiveCfg = Release|x86
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Release|ARM.ActiveCfg = Release|ARM
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Release|ARM.Build.0 = Release|ARM
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Release|ARM.Deploy.0 = Release|ARM
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Release|ARM64.ActiveCfg = Release|x86
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Release|iPhone.ActiveCfg = Release|x86
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Release|iPhoneSimulator.ActiveCfg = Release|x86
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Release|x64.ActiveCfg = Release|x64
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Release|x64.Build.0 = Release|x64
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Release|x64.Deploy.0 = Release|x64
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Release|x86.ActiveCfg = Release|x86
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Release|x86.Build.0 = Release|x86
+		{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

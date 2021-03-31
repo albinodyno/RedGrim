@@ -20,8 +20,6 @@ namespace RedGrim.App.Controls
         BluetoothDevice btDevice;
         GaugeCommands commands;
 
-        //SerialDevice serialDevice;
-
         string savedDeviceID;
         string savedDeviceName;
         
@@ -70,7 +68,7 @@ namespace RedGrim.App.Controls
             {
                 MainPage.SystemLogEntry(ex.Message);
                 UnsuccessfulConnection(ex.Message);
-                DisconnectBluetooth();
+                //DisconnectBluetooth();
             }
         }
 
@@ -118,7 +116,7 @@ namespace RedGrim.App.Controls
             catch (UnauthorizedAccessException ex)
             {
                 UnsuccessfulConnection($"Bluetooth Device not found - {ex.Message}");
-                DisconnectBluetooth();
+                //DisconnectBluetooth();
             }
             catch (Exception ex)
             {
@@ -1033,26 +1031,26 @@ namespace RedGrim.App.Controls
         //    });
         //}
 
-        private void BtDevice_ConnectionStatusChanged(BluetoothDevice sender, object args)
-        {
-            if (btDevice == null)
-                return;
-            try
-            {
-                if (btDevice.ConnectionStatus == BluetoothConnectionStatus.Connected)
-                    return;
-                else
-                {
-                    DisconnectBluetooth();
-                    UnsuccessfulConnection("Manually Disconnected or Device Lost");
-                }
-            }
-            catch (Exception ex)
-            {
-                MainPage.SystemLogEntry(ex.Message);
-                return;
-            }
-        }
+        //private void BtDevice_ConnectionStatusChanged(BluetoothDevice sender, object args)
+        //{
+        //    if (btDevice == null)
+        //        return;
+        //    try
+        //    {
+        //        if (btDevice.ConnectionStatus == BluetoothConnectionStatus.Connected)
+        //            return;
+        //        else
+        //        {
+        //            DisconnectBluetooth();
+        //            UnsuccessfulConnection("Manually Disconnected or Device Lost");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MainPage.SystemLogEntry(ex.Message);
+        //        return;
+        //    }
+        //}
 
         #endregion
     }

@@ -19,7 +19,6 @@ namespace RedGrim.App
         bool settingsPaneActive = false;
         bool auxPaneActive = false;
         bool mapPaneActive = false;
-        //bool settingsReady;
 
         public MainPage()
         {
@@ -35,7 +34,6 @@ namespace RedGrim.App
                 LoadThemeSettings();
                 pnlAux.LoadAuxSettings();
                 pnlBT.LoadBTSettings();
-                //pnlBT.ConnectSavedBTOBD();
             }
             else
                 SystemLogEntry("CRITICAL ERROR LOADING SETTINGS");
@@ -71,7 +69,6 @@ namespace RedGrim.App
             pnlSideMenu.Visibility = Visibility.Visible;
             pnlSettings.Visibility = Visibility.Collapsed;
             settingsPaneActive = false;
-            pnlMap.Visibility = Visibility.Collapsed;
             mapPaneActive = false;
         }
 
@@ -83,7 +80,6 @@ namespace RedGrim.App
                 pnlBT.Visibility = Visibility.Visible;
                 pnlSettings.Visibility = Visibility.Collapsed;
                 settingsPaneActive = false;
-                pnlMap.Visibility = Visibility.Collapsed;
                 mapPaneActive = false;
                 auxPaneActive = true;
             }
@@ -103,7 +99,6 @@ namespace RedGrim.App
             {
                 pnlAux.Visibility = Visibility.Collapsed;
                 pnlBT.Visibility = Visibility.Collapsed;
-                pnlMap.Visibility = Visibility.Collapsed;
                 mapPaneActive = false;
                 pnlSettings.Visibility = Visibility.Visible;
                 settingsPaneActive = true;
@@ -125,14 +120,12 @@ namespace RedGrim.App
                 pnlAux.Visibility = Visibility.Collapsed;
                 pnlBT.Visibility = Visibility.Collapsed;
                 pnlSettings.Visibility = Visibility.Collapsed;
-                pnlMap.Visibility = Visibility.Visible;
                 mapPaneActive = true;
             }
             else
             {
                 if (auxPaneActive)
                     pnlAux.Visibility = Visibility.Visible;
-                pnlMap.Visibility = Visibility.Collapsed;
                 pnlBT.Visibility = Visibility.Visible;
                 mapPaneActive = false;
             }
