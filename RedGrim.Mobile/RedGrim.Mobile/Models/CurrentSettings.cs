@@ -14,10 +14,6 @@ namespace RedGrim.Mobile.Models
         public string aux4 { get; set; }
 
         public string theme { get; set; }
-
-        public bool frontCam { get; set; }
-        public bool backCam { get; set; }
-        public bool topCam { get; set; }
         public string btDeviceID { get; set; }
         public string btDeviceName { get; set; }
         public string obdProtocol { get; set; }

@@ -60,6 +60,8 @@ namespace RedGrim.App.Controls
 
                 tbkStatus.Text = $"Status : Connecting to {device.Name}...";
                 btDevice = await BluetoothDevice.FromIdAsync(device.Id);
+                btDevice.ConnectionStatusChanged += BtDevice_ConnectionStatusChanged;
+
                 DevicePairingResult pair = await btDevice.DeviceInformation.Pairing.PairAsync();
 
                 BTSetup();
@@ -68,7 +70,6 @@ namespace RedGrim.App.Controls
             {
                 MainPage.SystemLogEntry(ex.Message);
                 UnsuccessfulConnection(ex.Message);
-                //DisconnectBluetooth();
             }
         }
 
@@ -78,7 +79,7 @@ namespace RedGrim.App.Controls
             {
                 tbkStatus.Text = "Status : Connecting to last device...";
                 btDevice = await BluetoothDevice.FromIdAsync(savedDeviceID);
-                //btDevice.ConnectionStatusChanged += BtDevice_ConnectionStatusChanged;
+                btDevice.ConnectionStatusChanged += BtDevice_ConnectionStatusChanged;
 
                 if (btDevice.DeviceInformation.Pairing.IsPaired)
                     BTSetup();
@@ -89,7 +90,6 @@ namespace RedGrim.App.Controls
             {
                 MainPage.SystemLogEntry(ex.Message);
                 UnsuccessfulConnection(ex.Message);
-                //DisconnectBluetooth();
             }
         }
 
@@ -104,7 +104,6 @@ namespace RedGrim.App.Controls
                     throw new Exception();
 
                 streamSocket = new StreamSocket();
-                //streamSocket.Control.KeepAlive = true;
                 await streamSocket.ConnectAsync(service.ConnectionHostName, service.ConnectionServiceName);
 
                 commands = new GaugeCommands(streamSocket, SettingsController.SavedSettings.elmDelay, SettingsController.SavedSettings.pidDelay);
@@ -116,12 +115,17 @@ namespace RedGrim.App.Controls
             catch (UnauthorizedAccessException ex)
             {
                 UnsuccessfulConnection($"Bluetooth Device not found - {ex.Message}");
-                //DisconnectBluetooth();
             }
             catch (Exception ex)
             {
                 UnsuccessfulConnection($"Bluetooth Device not found - {ex.Message}");
             }
+        }
+
+
+        private void BtDevice_ConnectionStatusChanged(BluetoothDevice sender, object args)
+        {
+            MainPage.SystemLogEntry("<----Connection Changed---->");
         }
 
         private void SuccessfulConnection()

@@ -23,9 +23,12 @@ namespace RedGrim.Mobile.Models
         public int pidDelay;
         bool success;
 
-        public Gauge botLeft;
-        public Gauge botRight;
-        public Gauge mainGauge;
+        public Gauge MainGauge;
+        public Gauge RadialGauge1;
+        public Gauge RadialGauge2;
+        public Gauge BoxGauge1;
+        public Gauge BoxGauge2;
+
 
         public Dictionary<string, string> obdCommands = new Dictionary<string, string>()
         {
@@ -38,9 +41,9 @@ namespace RedGrim.Mobile.Models
             {"Voltage", "0144\r"}
         };
 
-        public GaugeCommands(BluetoothSocket stream, int eDelay, int pDelay)
+        public GaugeCommands(BluetoothSocket btSocket, int eDelay, int pDelay)
         {
-            socket = stream;
+            socket = btSocket;
 
             //obdWriter = new DataWriter(streamSocket.OutputStream);
             //obdReader = new DataReader(streamSocket.InputStream);
@@ -49,9 +52,13 @@ namespace RedGrim.Mobile.Models
             elmDelay = eDelay;
             pidDelay = pDelay;
 
-            botLeft = new Gauge("CoolantTemp", "°F", 300, 15, obdCommands["CoolantTemp"]);
-            botRight = new Gauge("IntakeTemp", "°F", 300, 15, obdCommands["IntakeTemp"]);
-            mainGauge = new Gauge("Voltage", "V", 50, 5, obdCommands["Voltage"]);
+            //choose gauge content here
+            MainGauge = new Gauge("Voltage", "V", 50, 0, 5, obdCommands["Voltage"]);
+            RadialGauge1 = new Gauge("CoolantTemp", "°F", 300, -20, 15, obdCommands["CoolantTemp"]);
+            RadialGauge2 = new Gauge("CoolantTemp", "°F", 300, -20, 15, obdCommands["CoolantTemp"]);
+            BoxGauge1 = new Gauge("IntakeTemp", "°F", 300, -20, 15, obdCommands["IntakeTemp"]);
+            BoxGauge2 = new Gauge("IntakeTemp", "°F", 300, -20, 15, obdCommands["IntakeTemp"]);
+
         }
 
         #region Write/Read ELM
@@ -111,10 +118,11 @@ namespace RedGrim.Mobile.Models
 
         #region Execute PID Commands
         public async Task<bool> ExecutePIDs()
-        {    
-            await WritePID(botLeft.OBDCommand);   //CoolantTemp
-            await WritePID(botRight.OBDCommand);   //IntakeTemp
-            await WritePID(mainGauge.OBDCommand);   //Voltage
+        {
+            await WritePID(MainGauge.OBDCommand);
+            await WritePID(RadialGauge1.OBDCommand);
+            await WritePID(BoxGauge1.OBDCommand);
+
             await Task.Delay(pidDelay);
 
             success = await ReadPID();

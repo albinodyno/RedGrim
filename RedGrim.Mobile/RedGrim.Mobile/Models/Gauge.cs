@@ -12,6 +12,7 @@ namespace RedGrim.Mobile.Models
         private string uom = "";
         private double gaugeValue = 0;
         private int max = 0;
+        private int min = 0;
         private int tickSpacing = 10;
         private string obdCommand = "";
 
@@ -26,15 +27,17 @@ namespace RedGrim.Mobile.Models
         public string UOM { get { return uom; } set { uom = value; } }
         public double GaugeValue { get { return gaugeValue; } set { gaugeValue = value; } }
         public int Max { get { return max; } set { max = value; } }
+        public int Min { get { return min; } set { min = value; } }
         public int TickSpacing { get { return tickSpacing; } set { tickSpacing = value; } }
         public string OBDCommand { get { return obdCommand; } set { obdCommand = value; } } 
         
 
-        public Gauge(string gName, string gUOM, int gMax, int gTickSpacing, string gOBDCommand)
+        public Gauge(string gName, string gUOM, int gMax, int gMin, int gTickSpacing, string gOBDCommand)
         {
             name = gName;
             uom = gUOM;
             max = gMax;
+            min = gMin;
             tickSpacing = gTickSpacing;
             obdCommand = gOBDCommand;
         }
