@@ -38,5 +38,23 @@ namespace RedGrim.Mobile
             SettingsPage.IsVisible = true;
             MapPage.IsVisible = false;
         }
+
+        private void btnMapLaunch_Clicked(object sender, EventArgs e)
+        {
+            if(!MapPage.IsVisible)
+            {
+                MapPage.IsVisible = true;
+                pnlBT.IsVisible = false;
+                pnlSideMenu.IsVisible = true;
+                SettingsPage.IsVisible = false;
+            }
+            else
+            {
+                MapPage.IsVisible = false;
+                pnlBT.IsVisible = true;
+                pnlSideMenu.IsVisible = true;
+                SettingsPage.IsVisible = false;
+            }
+        }
     }
 }

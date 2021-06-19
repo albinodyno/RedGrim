@@ -23,7 +23,8 @@ namespace RedGrim.Mobile.Controls
         string savedDeviceName = "";
 
         public static string log = "";
-        bool deviceConnected = false;
+        bool connectionSetup = false;
+
         bool loopPid = true;
 
         public BluetoothControl()
@@ -32,7 +33,7 @@ namespace RedGrim.Mobile.Controls
             LoadAdapter();
         }
 
-        #region Bluetooth Device Setup
+        #region Initial Bluetooth Setttings
         public void LoadAdapter()
         {
             adapter = BluetoothAdapter.DefaultAdapter;
@@ -49,28 +50,22 @@ namespace RedGrim.Mobile.Controls
                 pkrBluetoothPicker.Items.Add(d.Name);
         }
 
-        public async void ConnectionHandling()
+        private void pkrBluetoothPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            deviceConnected = await ConnectDevice();
-
-            if (deviceConnected)
-                deviceConnected = await ConnectSocket();
-            if (deviceConnected)
-                deviceConnected = await TestConnection();
-            if (deviceConnected)
-            {
-                SuccessfulConnection();
-                InitGauges();
-            }
-
-
+            ConnectDevice();
         }
+        #endregion
 
+        #region Bluetooth Device Setup and Gauges Setup
         public async void ConnectSavedDevice()
         {
+            tbkBTStatus.Text = "Atempting Connection...";
+            tbkBTStatus.TextColor = Color.Purple;
+
             try
             {
                 device = (from bd in adapter.BondedDevices where bd.Name == savedDeviceName select bd).FirstOrDefault();
+                ConnectionHandling();
             }
 
             catch (Exception ex)
@@ -79,24 +74,36 @@ namespace RedGrim.Mobile.Controls
             }
         }
 
-
-        public async Task<bool> ConnectDevice()
+        public async void ConnectDevice()
         {
+            tbkBTStatus.Text = "Atempting Connection...";
+            tbkBTStatus.TextColor = Color.Purple;
+
             try
             {
                 if (pkrBluetoothPicker.SelectedIndex == -1)
                     throw new Exception("Device not found");
                 else
-                {
                     device = (from bd in adapter.BondedDevices where bd.Name == pkrBluetoothPicker.Items[pkrBluetoothPicker.SelectedIndex] select bd).FirstOrDefault();
-                    return true;
-                }
+
+                ConnectionHandling();
             }
             catch(Exception ex)
             {
                 FailedConnection(ex.Message);
-                return false;
             }
+        }
+
+        //Main handler for running through connections and tests
+        public async void ConnectionHandling()
+        {
+            connectionSetup = await ConnectSocket();
+            if (connectionSetup) connectionSetup = await TestConnection();
+            if (connectionSetup) connectionSetup = await SetupGauges();
+            if (connectionSetup) connectionSetup = await TestGauges();
+            if (connectionSetup) SuccessfulConnection();
+
+            //if (connectionSetup) RunGauges();
         }
 
         private async Task<bool> ConnectSocket()
@@ -118,115 +125,80 @@ namespace RedGrim.Mobile.Controls
                 FailedConnection(ex.Message);
                 return false;
             }
-
-
-            //// Read data from the device
-            //await socket.InputStream.ReadAsync(buffer, 0, buffer.Length);
-
-            //// Write data to the device
-            //await socket.OutputStream.WriteAsync(buffer, 0, buffer.Length);
-        }
-
-        private void pkrBluetoothPicker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ConnectionHandling();
         }
 
         private async Task<bool> TestConnection()
         {
             try
             {
-                byte[] writeBuffer = Encoding.ASCII.GetBytes("ATZ\r");
-                byte[] readBuffer = new byte[20];
-
                 // Write data to the device
-                await socket.OutputStream.WriteAsync(writeBuffer, 0, writeBuffer.Length);
+                byte[] writeBuffer = Encoding.ASCII.GetBytes("ATZ\r");
+                await gaugeCommands.socket.OutputStream.WriteAsync(writeBuffer, 0, writeBuffer.Length);
+                await gaugeCommands.socket.OutputStream.FlushAsync();
 
                 // Read data from the device
-                await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
+                byte[] readBuffer = new byte[512];
+                int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
+                string data = Encoding.ASCII.GetString(readBuffer);
+
+                log += data;
 
                 return true;
             }
             catch (Exception ex)
             {
+                FailedConnection(ex.Message);
                 return false;
             }
+
+            //byte[] writeBuffer = Encoding.ASCII.GetBytes("ATZ\r");
+            //byte[] readBuffer = new byte[20];
+
+            //// Write data to the device
+            //await socket.OutputStream.WriteAsync(writeBuffer, 0, writeBuffer.Length);
+
+            //// Read data from the device
+            //int data = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
+            //log += data;
+
+            //return true;
         }
 
-        #endregion
-
-        #region Successful/Failed Connection Handling
-        private async void SuccessfulConnection()
+        public async Task<bool> SetupGauges()
         {
             try
             {
-                tbkOBDDevice.Text = device.Name;
-                tbkOBDStatus.Text = "Connected";
-                tbkBTStatus.Text = "Connected";
-                tbkBTStatus.TextColor = Color.Cyan;
+                gagRadialMain.Headers[0].Text = $"{gaugeCommands.MainGauge.Name} ({gaugeCommands.MainGauge.UOM})";
+                gagRadialMain.Scales[0].Interval = gaugeCommands.MainGauge.TickSpacing;
+                gagRadialMain.Scales[0].StartValue = gaugeCommands.MainGauge.Min;
+                gagRadialMain.Scales[0].EndValue = gaugeCommands.MainGauge.Max;
+
+                gagRadial1.Headers[0].Text = $"{gaugeCommands.RadialGauge1.Name} ({gaugeCommands.RadialGauge1.UOM})";
+                gagRadial1.Scales[0].Interval = gaugeCommands.RadialGauge1.TickSpacing;
+                gagRadial1.Scales[0].StartValue = gaugeCommands.RadialGauge1.Min;
+                gagRadial1.Scales[0].EndValue = gaugeCommands.RadialGauge1.Max;
+
+                gagRadial2.Headers[0].Text = $"{gaugeCommands.RadialGauge2.Name} ({gaugeCommands.RadialGauge2.UOM})";
+                gagRadial2.Scales[0].Interval = gaugeCommands.RadialGauge2.TickSpacing;
+                gagRadial2.Scales[0].StartValue = gaugeCommands.RadialGauge2.Min;
+                gagRadial2.Scales[0].EndValue = gaugeCommands.RadialGauge2.Max;
+
+                gagBox1Label.Text = gaugeCommands.BoxGauge1.Name;
+                gagBox1Value.Text = "0";
+                gagBox1UoM.Text = gaugeCommands.BoxGauge1.UOM;
+
+                gagBox2Label.Text = gaugeCommands.BoxGauge2.Name;
+                gagBox2Value.Text = "0";
+                gagBox2UoM.Text = gaugeCommands.BoxGauge2.UOM;
+
+                return true;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 FailedConnection(ex.Message);
+                return false;
             }
-        }
 
-        private void FailedConnection(string error)
-        {
-            try
-            {
-                tbkOBDDevice.Text = "None";
-                tbkOBDStatus.Text = "No Connection";
-                tbkBTStatus.Text = "No Connection";
-                tbkBTStatus.TextColor = Color.OrangeRed;
-                MainPage.SystemLogEntry(error);
-            }
-            catch (Exception)
-            {
-
-            }
-        }
-
-        #endregion
-
-        #region Gauges
-
-        public async void InitGauges()
-        {
-            SetupGauges();
-
-            if (await TestGauges())
-            {
-                //RunGauges();
-            }
-            else
-                FailedConnection("Gauges failed testing");
-        }
-
-        public void SetupGauges()
-        {
-            gagRadialMain.Headers[0].Text = $"{gaugeCommands.MainGauge.Name} ({gaugeCommands.MainGauge.UOM})";
-            gagRadialMain.Scales[0].Interval = gaugeCommands.MainGauge.TickSpacing;
-            gagRadialMain.Scales[0].StartValue = gaugeCommands.MainGauge.Min;
-            gagRadialMain.Scales[0].EndValue = gaugeCommands.MainGauge.Max;
-
-            gagRadial1.Headers[0].Text = $"{gaugeCommands.RadialGauge1.Name} ({gaugeCommands.RadialGauge1.UOM})";
-            gagRadial1.Scales[0].Interval = gaugeCommands.RadialGauge1.TickSpacing;
-            gagRadial1.Scales[0].StartValue = gaugeCommands.RadialGauge1.Min;
-            gagRadial1.Scales[0].EndValue = gaugeCommands.RadialGauge1.Max;
-
-            gagRadial2.Headers[0].Text = $"{gaugeCommands.RadialGauge2.Name} ({gaugeCommands.RadialGauge2.UOM})";
-            gagRadial2.Scales[0].Interval = gaugeCommands.RadialGauge2.TickSpacing;
-            gagRadial2.Scales[0].StartValue = gaugeCommands.RadialGauge2.Min;
-            gagRadial2.Scales[0].EndValue = gaugeCommands.RadialGauge2.Max;
-
-            gagBox1Label.Text = gaugeCommands.BoxGauge1.Name;
-            gagBox1Value.Text = "0";
-            gagBox1UoM.Text = gaugeCommands.BoxGauge1.UOM;
-
-            gagBox2Label.Text = gaugeCommands.BoxGauge2.Name;
-            gagBox2Value.Text = "0";
-            gagBox2UoM.Text = gaugeCommands.BoxGauge2.UOM;
         }
 
         public async Task<bool> TestGauges()
@@ -241,7 +213,9 @@ namespace RedGrim.Mobile.Controls
 
             return gaugeTest;
         }
+        #endregion
 
+        #region  Run Gauges
         public async void RunGauges()
         {
             while (loopPid)
@@ -253,8 +227,9 @@ namespace RedGrim.Mobile.Controls
                     //Update Gauge UI
                     gagRadialMain.Scales[0].Pointers[0].Value = gaugeCommands.MainGauge.GaugeValue;
                     gagRadial1.Scales[0].Pointers[0].Value = gaugeCommands.RadialGauge1.GaugeValue;
+                    gagRadial2.Scales[0].Pointers[0].Value = gaugeCommands.RadialGauge2.GaugeValue;
                     gagBox1Value.Text = Convert.ToString(gaugeCommands.BoxGauge1.GaugeValue);
-
+                    gagBox2Value.Text = Convert.ToString(gaugeCommands.BoxGauge2.GaugeValue);
                 }
                 catch (Exception ex)
                 {
@@ -266,7 +241,41 @@ namespace RedGrim.Mobile.Controls
 
         public async void StopGauges()
         {
+            loopPid = false;
+        }
+        #endregion
 
+        #region Successful/Failed Connection Handling
+        private async void SuccessfulConnection()
+        {
+            try
+            {
+                tbkOBDDevice.Text = device.Name;
+                tbkOBDStatus.Text = "Connected";
+                tbkBTStatus.Text = "Connected";
+                tbkBTStatus.TextColor = Color.Cyan;
+                SaveDevice();
+            }
+            catch (Exception ex)
+            {
+                FailedConnection(ex.Message);
+            }
+        }
+
+        private void FailedConnection(string error)
+        {
+            try
+            {
+                tbkOBDDevice.Text = "None";
+                tbkOBDStatus.Text = "No Connection";
+                tbkBTStatus.Text = "Failed Connection";
+                tbkBTStatus.TextColor = Color.OrangeRed;
+                MainPage.SystemLogEntry(error);
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         #endregion
@@ -286,11 +295,24 @@ namespace RedGrim.Mobile.Controls
         private void btnBTMenuOptions_Clicked(object sender, EventArgs e)
         {
             BTMenuOptions.IsVisible = true;
+            btnBTMenuOptions.IsVisible = false;
         }
 
         private void btnCloseBTMenuOptions_Clicked(object sender, EventArgs e)
         {
             BTMenuOptions.IsVisible = false;
+            btnBTMenuOptions.IsVisible = true;
+        }
+
+        #endregion
+
+        #region Save
+        private async void SaveDevice()
+        {
+            savedDeviceName = device.Name;
+            savedDeviceID = device.Address;
+
+
         }
 
         #endregion

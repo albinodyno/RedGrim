@@ -1,10 +1,19 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RedGrim.Mobile.Controls.MapControl">
+             x:Class="RedGrim.Mobile.Controls.MapControl"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
+    
   <ContentView.Content>
-      <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
+        <Grid x:Name="MapGrid" BackgroundColor="Black">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height=".15*"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout x:Name="mapLayout" Grid.Row="0">
+                <maps:Map x:Name="mainMap" />
+            </StackLayout>
+        </Grid>
   </ContentView.Content>
 </ContentView>

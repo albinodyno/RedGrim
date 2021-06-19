@@ -36,7 +36,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf5a0;" FontSize="48" Background="transparent" TextColor="DarkCyan" x:Name="btnMapLaunch"/>
+                <Button Grid.Row="0" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf5a0;" FontSize="48" Background="transparent" TextColor="DarkCyan" x:Name="btnMapLaunch" Clicked="btnMapLaunch_Clicked"/>
                 <Button Grid.Row="1" FontFamily="{StaticResource FontAwesomeBrands}" Text="&#xf293;" FontSize="48" Background="transparent" TextColor="DarkCyan" x:Name="btnBTSetup" Clicked="btnBTSetup_Clicked"/>
 
                 <Button Grid.Row="2" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf0e7;" FontSize="48" Background="transparent" TextColor="DarkCyan" x:Name="btnAuxLaunch" />

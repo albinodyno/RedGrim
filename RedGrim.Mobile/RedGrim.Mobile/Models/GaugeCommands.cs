@@ -15,12 +15,12 @@ namespace RedGrim.Mobile.Models
 {
     class GaugeCommands
     {
-        BluetoothSocket socket;
+        public BluetoothSocket socket;
         //DataWriter obdWriter;
         //DataReader obdReader;
 
-        public int elmDelay;
-        public int pidDelay;
+        public int elmDelay = 1000;
+        public int pidDelay = 300;
         bool success;
 
         public Gauge MainGauge;
@@ -54,10 +54,10 @@ namespace RedGrim.Mobile.Models
 
             //choose gauge content here
             MainGauge = new Gauge("Voltage", "V", 50, 0, 5, obdCommands["Voltage"]);
-            RadialGauge1 = new Gauge("CoolantTemp", "°F", 300, -20, 15, obdCommands["CoolantTemp"]);
-            RadialGauge2 = new Gauge("CoolantTemp", "°F", 300, -20, 15, obdCommands["CoolantTemp"]);
-            BoxGauge1 = new Gauge("IntakeTemp", "°F", 300, -20, 15, obdCommands["IntakeTemp"]);
-            BoxGauge2 = new Gauge("IntakeTemp", "°F", 300, -20, 15, obdCommands["IntakeTemp"]);
+            RadialGauge1 = new Gauge("CoolantTemp", "°F", 250, -25, 25, obdCommands["CoolantTemp"]);
+            RadialGauge2 = new Gauge("IntakeTemp", "°F", 250, -25, 25, obdCommands["IntakeTemp"]);
+            BoxGauge1 = new Gauge("CoolantTemp", "°F", 250, -25, 25, obdCommands["CoolantTemp"]);
+            BoxGauge2 = new Gauge("IntakeTemp", "°F", 250, -25, 25, obdCommands["IntakeTemp"]);
 
         }
 
@@ -121,7 +121,9 @@ namespace RedGrim.Mobile.Models
         {
             await WritePID(MainGauge.OBDCommand);
             await WritePID(RadialGauge1.OBDCommand);
+            await WritePID(RadialGauge2.OBDCommand);
             await WritePID(BoxGauge1.OBDCommand);
+            await WritePID(BoxGauge2.OBDCommand);
 
             await Task.Delay(pidDelay);
 
@@ -136,6 +138,13 @@ namespace RedGrim.Mobile.Models
         {
             try
             {
+                byte[] writeBuffer = Encoding.ASCII.GetBytes(command);
+
+                // Write data to the device
+                await socket.OutputStream.WriteAsync(writeBuffer, 0, writeBuffer.Length);
+                await socket.OutputStream.FlushAsync();
+
+                //Old way on PI
                 //obdWriter.WriteString(command);
                 //await obdWriter.StoreAsync();
                 //await obdWriter.FlushAsync();
@@ -151,6 +160,13 @@ namespace RedGrim.Mobile.Models
         {
             try
             {
+                // Read data from the device
+                byte[] readBuffer = new byte[512];
+                int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
+                string data = Encoding.ASCII.GetString(readBuffer);
+
+                BluetoothControl.log += data;
+
                 //uint buffer = await obdReader.LoadAsync(512);
                 //string value = obdReader.ReadString(buffer);
                 //BluetoothControl.log = BluetoothControl.log + value;

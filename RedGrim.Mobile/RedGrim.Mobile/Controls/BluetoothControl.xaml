@@ -15,13 +15,13 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition Height=".10*"/>
+                <RowDefinition Height=".15*"/>
             </Grid.RowDefinitions>
             
             <!--Radial Gauge Main-->
-            <gauge:SfCircularGauge x:Name="gagRadialMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="10">
+            <gauge:SfCircularGauge x:Name="gagRadialMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
                 <gauge:SfCircularGauge.Headers>
-                    <gauge:Header Text="Coolant Temp" ForegroundColor="DarkCyan" TextSize="15" />
+                    <gauge:Header Text="Coolant Temp" ForegroundColor="DarkCyan"/>
                 </gauge:SfCircularGauge.Headers>
                 <gauge:SfCircularGauge.Scales>
                     <gauge:Scale StartValue="-20" EndValue="220" Interval="20">
@@ -50,9 +50,9 @@
                 </Grid.RowDefinitions>
 
                 <!--Radial Gauge 1-->
-                <gauge:SfCircularGauge x:Name="gagRadial1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="12" Grid.Row="0" Grid.Column="0">
+                <gauge:SfCircularGauge x:Name="gagRadial1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0">
                     <gauge:SfCircularGauge.Headers>
-                        <gauge:Header Text="Coolant Temp" ForegroundColor="DarkCyan" TextSize="12" />
+                        <gauge:Header Text="---" ForegroundColor="DarkCyan" />
                     </gauge:SfCircularGauge.Headers>
                     <gauge:SfCircularGauge.Scales>
                         <gauge:Scale>
@@ -60,7 +60,7 @@
                                 <gauge:Range StartValue="0" EndValue="40"/>
                             </gauge:Scale.Ranges>
                             <gauge:Scale.Pointers>
-                                <gauge:NeedlePointer  Value="60" />
+                                <gauge:NeedlePointer  Value="0" />
                                 <gauge:RangePointer Value="60" />
                                 <gauge:MarkerPointer Value="70" />
                             </gauge:Scale.Pointers>
@@ -69,9 +69,9 @@
                 </gauge:SfCircularGauge>
 
                 <!--Radial Gauge 2-->
-                <gauge:SfCircularGauge x:Name="gagRadial2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="12" Grid.Row="0" Grid.Column="1">
+                <gauge:SfCircularGauge x:Name="gagRadial2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="1">
                     <gauge:SfCircularGauge.Headers>
-                        <gauge:Header Text="---" ForegroundColor="DarkCyan" TextSize="12" />
+                        <gauge:Header Text="---" ForegroundColor="DarkCyan" />
                     </gauge:SfCircularGauge.Headers>
                     <gauge:SfCircularGauge.Scales>
                         <gauge:Scale>
@@ -103,24 +103,24 @@
                     </Grid.RowDefinitions>
 
                     <!--Box Gauge 1-->
-                    <Frame Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" BorderColor="DarkCyan" BackgroundColor="Transparent" Margin="0,0,0,10"/>
+                    <Frame Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" BorderColor="DarkCyan" BackgroundColor="Transparent" Margin="0,0,0,5"/>
 
                     <StackLayout Grid.Row="0" Grid.Column="1" VerticalOptions="EndAndExpand">
-                        <Label x:Name="gagBox1Label" Text="Voltage" HorizontalOptions="CenterAndExpand" TextColor="DarkCyan" FontSize="28"/>
+                        <Label x:Name="gagBox1Label" Text="---" HorizontalOptions="CenterAndExpand" TextColor="DarkCyan" />
                     </StackLayout>
 
                     <StackLayout Grid.Row="1" Grid.Column="1" VerticalOptions="CenterAndExpand">
                         <StackLayout Orientation="Horizontal">
-                            <Label x:Name="gagBox1Value" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Text="35" TextColor="DarkCyan" FontSize="48"/>
-                            <Label x:Name="gagBox1UoM" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Text="V" TextColor="DarkCyan" FontSize="48"/>
+                            <Label x:Name="gagBox1Value" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Text="---" TextColor="DarkCyan" FontSize="48"/>
+                            <Label x:Name="gagBox1UoM" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Text="" TextColor="DarkCyan" FontSize="48"/>
                         </StackLayout>
                     </StackLayout>
 
                     <!--Box Gauge 2-->
-                    <Frame Grid.Row="0" Grid.Column="4" Grid.RowSpan="3" BorderColor="DarkCyan" BackgroundColor="Transparent" Margin="0,0,0,10"/>
+                    <Frame Grid.Row="0" Grid.Column="4" Grid.RowSpan="3" BorderColor="DarkCyan" BackgroundColor="Transparent" Margin="0,0,0,5"/>
                     
                     <StackLayout Grid.Row="0" Grid.Column="4" VerticalOptions="EndAndExpand">
-                        <Label x:Name="gagBox2Label" Text="---" HorizontalOptions="CenterAndExpand" TextColor="DarkCyan" FontSize="28"/>
+                        <Label x:Name="gagBox2Label" Text="---" HorizontalOptions="CenterAndExpand" TextColor="DarkCyan"/>
                     </StackLayout>
 
                     <StackLayout  Grid.Row="1" Grid.Column="4" VerticalOptions="CenterAndExpand">
@@ -134,12 +134,12 @@
             </Grid>
 
             <!--BT Status-->
-            <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" x:Name="tbkBTStatus" TextColor="Purple" Text="BT Status" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand"/>
+            <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" x:Name="tbkBTStatus" TextColor="Purple" Text="No Connection" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand"/>
 
             <!--BT Settings Panel-->
             <Frame x:Name="pnlBTSettings" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2" IsVisible="false" VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" Background="Black" BorderColor="OrangeRed" CornerRadius="10">
 
-                <Grid>
+                <Grid Background="Black">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
@@ -155,7 +155,7 @@
 
                     <StackLayout Grid.Row="1" HorizontalOptions="StartAndExpand">
                         <StackLayout Orientation="Horizontal">
-                            <Label HorizontalOptions="StartAndExpand" Text="Device:" TextColor="Cyan"></Label>
+                            <Label HorizontalOptions="StartAndExpand" Text="Device:" TextColor="Cyan"/>
                             <Label x:Name="tbkOBDDevice" HorizontalOptions="StartAndExpand" Text="None" TextColor="Cyan"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
@@ -175,7 +175,7 @@
                             <Button x:Name="btnDisconnectDevice" Text="Disconnect" TextColor="OrangeRed" BorderColor="OrangeRed" BorderWidth=".1" Background="Transparent"/>
                             <Button x:Name="btnErrorCodes" Text="Error Codes" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1"/>
                             <Button x:Name="btnStartGauges" Text="Force Start" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1"/>
-                            <Button x:Name="btnStopGauges" Text="Stop Gauges" TextColor="OrangeRed" Background="Transparent" BorderColor="OrangeRed" BorderWidth=".1"/>
+                            <Button x:Name="btnStopGauges" Text="Stop Gauges" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1"/>
                             <Button x:Name="btnCloseBTMenuOptions" Text="Close" TextColor="OrangeRed" Background="Transparent" BorderColor="OrangeRed" BorderWidth=".1" Clicked="btnCloseBTMenuOptions_Clicked"/>
                         </StackLayout>
                     </ScrollView>

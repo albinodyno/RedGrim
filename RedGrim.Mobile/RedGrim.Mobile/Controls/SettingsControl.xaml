@@ -13,7 +13,24 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!--Left Column-->
+            
+            
+            
+            
+            <StackLayout Grid.Row="0" Padding="5" Margin="2">
+                <Button x:Name="btnGaugeSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Gauge Settings" Clicked="btnGaugeSettings_Clicked"  Background="Cyan" TextColor="Black"/>
+                <Button x:Name="btnShowLog" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="OBD Log" Clicked="btnShowLog_Clicked" Background="Cyan" TextColor="Black" Margin="2"/>
+                <Button x:Name="btnShowErrorLog" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="System Logs" Clicked="btnShowErrorLog_Clicked" Background="Cyan" TextColor="Black"/>
+                <Button x:Name="btnSaveSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Save" Clicked="btnSaveSettings_Clicked" Background="Cyan" TextColor="Black"/>
+                <Button x:Name="btnResetSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Reset To Default" Clicked="btnResetSettings_Clicked" Background="OrangeRed" TextColor="Black"/>
+            </StackLayout>
+
+
+
+
+
+
+            <!--Left Column
             <Grid Grid.Column="0" VerticalOptions="Start" Background="Black">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -21,7 +38,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <!--AUX Buttons-->
+                AUX Buttons
                 <StackLayout Padding="5" Margin="2">
                     <Label Text="AUX Buttons" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Cyan"/>
                     <Entry x:Name="txbAux1" Background="DarkGray"/>
@@ -29,63 +46,37 @@
                     <Entry x:Name="txbAux3" Background="DarkGray"/>
                     <Entry x:Name="txbAux4" Background="DarkGray"/>
                 </StackLayout>
-
-                    <!--Theme
-                <Frame BorderColor="Purple" CornerRadius="5"/>
-                <StackLayout Grid.Row="2" Padding="5" Margin="2">
-                    <Label Text="Theme" VerticalOptions="Center" HorizontalOptions="Center" TextColor="DarkCyan"/>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="End">
-                        <RadioButton Text="Dark" IsChecked="True" x:Name="rbtDark" TextColor="Purple"/>
-                        <RadioButton Text="Light" IsChecked="False" x:Name="rbtLight" TextColor="Purple"/>
-                    </StackLayout>
-                </StackLayout>-->
-            </Grid>
+            </Grid>-->
 
             <!--Right Column-->
-            <Grid Grid.Column="1" VerticalOptions="Start" Background="Black">
+            <Grid Grid.Column="0" VerticalOptions="Start" Background="Black">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <!--WIFI
-                <Frame Grid.Row="1" HorizontalOptions="CenterAndExpand" BorderColor="Purple" CornerRadius="5" />
-                <StackLayout Grid.Row="1" Padding="5" Margin="2">
-                    <Label Text="WIFI" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Cyan"/>
-                    <Label Text="None" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Cyan" Margin="2" Padding="5"/>
-                    <Button x:Name="btnConnectWiFi" VerticalOptions="Center" HorizontalOptions="Center" Text="Connect" Background="Cyan" TextColor="Black" MinWidth="230" Padding="5" Margin="2"/>
-                </StackLayout>-->
-
-                <!--OBD-->
-                <StackLayout Grid.Row="0" Grid.RowSpan="2" Padding="5" Margin="2">
-                    <!--<Label Text="OBD" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Cyan"/>-->
-                    <Button x:Name="btnGaugeSettings" VerticalOptions="Center" HorizontalOptions="Center" Text="Gauge Settings" Clicked="btnGaugeSettings_Clicked"  Background="Cyan" TextColor="Black" WidthRequest="230" Padding="5" Margin="2"/>
-                    <Button x:Name="btnShowLog" VerticalOptions="Center" HorizontalOptions="Center" Text="OBD Log" Clicked="btnShowLog_Clicked" Background="Cyan" TextColor="Black" WidthRequest="230" Padding="5" Margin="2"/>
-                    <Button x:Name="btnShowErrorLog" VerticalOptions="Center" HorizontalOptions="Center" Text="System Logs" Clicked="btnShowErrorLog_Clicked" Background="Cyan" TextColor="Black" WidthRequest="230" Padding="5" Margin="2"/>
-                    <Button x:Name="btnSaveSettings" VerticalOptions="Center" HorizontalOptions="Center" Text="Save" Clicked="btnSaveSettings_Clicked" Background="Cyan" TextColor="Black" WidthRequest="230" Padding="5" Margin="2"/>
-                    <Button x:Name="btnResetSettings" VerticalOptions="Center" HorizontalOptions="Center" Text="Reset To Default" Clicked="btnResetSettings_Clicked" Background="OrangeRed" TextColor="Black" WidthRequest="230" Padding="5" Margin="2"/>
-                    <Label x:Name="tbkSettingsStatus" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="230"/>
-
-                </StackLayout>
-
-                <!--System
-                <StackLayout Grid.Row="1" Padding="5" Margin="2">
-                    <Label VerticalOptions="Center" HorizontalOptions="Center" Text="System" TextColor="Cyan"/>
+                <!--OBD
+                <StackLayout Grid.Row="0" Grid.RowSpan="3" Padding="5" Margin="2">
+                    <Button x:Name="btnGaugeSettings" VerticalOptions="StartAndExpand" HorizontalOptions="Center" Text="Gauge Settings" Clicked="btnGaugeSettings_Clicked"  Background="Cyan" TextColor="Black"/>
+                    <Button x:Name="btnShowLog" VerticalOptions="StartAndExpand" HorizontalOptions="Center" Text="OBD Log" Clicked="btnShowLog_Clicked" Background="Cyan" TextColor="Black" Margin="2"/>
+                    <Button x:Name="btnShowErrorLog" VerticalOptions="StartAndExpand" HorizontalOptions="Center" Text="System Logs" Clicked="btnShowErrorLog_Clicked" Background="Cyan" TextColor="Black"/>
+                    <Button x:Name="btnSaveSettings" VerticalOptions="StartAndExpand" HorizontalOptions="Center" Text="Save" Clicked="btnSaveSettings_Clicked" Background="Cyan" TextColor="Black"/>
+                    <Button x:Name="btnResetSettings" VerticalOptions="StartAndExpand" HorizontalOptions="Center" Text="Reset To Default" Clicked="btnResetSettings_Clicked" Background="OrangeRed" TextColor="Black"/>
                 </StackLayout>-->
             </Grid>
 
             <!--OBD Log-->
             <StackLayout x:Name="SettingsOBDPage" Grid.ColumnSpan="2" IsVisible="False" Background="Black">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="End" Padding="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Padding="5">
                     <Label FontSize="18" Text="Bluetooth - OBD Log" Margin="5" TextColor="DarkGoldenrod"/>
-                    <Button x:Name="btnUpdateLog" FontFamily="Segoe MDL2 Assets" Text="&#xE777;" FontSize="18" Clicked="btnUpdateLog_Clicked" Margin="5" Background="Transparent"/>
-                    <Button x:Name="btnClearLog" FontFamily="Segoe MDL2 Assets" Text="&#xE75C;" FontSize="18" Clicked="btnClearLog_Clicked" Margin="5" Background="Transparent"/>
+                    <Button x:Name="btnUpdateLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf01e;" FontSize="18" Clicked="btnUpdateLog_Clicked" Margin="5" Background="Transparent"/>
+                    <Button x:Name="btnClearLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf12d;" FontSize="18" Clicked="btnClearLog_Clicked" Margin="5" Background="Transparent"/>
                 </StackLayout>
-                <ScrollView Margin="10" Padding="2" HeightRequest="270">
-                    <Editor x:Name="tbkLog" FontSize="12" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsEnabled="false"/>
+                <ScrollView Margin="10" Padding="2" HeightRequest="140">
+                    <Label x:Name="tbkLog" FontSize="14" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" Padding="5"/>
                 </ScrollView>
-                <Button x:Name="btnCloseLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseLog_Clicked" TextColor="White" Margin="5" Background="Transparent" HorizontalOptions="EndAndExpand"/>
+                <Button x:Name="btnCloseLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseLog_Clicked" Margin="5" TextColor="White" Background="OrangeRed" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
 
             <!--Error Log-->
@@ -93,12 +84,12 @@
                 <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Padding="5">
                     <Label FontSize="18" Text="Error Log" Margin="5" TextColor="DarkGoldenrod"/>
                     <Button x:Name="btnUpdateErrorLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf01e;" FontSize="18" Clicked="btnUpdateErrorLog_Clicked" Margin="5" Background="Transparent"/>
-                    <Button x:Name="btnClearErrorLog" FontFamily="{StaticResource FontAwesomeSolid}" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" Text="&#xf12d;" FontSize="18" Clicked="btnClearErrorLog_Clicked" Margin="5" Background="Transparent"/>
+                    <Button x:Name="btnClearErrorLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf12d;" FontSize="18" Clicked="btnClearErrorLog_Clicked" Margin="5" Background="Transparent"/>
                 </StackLayout>
-                <ScrollView Margin="10" Padding="2" HeightRequest="270">
+                <ScrollView Margin="10" Padding="2" HeightRequest="140">
                     <Label x:Name="tbkErrorLog" FontSize="14" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" Padding="5"/>
                 </ScrollView>
-                <Button x:Name="btnCloseErrorLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseErrorLog_Clicked" Margin="5" TextColor="White" Background="Transparent" HorizontalOptions="EndAndExpand"/>
+                <Button x:Name="btnCloseErrorLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseErrorLog_Clicked" TextColor="White" Background="OrangeRed" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
 
             <!--Gauge Settings-->
