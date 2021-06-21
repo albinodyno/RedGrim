@@ -11,8 +11,13 @@
                 <RowDefinition Height=".15*"/>
             </Grid.RowDefinitions>
 
-            <StackLayout x:Name="mapLayout" Grid.Row="0">
-                <maps:Map x:Name="mainMap" />
+            <StackLayout x:Name="mapLayout" Grid.Row="0"/>
+
+            <StackLayout x:Name="mapMenu" Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Button x:Name="btnPanToCurrentLocation" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Loc" FontSize="16" Background="transparent" TextColor="DarkCyan" Clicked="btnPanToCurrentLocation_Clicked"/>
+                <Button HorizontalOptions="CenterAndExpand"/>
+                <Button HorizontalOptions="CenterAndExpand"/>
+                <Button HorizontalOptions="CenterAndExpand"/>
             </StackLayout>
         </Grid>
   </ContentView.Content>

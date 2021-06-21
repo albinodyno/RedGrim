@@ -86,15 +86,15 @@ namespace RedGrim.Mobile.Models
         {
             try
             {
-                byte[] buffer = Encoding.ASCII.GetBytes(input);
-                await socket.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+                byte[] writeBuffer = Encoding.ASCII.GetBytes(input);
+                await socket.OutputStream.WriteAsync(writeBuffer, 0, writeBuffer.Length);
                 await socket.OutputStream.FlushAsync();
 
                 await Task.Delay(elmDelay);
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry($"ELM Write setup failed - {ex.Message}");
+                MainPage.SystemLogEntry($"ELM WRITE setup failed - {ex.Message}");
             }
         }
 
@@ -102,11 +102,11 @@ namespace RedGrim.Mobile.Models
         {
             try
             {
-                //uint buffer = await obdReader.LoadAsync(512);
+                byte[] readBuffer = new byte[512];
+                int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
+                string data = Encoding.ASCII.GetString(readBuffer);
 
-                int buffer = (int)socket.InputStream.Length;
-                //string value = socket.InputStream.ReadAsync(new byte[] buffer, );
-                //BluetoothControl.log = BluetoothControl.log + value;
+                BluetoothControl.log += data;
             }
             catch(Exception ex)
             {
@@ -134,7 +134,7 @@ namespace RedGrim.Mobile.Models
 
 
         #region Write/Read PID
-        public async Task WritePID(string command)        //Write in PID code
+        public async Task WritePID(string command)
         {
             try
             {
