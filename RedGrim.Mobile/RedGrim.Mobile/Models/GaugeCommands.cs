@@ -106,11 +106,11 @@ namespace RedGrim.Mobile.Models
                 int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
                 string data = Encoding.ASCII.GetString(readBuffer);
 
-                BluetoothControl.log += data;
+                BluetoothControl.log += $"{data}\r";
             }
             catch(Exception ex)
             {
-                MainPage.SystemLogEntry($"ELM Read setup failed - {ex.Message}");
+                MainPage.SystemLogEntry($"ELM READ setup failed - {ex.Message}");
             }
         }
         #endregion
@@ -165,7 +165,7 @@ namespace RedGrim.Mobile.Models
                 int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
                 string data = Encoding.ASCII.GetString(readBuffer);
 
-                BluetoothControl.log += data;
+                BluetoothControl.log += $"{data}\r";
 
                 //uint buffer = await obdReader.LoadAsync(512);
                 //string value = obdReader.ReadString(buffer);

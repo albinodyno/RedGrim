@@ -116,7 +116,7 @@ namespace RedGrim.Mobile.Controls
                 socket = device.CreateRfcommSocketToServiceRecord(UUID.FromString("00001101-0000-1000-8000-00805f9b34fb"));
                 await socket.ConnectAsync();
 
-                gaugeCommands = new GaugeCommands(socket, 300, 300);
+                gaugeCommands = new GaugeCommands(socket, 1000, 300);
 
                 return true;
             }
@@ -141,7 +141,7 @@ namespace RedGrim.Mobile.Controls
                 int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
                 string data = Encoding.ASCII.GetString(readBuffer);
 
-                log += data;
+                log += $"{data}\r";
 
                 return true;
             }
