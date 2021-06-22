@@ -22,9 +22,25 @@ namespace RedGrim.Mobile.Controls
 
         }
 
+        private void btnUpdateLog_Clicked(object sender, EventArgs e)
+        {
+            tbkLog.Text = BluetoothControl.log;
+        }
+
+        private void btnClearLog_Clicked(object sender, EventArgs e)
+        {
+            tbkLog.Text = "";
+        }
+
+        private void btnCloseLog_Clicked(object sender, EventArgs e)
+        {
+            SettingsOBDPage.IsVisible = false;
+        }
+
         private void btnShowLog_Clicked(object sender, EventArgs e)
         {
             SettingsOBDPage.IsVisible = true;
+            tbkLog.Text = BluetoothControl.log;
         }
 
         private void btnShowErrorLog_Clicked(object sender, EventArgs e)
@@ -41,21 +57,6 @@ namespace RedGrim.Mobile.Controls
         private void btnResetSettings_Clicked(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnUpdateLog_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnClearLog_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnCloseLog_Clicked(object sender, EventArgs e)
-        {
-            SettingsOBDPage.IsVisible = false;
         }
 
         private void btnUpdateErrorLog_Clicked(object sender, EventArgs e)
