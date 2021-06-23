@@ -103,7 +103,7 @@ namespace RedGrim.Mobile.Controls
             if (connectionSetup) connectionSetup = await TestGauges();
             if (connectionSetup) SuccessfulConnection();
 
-            //if (connectionSetup) RunGauges();
+            if (connectionSetup) RunGauges();
         }
 
         private async Task<bool> ConnectSocket()
@@ -141,7 +141,7 @@ namespace RedGrim.Mobile.Controls
                 int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
                 string data = Encoding.ASCII.GetString(readBuffer);
 
-                log += $"{data}\r";
+                log += $"{data}\n";
 
                 return true;
             }
@@ -218,7 +218,7 @@ namespace RedGrim.Mobile.Controls
         #region  Run Gauges
         public async void RunGauges()
         {
-            while (loopPid)
+            //while (loopPid)
                 try
                 {
                     //Get Data

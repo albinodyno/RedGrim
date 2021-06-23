@@ -57,12 +57,12 @@
                     <gauge:SfCircularGauge.Scales>
                         <gauge:Scale>
                             <gauge:Scale.Ranges>
-                                <gauge:Range StartValue="0" EndValue="40"/>
+                                <gauge:Range StartValue="0" EndValue="0"/>
                             </gauge:Scale.Ranges>
                             <gauge:Scale.Pointers>
                                 <gauge:NeedlePointer  Value="0" />
-                                <gauge:RangePointer Value="60" />
-                                <gauge:MarkerPointer Value="70" />
+                                <gauge:RangePointer Value="0" />
+                                <gauge:MarkerPointer Value="0" />
                             </gauge:Scale.Pointers>
                         </gauge:Scale>
                     </gauge:SfCircularGauge.Scales>

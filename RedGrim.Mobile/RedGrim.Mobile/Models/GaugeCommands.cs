@@ -106,7 +106,7 @@ namespace RedGrim.Mobile.Models
                 int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
                 string data = Encoding.ASCII.GetString(readBuffer);
 
-                BluetoothControl.log += $"{data}\r";
+                BluetoothControl.log += $"{data}\n";
             }
             catch(Exception ex)
             {
@@ -128,7 +128,7 @@ namespace RedGrim.Mobile.Models
             await Task.Delay(pidDelay);
 
             success = await ReadPID();
-            return true;
+            return success;
         }
         #endregion
 
@@ -165,15 +165,17 @@ namespace RedGrim.Mobile.Models
                 int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
                 string data = Encoding.ASCII.GetString(readBuffer);
 
-                BluetoothControl.log += $"{data}\r";
-
-                //uint buffer = await obdReader.LoadAsync(512);
-                //string value = obdReader.ReadString(buffer);
-                //BluetoothControl.log = BluetoothControl.log + value;
+                BluetoothControl.log += $"{data}\n";
 
                 //botLeft.GaugeValue = GaugeParse.CoolantTemp(value.Substring(9, 2));
                 //botRight.GaugeValue = GaugeParse.Intaketemp(value.Substring(23, 2));
                 //mainGauge.GaugeValue = GaugeParse.Voltage(value.Substring(37, 4));
+
+                //MainGauge.GaugeValue = GaugeParse.Voltage(data.Substring(9, 2));
+                //RadialGauge1.GaugeValue = GaugeParse.CoolantTemp(data.Substring(9, 2));
+                //RadialGauge2.GaugeValue = GaugeParse.Intaketemp(data.Substring(9, 2));
+                //BoxGauge1.GaugeValue = GaugeParse.CoolantTemp(data.Substring(9, 2));
+                //BoxGauge2.GaugeValue = GaugeParse.Intaketemp(data.Substring(9, 2));
 
                 return true;
             }
