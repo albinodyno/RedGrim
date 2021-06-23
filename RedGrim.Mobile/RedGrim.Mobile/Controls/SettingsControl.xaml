@@ -13,22 +13,14 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            
-            
-            
-            
             <StackLayout Grid.Row="0" Grid.ColumnSpan="2" Padding="5" Margin="2">
                 <Button x:Name="btnGaugeSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Gauge Settings" Clicked="btnGaugeSettings_Clicked"  Background="Cyan" TextColor="Black"/>
                 <Button x:Name="btnShowLog" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="OBD Log" Clicked="btnShowLog_Clicked" Background="Cyan" TextColor="Black" Margin="2"/>
                 <Button x:Name="btnShowErrorLog" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="System Logs" Clicked="btnShowErrorLog_Clicked" Background="Cyan" TextColor="Black"/>
                 <Button x:Name="btnSaveSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Save" Clicked="btnSaveSettings_Clicked" Background="Cyan" TextColor="Black"/>
                 <Button x:Name="btnResetSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Reset To Default" Clicked="btnResetSettings_Clicked" Background="OrangeRed" TextColor="Black"/>
+                <Label x:Name="lblVersionNumber" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Version Number" Background="Black" TextColor="OrangeRed"/>
             </StackLayout>
-
-
-
-
-
 
             <!--Left Column
             <Grid Grid.Column="0" VerticalOptions="Start" Background="Black">

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +15,11 @@ namespace RedGrim.Mobile.Controls
         public SettingsControl()
         {
             InitializeComponent();
+        }
+
+        public void UpdateVersionNum()
+        {
+            lblVersionNumber.Text = MainPage.VersionNumber;
         }
 
         private void btnGaugeSettings_Clicked(object sender, EventArgs e)

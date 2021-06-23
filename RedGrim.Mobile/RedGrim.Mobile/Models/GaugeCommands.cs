@@ -30,35 +30,30 @@ namespace RedGrim.Mobile.Models
         public Gauge BoxGauge2;
 
 
-        public Dictionary<string, string> obdCommands = new Dictionary<string, string>()
-        {
-            {"RPM", "010C\r"},
-            {"MPH","010D\r"},
-            {"EngineLoad", "0104\r"},
-            {"ThrottlePos", "0111\r"},
-            {"CoolantTemp", "0105\r"},
-            {"IntakeTemp", "010F\r"},
-            {"Voltage", "0144\r"}
-        };
+        //public Dictionary<string, string> obdCommands = new Dictionary<string, string>()
+        //{
+        //    {"RPM", "010C\r"},
+        //    {"MPH","010D\r"},
+        //    {"EngineLoad", "0104\r"},
+        //    {"ThrottlePos", "0111\r"},
+        //    {"CoolantTemp", "0105\r"},
+        //    {"IntakeTemp", "010F\r"},
+        //    {"Voltage", "0144\r"}
+        //};
 
         public GaugeCommands(BluetoothSocket btSocket, int eDelay, int pDelay)
         {
             socket = btSocket;
 
-            //obdWriter = new DataWriter(streamSocket.OutputStream);
-            //obdReader = new DataReader(streamSocket.InputStream);
-            //obdReader.InputStreamOptions = InputStreamOptions.Partial;
-
             elmDelay = eDelay;
             pidDelay = pDelay;
 
             //choose gauge content here
-            MainGauge = new Gauge("Voltage", "V", 50, 0, 5, obdCommands["Voltage"], GaugeParse.Voltage);
-            RadialGauge1 = new Gauge("CoolantTemp", "°F", 250, -25, 25, obdCommands["CoolantTemp"], GaugeParse.CoolantTemp);
-            RadialGauge2 = new Gauge("IntakeTemp", "°F", 250, -25, 25, obdCommands["IntakeTemp"], GaugeParse.Intaketemp);
-            BoxGauge1 = new Gauge("CoolantTemp", "°F", 250, -25, 25, obdCommands["CoolantTemp"], GaugeParse.CoolantTemp);
-            BoxGauge2 = new Gauge("IntakeTemp", "°F", 250, -25, 25, obdCommands["IntakeTemp"], GaugeParse.Intaketemp);
-
+            MainGauge = BuildGauge.VoltageGauge();
+            RadialGauge1 = BuildGauge.CoolantGauge();
+            RadialGauge2 = BuildGauge.IntakeGauge();
+            BoxGauge1 = BuildGauge.CoolantGauge();
+            BoxGauge2 = BuildGauge.IntakeGauge();
         }
 
         #region Write/Read ELM
@@ -179,12 +174,31 @@ namespace RedGrim.Mobile.Models
                 //BoxGauge1.GaugeValue = GaugeParse.CoolantTemp(data.Substring(60, 2));
                 //BoxGauge2.GaugeValue = GaugeParse.Intaketemp(data.Substring(73, 2));
 
+                var array = data.Split('>').ToList();
+                List<string> hexValues = new List<string>();
+ 
+                foreach(string s in array)
+                {
+                    string h = s.Substring(9);
+                    hexValues.Add(h);
+                }
 
-                MainGauge.GaugeValue = MainGauge.ParseGauge(data.Substring(9, 4));
-                RadialGauge1.GaugeValue = RadialGauge1.ParseGauge(data.Substring(24, 2));
-                RadialGauge2.GaugeValue = RadialGauge2.ParseGauge(data.Substring(37, 2));
-                BoxGauge1.GaugeValue = BoxGauge1.ParseGauge(data.Substring(60, 2));
-                BoxGauge2.GaugeValue = BoxGauge2.ParseGauge(data.Substring(73, 2));
+
+                int index = 9;
+
+                MainGauge.GaugeValue = MainGauge.ParseGauge(data.Substring(index, MainGauge.HexNum));
+                index += MainGauge.HexNum + 11;
+
+                RadialGauge1.GaugeValue = RadialGauge1.ParseGauge(data.Substring(index, RadialGauge1.HexNum));
+                index += RadialGauge1.HexNum + 11;
+
+                RadialGauge2.GaugeValue = RadialGauge2.ParseGauge(data.Substring(index, RadialGauge2.HexNum));
+                index += RadialGauge2.HexNum + 11;
+
+                BoxGauge1.GaugeValue = BoxGauge1.ParseGauge(data.Substring(index, BoxGauge1.HexNum));
+                index += BoxGauge1.HexNum + 11;
+
+                BoxGauge2.GaugeValue = BoxGauge2.ParseGauge(data.Substring(index, BoxGauge2.HexNum));
 
                 return true;
             }

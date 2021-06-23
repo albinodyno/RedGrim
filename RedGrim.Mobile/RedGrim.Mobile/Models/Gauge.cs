@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RedGrim.Mobile.Models
 {
-    class Gauge
+    public class Gauge
     {
         private string name = "";
         private string uom = "";
@@ -31,8 +31,14 @@ namespace RedGrim.Mobile.Models
         public int TickSpacing { get { return tickSpacing; } set { tickSpacing = value; } }
         public string OBDCommand { get { return obdCommand; } set { obdCommand = value; } }
         public Func<string, double> ParseGauge { get; set; }
+        public int HexNum { get; set; }
 
-        public Gauge(string gName, string gUOM, int gMax, int gMin, int gTickSpacing, string gOBDCommand, Func<string, double> ParseGaugeMethod)
+        public Gauge()
+        {
+
+        }
+
+        public Gauge(string gName, string gUOM, int gMax, int gMin, int gTickSpacing, string gOBDCommand, Func<string, double> ParseGaugeMethod, int gHexNum)
         {
             name = gName;
             uom = gUOM;
@@ -41,6 +47,7 @@ namespace RedGrim.Mobile.Models
             tickSpacing = gTickSpacing;
             obdCommand = gOBDCommand;
             ParseGauge = ParseGaugeMethod;
+            HexNum = gHexNum;
         }
     }
 }
