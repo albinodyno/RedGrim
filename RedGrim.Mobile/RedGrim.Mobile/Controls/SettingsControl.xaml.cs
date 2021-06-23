@@ -29,7 +29,8 @@ namespace RedGrim.Mobile.Controls
 
         private void btnClearLog_Clicked(object sender, EventArgs e)
         {
-            tbkLog.Text = "";
+            BluetoothControl.log = "";
+            tbkLog.Text = BluetoothControl.log;
         }
 
         private void btnCloseLog_Clicked(object sender, EventArgs e)

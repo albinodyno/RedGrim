@@ -74,7 +74,7 @@
                     <Button x:Name="btnClearLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf12d;" FontSize="18" Clicked="btnClearLog_Clicked" Margin="5" Background="Transparent"/>
                 </StackLayout>
                 <ScrollView Margin="10" Padding="2" HeightRequest="140">
-                    <Label x:Name="tbkLog" FontSize="14" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" Padding="5"/>
+                    <Label x:Name="tbkLog" FontSize="14" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" LineBreakMode="WordWrap"/>
                 </ScrollView>
                 <Button x:Name="btnCloseLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseLog_Clicked" Margin="5" TextColor="White" Background="OrangeRed" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
@@ -87,7 +87,7 @@
                     <Button x:Name="btnClearErrorLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf12d;" FontSize="18" Clicked="btnClearErrorLog_Clicked" Margin="5" Background="Transparent"/>
                 </StackLayout>
                 <ScrollView Margin="10" Padding="2" HeightRequest="140">
-                    <Label x:Name="tbkErrorLog" FontSize="14" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" Padding="5"/>
+                    <Label x:Name="tbkErrorLog" FontSize="14" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"/>
                 </ScrollView>
                 <Button x:Name="btnCloseErrorLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseErrorLog_Clicked" TextColor="White" Background="OrangeRed" HorizontalOptions="EndAndExpand"/>
             </StackLayout>

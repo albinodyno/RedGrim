@@ -19,7 +19,7 @@ namespace RedGrim.Mobile.Models
             catch (Exception ex)
             {
                 MainPage.SystemLogEntry(ex.Message);
-                return 0;
+                value = 0;
             }
             return value;
         }
@@ -35,7 +35,7 @@ namespace RedGrim.Mobile.Models
             catch (Exception ex)
             {
                 MainPage.SystemLogEntry(ex.Message);
-                return 0;
+                value = 0;
             }
             return value;
         }
@@ -51,7 +51,7 @@ namespace RedGrim.Mobile.Models
             catch (Exception ex)
             {
                 MainPage.SystemLogEntry(ex.Message);
-                return 0;
+                value = 0;
             }
             return value;
         }
@@ -68,7 +68,7 @@ namespace RedGrim.Mobile.Models
             catch (Exception ex)
             {
                 MainPage.SystemLogEntry(ex.Message);
-                return 0;
+                value = 0;
             }
             return value;
         }
@@ -86,7 +86,7 @@ namespace RedGrim.Mobile.Models
             catch (Exception ex)
             {
                 MainPage.SystemLogEntry(ex.Message);
-                return 0;
+                value =  0;
             }
                 return value;
         }

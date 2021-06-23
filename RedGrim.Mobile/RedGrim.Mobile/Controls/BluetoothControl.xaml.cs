@@ -141,7 +141,8 @@ namespace RedGrim.Mobile.Controls
                 int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
                 string data = Encoding.ASCII.GetString(readBuffer);
 
-                log += $"{data}\n";
+
+                UpdateLog(data);
 
                 return true;
             }
@@ -203,26 +204,31 @@ namespace RedGrim.Mobile.Controls
 
         public async Task<bool> TestGauges()
         {
-            bool gaugeTest = true;
+            try
+            {
+                if (gaugeCommands == null) 
+                    throw new Exception("Gauge Test Failed, Gauge Commands Null");
+                else
+                    await gaugeCommands.SetupCommands();
 
-            if (gaugeCommands == null)
-                gaugeTest = false;
-
-            if (gaugeTest)
-                gaugeTest = await gaugeCommands.SetupCommands();
-
-            return gaugeTest;
+                return true;
+            }
+            catch(Exception ex)
+            {
+                FailedConnection(ex.Message);
+                return false;
+            }
         }
         #endregion
 
         #region  Run Gauges
         public async void RunGauges()
         {
-            //while (loopPid)
+            while (loopPid)
                 try
                 {
                     //Get Data
-                    bool success = await gaugeCommands.ExecutePIDs();
+                    loopPid = await gaugeCommands.ExecutePIDs();
 
                     //Update Gauge UI
                     gagRadialMain.Scales[0].Pointers[0].Value = gaugeCommands.MainGauge.GaugeValue;
@@ -306,13 +312,18 @@ namespace RedGrim.Mobile.Controls
 
         #endregion
 
-        #region Save
+        #region Misc
         private async void SaveDevice()
         {
             savedDeviceName = device.Name;
             savedDeviceID = device.Address;
 
 
+        }
+
+        public static void UpdateLog(string input)
+        {
+            log = log + "\r\n" + input;
         }
 
         #endregion

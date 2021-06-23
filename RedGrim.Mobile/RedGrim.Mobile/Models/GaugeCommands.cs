@@ -53,11 +53,11 @@ namespace RedGrim.Mobile.Models
             pidDelay = pDelay;
 
             //choose gauge content here
-            MainGauge = new Gauge("Voltage", "V", 50, 0, 5, obdCommands["Voltage"]);
-            RadialGauge1 = new Gauge("CoolantTemp", "°F", 250, -25, 25, obdCommands["CoolantTemp"]);
-            RadialGauge2 = new Gauge("IntakeTemp", "°F", 250, -25, 25, obdCommands["IntakeTemp"]);
-            BoxGauge1 = new Gauge("CoolantTemp", "°F", 250, -25, 25, obdCommands["CoolantTemp"]);
-            BoxGauge2 = new Gauge("IntakeTemp", "°F", 250, -25, 25, obdCommands["IntakeTemp"]);
+            MainGauge = new Gauge("Voltage", "V", 50, 0, 5, obdCommands["Voltage"], GaugeParse.Voltage);
+            RadialGauge1 = new Gauge("CoolantTemp", "°F", 250, -25, 25, obdCommands["CoolantTemp"], GaugeParse.CoolantTemp);
+            RadialGauge2 = new Gauge("IntakeTemp", "°F", 250, -25, 25, obdCommands["IntakeTemp"], GaugeParse.Intaketemp);
+            BoxGauge1 = new Gauge("CoolantTemp", "°F", 250, -25, 25, obdCommands["CoolantTemp"], GaugeParse.CoolantTemp);
+            BoxGauge2 = new Gauge("IntakeTemp", "°F", 250, -25, 25, obdCommands["IntakeTemp"], GaugeParse.Intaketemp);
 
         }
 
@@ -106,7 +106,7 @@ namespace RedGrim.Mobile.Models
                 int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
                 string data = Encoding.ASCII.GetString(readBuffer);
 
-                BluetoothControl.log += $"{data}\n";
+                BluetoothControl.UpdateLog(data);
             }
             catch(Exception ex)
             {
@@ -143,14 +143,16 @@ namespace RedGrim.Mobile.Models
                 // Write data to the device
                 await socket.OutputStream.WriteAsync(writeBuffer, 0, writeBuffer.Length);
                 await socket.OutputStream.FlushAsync();
+                await Task.Delay(pidDelay);
+
 
                 //Old way on PI
                 //obdWriter.WriteString(command);
                 //await obdWriter.StoreAsync();
                 //await obdWriter.FlushAsync();
-                //await Task.Delay(pidDelay);  //Can i remove this if we wait for pid delay to read?
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MainPage.SystemLogEntry(ex.Message);
             }
@@ -165,17 +167,24 @@ namespace RedGrim.Mobile.Models
                 int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
                 string data = Encoding.ASCII.GetString(readBuffer);
 
-                BluetoothControl.log += $"{data}\n";
+                BluetoothControl.UpdateLog(data);
 
                 //botLeft.GaugeValue = GaugeParse.CoolantTemp(value.Substring(9, 2));
                 //botRight.GaugeValue = GaugeParse.Intaketemp(value.Substring(23, 2));
                 //mainGauge.GaugeValue = GaugeParse.Voltage(value.Substring(37, 4));
 
-                //MainGauge.GaugeValue = GaugeParse.Voltage(data.Substring(9, 2));
-                //RadialGauge1.GaugeValue = GaugeParse.CoolantTemp(data.Substring(9, 2));
-                //RadialGauge2.GaugeValue = GaugeParse.Intaketemp(data.Substring(9, 2));
-                //BoxGauge1.GaugeValue = GaugeParse.CoolantTemp(data.Substring(9, 2));
-                //BoxGauge2.GaugeValue = GaugeParse.Intaketemp(data.Substring(9, 2));
+                //MainGauge.GaugeValue = GaugeParse.Voltage(data.Substring(9, 4));
+                //RadialGauge1.GaugeValue = GaugeParse.CoolantTemp(data.Substring(24, 2));
+                //RadialGauge2.GaugeValue = GaugeParse.Intaketemp(data.Substring(37, 2));
+                //BoxGauge1.GaugeValue = GaugeParse.CoolantTemp(data.Substring(60, 2));
+                //BoxGauge2.GaugeValue = GaugeParse.Intaketemp(data.Substring(73, 2));
+
+
+                MainGauge.GaugeValue = MainGauge.ParseGauge(data.Substring(9, 4));
+                RadialGauge1.GaugeValue = RadialGauge1.ParseGauge(data.Substring(24, 2));
+                RadialGauge2.GaugeValue = RadialGauge2.ParseGauge(data.Substring(37, 2));
+                BoxGauge1.GaugeValue = BoxGauge1.ParseGauge(data.Substring(60, 2));
+                BoxGauge2.GaugeValue = BoxGauge2.ParseGauge(data.Substring(73, 2));
 
                 return true;
             }

@@ -29,10 +29,10 @@ namespace RedGrim.Mobile.Models
         public int Max { get { return max; } set { max = value; } }
         public int Min { get { return min; } set { min = value; } }
         public int TickSpacing { get { return tickSpacing; } set { tickSpacing = value; } }
-        public string OBDCommand { get { return obdCommand; } set { obdCommand = value; } } 
-        
+        public string OBDCommand { get { return obdCommand; } set { obdCommand = value; } }
+        public Func<string, double> ParseGauge { get; set; }
 
-        public Gauge(string gName, string gUOM, int gMax, int gMin, int gTickSpacing, string gOBDCommand)
+        public Gauge(string gName, string gUOM, int gMax, int gMin, int gTickSpacing, string gOBDCommand, Func<string, double> ParseGaugeMethod)
         {
             name = gName;
             uom = gUOM;
@@ -40,6 +40,7 @@ namespace RedGrim.Mobile.Models
             min = gMin;
             tickSpacing = gTickSpacing;
             obdCommand = gOBDCommand;
+            ParseGauge = ParseGaugeMethod;
         }
     }
 }
