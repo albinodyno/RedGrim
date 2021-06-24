@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Toolkit" Version="7.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Syncfusion.Xamarin.SfGauge" Version="18.4.0.41" />
+    <PackageReference Include="Syncfusion.Xamarin.SfGauge" Version="19.1.0.69" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2012" />

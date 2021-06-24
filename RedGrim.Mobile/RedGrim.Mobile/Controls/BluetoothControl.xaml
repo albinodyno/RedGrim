@@ -17,7 +17,7 @@
                 <RowDefinition/>
                 <RowDefinition Height=".15*"/>
             </Grid.RowDefinitions>
-            
+
             <!--Radial Gauge Main-->
             <gauge:SfCircularGauge x:Name="gagRadialMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
                 <gauge:SfCircularGauge.Headers>
@@ -32,8 +32,8 @@
                         </gauge:Scale.Ranges>
                         <gauge:Scale.Pointers>
                             <gauge:NeedlePointer  Value="0" />
-                            <!--<gauge:RangePointer Value="50" />
-                            <gauge:MarkerPointer Value="70" />-->
+                            <gauge:RangePointer Value="50" />
+                            <gauge:MarkerPointer Value="70" />
                         </gauge:Scale.Pointers>
                     </gauge:Scale>
                 </gauge:SfCircularGauge.Scales>

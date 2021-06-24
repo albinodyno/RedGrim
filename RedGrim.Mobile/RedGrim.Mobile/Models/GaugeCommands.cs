@@ -125,11 +125,20 @@ namespace RedGrim.Mobile.Models
             success = await ReadPID();
             return success;
         }
+
+        public async Task ExecuteSinglePIDs()
+        {
+            await WriteSinglePID(MainGauge);
+            await WriteSinglePID(RadialGauge1);
+            await WriteSinglePID(RadialGauge2);
+            await WriteSinglePID(BoxGauge1);
+            await WriteSinglePID(BoxGauge2);
+        }
         #endregion
 
 
         #region Write/Read PID
-        public async Task WritePID(string command)
+        public async Task WritePID(string command) //For Single Write/Read: Add parameter for Gauge
         {
             try
             {
@@ -139,13 +148,6 @@ namespace RedGrim.Mobile.Models
                 await socket.OutputStream.WriteAsync(writeBuffer, 0, writeBuffer.Length);
                 await socket.OutputStream.FlushAsync();
                 await Task.Delay(pidDelay);
-
-
-                //Old way on PI
-                //obdWriter.WriteString(command);
-                //await obdWriter.StoreAsync();
-                //await obdWriter.FlushAsync();
-
             }
             catch (Exception ex)
             {
@@ -153,7 +155,7 @@ namespace RedGrim.Mobile.Models
             }
         }
 
-        public async Task<bool> ReadPID()        //Read in PID response and parse
+        public async Task<bool> ReadPID()
         {
             try
             {
@@ -164,25 +166,15 @@ namespace RedGrim.Mobile.Models
 
                 BluetoothControl.UpdateLog(data);
 
-                //botLeft.GaugeValue = GaugeParse.CoolantTemp(value.Substring(9, 2));
-                //botRight.GaugeValue = GaugeParse.Intaketemp(value.Substring(23, 2));
-                //mainGauge.GaugeValue = GaugeParse.Voltage(value.Substring(37, 4));
+                string[] dt = data.Split('<');
 
-                //MainGauge.GaugeValue = GaugeParse.Voltage(data.Substring(9, 4));
+
+
+                MainGauge.GaugeValue = GaugeParse.Voltage(dt[0].Substring(dt[0].Length-MainGauge.HexNum, MainGauge.HexNum));
                 //RadialGauge1.GaugeValue = GaugeParse.CoolantTemp(data.Substring(24, 2));
                 //RadialGauge2.GaugeValue = GaugeParse.Intaketemp(data.Substring(37, 2));
-                //BoxGauge1.GaugeValue = GaugeParse.CoolantTemp(data.Substring(60, 2));
-                //BoxGauge2.GaugeValue = GaugeParse.Intaketemp(data.Substring(73, 2));
-
-                var array = data.Split('>').ToList();
-                List<string> hexValues = new List<string>();
- 
-                foreach(string s in array)
-                {
-                    string h = s.Substring(9);
-                    hexValues.Add(h);
-                }
-
+                //BoxGauge1.GaugeValue = GaugeParse.CoolantTemp(data.Substring(50, 2));
+                //BoxGauge2.GaugeValue = GaugeParse.Intaketemp(data.Substring(63, 2));
 
                 int index = 9;
 
@@ -208,6 +200,48 @@ namespace RedGrim.Mobile.Models
                 return false;
             }
         }
+
+        public async Task WriteSinglePID(Gauge gauge)
+        {
+            await Task.Delay(pidDelay);
+            try
+            {
+                byte[] writeBuffer = Encoding.ASCII.GetBytes(gauge.OBDCommand);
+
+                // Write data to the device
+                await socket.OutputStream.WriteAsync(writeBuffer, 0, writeBuffer.Length);
+                await socket.OutputStream.FlushAsync();
+                await Task.Delay(pidDelay);
+
+                gauge.GaugeValue = await ReadSinglePID(gauge);
+            }
+            catch (Exception ex)
+            {
+                MainPage.SystemLogEntry(ex.Message);
+            }
+        }
+
+        public async Task<double> ReadSinglePID(Gauge gauge)
+        {
+            try
+            {
+                // Read data from the device
+                byte[] readBuffer = new byte[512];
+                int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
+                string data = Encoding.ASCII.GetString(readBuffer);
+
+                BluetoothControl.UpdateLog(data);
+
+                double output = gauge.ParseGauge(data.Substring(9, gauge.HexNum));
+                return output;
+            }
+            catch (Exception ex)
+            {
+                MainPage.SystemLogEntry(ex.Message);
+                return 0;
+            }
+        }
+
         #endregion
     }
 }

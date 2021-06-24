@@ -36,17 +36,26 @@ namespace RedGrim.Mobile.Controls
         #region Initial Bluetooth Setttings
         public void LoadAdapter()
         {
-            adapter = BluetoothAdapter.DefaultAdapter;
-            if (adapter == null)
-                throw new Exception("No Bluetooth adapter found.");
+            try
+            {
+                adapter = BluetoothAdapter.DefaultAdapter;
+                if (adapter == null)
+                    throw new Exception("No Bluetooth adapter found.");
 
-            if (!adapter.IsEnabled)
-                throw new Exception("Bluetooth adapter is not enabled.");
+                if (!adapter.IsEnabled)
+                    throw new Exception("Bluetooth adapter is not enabled.");
+            }
+            catch(Exception ex)
+            {
+                FailedConnection(ex.Message);
+            }
+
         }
 
         public void LoadDevices()
         {
-            foreach (BluetoothDevice d in adapter.BondedDevices)
+            if (adapter.IsEnabled)
+                foreach (BluetoothDevice d in adapter.BondedDevices)
                 pkrBluetoothPicker.Items.Add(d.Name);
         }
 
@@ -137,7 +146,7 @@ namespace RedGrim.Mobile.Controls
                 await gaugeCommands.socket.OutputStream.FlushAsync();
 
                 // Read data from the device
-                byte[] readBuffer = new byte[512];
+                byte[] readBuffer = new byte[50];
                 int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
                 string data = Encoding.ASCII.GetString(readBuffer);
 
@@ -151,18 +160,6 @@ namespace RedGrim.Mobile.Controls
                 FailedConnection(ex.Message);
                 return false;
             }
-
-            //byte[] writeBuffer = Encoding.ASCII.GetBytes("ATZ\r");
-            //byte[] readBuffer = new byte[20];
-
-            //// Write data to the device
-            //await socket.OutputStream.WriteAsync(writeBuffer, 0, writeBuffer.Length);
-
-            //// Read data from the device
-            //int data = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
-            //log += data;
-
-            //return true;
         }
 
         public async Task<bool> SetupGauges()
@@ -227,8 +224,15 @@ namespace RedGrim.Mobile.Controls
             while (loopPid)
                 try
                 {
+                    System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                    sw.Start();
+
                     //Get Data
-                    loopPid = await gaugeCommands.ExecutePIDs();
+                    //loopPid = await gaugeCommands.ExecutePIDs(); //- For Grouped execution of commands
+                    await gaugeCommands.ExecuteSinglePIDs();   //- For Single execution of commands
+
+                    sw.Stop();
+                    UpdateLog($"-----Time to Execute: {Convert.ToString(sw.ElapsedMilliseconds)}");
 
                     //Update Gauge UI
                     gagRadialMain.Scales[0].Pointers[0].Value = gaugeCommands.MainGauge.GaugeValue;
