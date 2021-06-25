@@ -21,7 +21,7 @@
             <!--Radial Gauge Main-->
             <gauge:SfCircularGauge x:Name="gagRadialMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
                 <gauge:SfCircularGauge.Headers>
-                    <gauge:Header Text="Coolant Temp" ForegroundColor="DarkCyan"/>
+                    <gauge:Header Text="---" ForegroundColor="Cyan"/>
                 </gauge:SfCircularGauge.Headers>
                 <gauge:SfCircularGauge.Scales>
                     <gauge:Scale StartValue="-20" EndValue="220" Interval="20">
@@ -52,7 +52,7 @@
                 <!--Radial Gauge 1-->
                 <gauge:SfCircularGauge x:Name="gagRadial1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0">
                     <gauge:SfCircularGauge.Headers>
-                        <gauge:Header Text="---" ForegroundColor="DarkCyan" />
+                        <gauge:Header Text="---" ForegroundColor="Cyan" />
                     </gauge:SfCircularGauge.Headers>
                     <gauge:SfCircularGauge.Scales>
                         <gauge:Scale>
@@ -71,7 +71,7 @@
                 <!--Radial Gauge 2-->
                 <gauge:SfCircularGauge x:Name="gagRadial2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="1">
                     <gauge:SfCircularGauge.Headers>
-                        <gauge:Header Text="---" ForegroundColor="DarkCyan" />
+                        <gauge:Header Text="---" ForegroundColor="Cyan" />
                     </gauge:SfCircularGauge.Headers>
                     <gauge:SfCircularGauge.Scales>
                         <gauge:Scale>
@@ -111,8 +111,8 @@
 
                     <StackLayout Grid.Row="1" Grid.Column="1" VerticalOptions="CenterAndExpand">
                         <StackLayout Orientation="Horizontal">
-                            <Label x:Name="gagBox1Value" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Text="---" TextColor="DarkCyan" FontSize="48"/>
-                            <Label x:Name="gagBox1UoM" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Text="" TextColor="DarkCyan" FontSize="48"/>
+                            <Label x:Name="gagBox1Value" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Text="---" TextColor="DarkCyan" FontSize="40"/>
+                            <Label x:Name="gagBox1UoM" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Text="" TextColor="DarkCyan" FontSize="40"/>
                         </StackLayout>
                     </StackLayout>
 
@@ -125,8 +125,8 @@
 
                     <StackLayout  Grid.Row="1" Grid.Column="4" VerticalOptions="CenterAndExpand">
                         <StackLayout Orientation="Horizontal">
-                            <Label x:Name="gagBox2Value" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Text="---" TextColor="DarkCyan" FontSize="48"/>
-                            <Label x:Name="gagBox2UoM" VerticalOptions="Fill" HorizontalOptions="StartAndExpand" Text="" TextColor="DarkCyan" FontSize="48"/>
+                            <Label x:Name="gagBox2Value" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Text="---" TextColor="DarkCyan" FontSize="40"/>
+                            <Label x:Name="gagBox2UoM" VerticalOptions="Fill" HorizontalOptions="StartAndExpand" Text="" TextColor="DarkCyan" FontSize="40"/>
                         </StackLayout>
                     </StackLayout>
 

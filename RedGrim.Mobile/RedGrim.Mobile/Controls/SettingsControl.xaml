@@ -59,14 +59,14 @@
             </Grid>
 
             <!--OBD Log-->
-            <StackLayout x:Name="SettingsOBDPage" Grid.ColumnSpan="2" IsVisible="False" Background="Black">
+            <StackLayout x:Name="SettingsOBDPage" Grid.ColumnSpan="2" IsVisible="False" BackgroundColor="Black">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Padding="5">
                     <Label FontSize="18" Text="Bluetooth - OBD Log" Margin="5" TextColor="DarkGoldenrod"/>
                     <Button x:Name="btnUpdateLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf01e;" FontSize="18" Clicked="btnUpdateLog_Clicked" Margin="5" Background="Transparent"/>
                     <Button x:Name="btnClearLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf12d;" FontSize="18" Clicked="btnClearLog_Clicked" Margin="5" Background="Transparent"/>
                 </StackLayout>
                 <ScrollView Margin="10" Padding="2" HeightRequest="140">
-                    <Label x:Name="tbkLog" FontSize="14" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" LineBreakMode="WordWrap"/>
+                    <Label x:Name="tbkLog" FontSize="14" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" Text="---Start---" TextColor="White"/>
                 </ScrollView>
                 <Button x:Name="btnCloseLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseLog_Clicked" Margin="5" TextColor="White" Background="OrangeRed" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
