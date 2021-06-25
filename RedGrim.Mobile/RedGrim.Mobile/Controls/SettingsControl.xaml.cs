@@ -1,17 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using RedGrim.Mobile.Models;
 
 namespace RedGrim.Mobile.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsControl : ContentView
     {
+        public static Settings saveSettings = new Settings();
+        public static Settings loadedSettings = new Settings();
+
         public SettingsControl()
         {
             InitializeComponent();
@@ -57,7 +63,7 @@ namespace RedGrim.Mobile.Controls
 
         private void btnSaveSettings_Clicked(object sender, EventArgs e)
         {
-
+            SaveData();
         }
 
         private void btnResetSettings_Clicked(object sender, EventArgs e)
@@ -110,5 +116,51 @@ namespace RedGrim.Mobile.Controls
         {
 
         }
+
+        #region Save/Load Methods
+
+        public static void LoadData()
+        {
+            try
+            {
+                string loadPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "RedGrimSettings.txt");
+
+                if (loadPath == null || !File.Exists(loadPath))
+                {
+                    throw new Exception("File not found");
+                }
+
+                StreamReader reader = new StreamReader(loadPath, true);
+                string jsonSettings = reader.ReadToEnd();
+
+                loadedSettings = (Settings)JsonConvert.DeserializeObject(jsonSettings);
+                saveSettings = loadedSettings;
+            }
+            catch (Exception ex)
+            {
+                MainPage.SystemLogEntry($"---Load Settings Failed - {ex.Message}");
+            }
+        }
+
+
+        public static void SaveData()
+        {
+            try
+            {
+                string jsonSettings = JsonConvert.SerializeObject(saveSettings);
+
+                string savePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "RedGrimSettings.txt");
+
+                StreamWriter writer = File.CreateText(savePath);
+                writer.Write(jsonSettings);
+                MainPage.SystemLogEntry("---Settings saved successfully");
+            }
+            catch(Exception ex)
+            {
+                MainPage.SystemLogEntry("---Failed to save settings");
+            }
+        }
+
+        #endregion
     }
 }

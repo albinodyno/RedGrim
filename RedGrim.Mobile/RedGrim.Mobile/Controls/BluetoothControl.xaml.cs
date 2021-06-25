@@ -19,7 +19,7 @@ namespace RedGrim.Mobile.Controls
         BluetoothDevice device;
         GaugeCommands gaugeCommands;
 
-        string savedDeviceID = "";
+        string savedDeviceAddress = "";
         string savedDeviceName = "";
 
         public static string log = "";
@@ -30,7 +30,13 @@ namespace RedGrim.Mobile.Controls
         public BluetoothControl()
         {
             InitializeComponent();
+
+            gagRadialMain.PointerPositionChanged += Radial_PointerPositionChanged;
+            gagRadial1.PointerPositionChanged += Radial_PointerPositionChanged;
+            gagRadial2.PointerPositionChanged += Radial_PointerPositionChanged;
+
             LoadAdapter();
+
         }
 
         #region Initial Bluetooth Setttings
@@ -73,6 +79,9 @@ namespace RedGrim.Mobile.Controls
 
             try
             {
+                savedDeviceName = SettingsControl.loadedSettings.btDeviceName;
+                savedDeviceAddress = SettingsControl.loadedSettings.btDeviceAddress;
+
                 device = (from bd in adapter.BondedDevices where bd.Name == savedDeviceName select bd).FirstOrDefault();
                 ConnectionHandling();
             }
@@ -240,6 +249,8 @@ namespace RedGrim.Mobile.Controls
                     gagRadial2.Scales[0].Pointers[0].Value = gaugeCommands.RadialGauge2.GaugeValue;
                     gagBox1Value.Text = Convert.ToString(gaugeCommands.BoxGauge1.GaugeValue);
                     gagBox2Value.Text = Convert.ToString(gaugeCommands.BoxGauge2.GaugeValue);
+
+
                 }
                 catch (Exception ex)
                 {
@@ -320,7 +331,7 @@ namespace RedGrim.Mobile.Controls
         private async void SaveDevice()
         {
             savedDeviceName = device.Name;
-            savedDeviceID = device.Address;
+            savedDeviceAddress = device.Address;
 
 
         }
@@ -328,6 +339,35 @@ namespace RedGrim.Mobile.Controls
         public static void UpdateLog(string input)
         {
             log = log + "\r\n" + input;
+        }
+
+        private void Radial_PointerPositionChanged(object sender, Syncfusion.SfGauge.XForms.PointerPositionChangedArgs args)
+        {
+            try
+            {
+                if (sender == gagRadialMain)
+                {
+                    lblMainValue.Text = Convert.ToString(args.pointerValue);
+                    return;
+                }
+                if (sender == gagRadial1)
+                {
+                    lblRadial1Value.Text = Convert.ToString(args.pointerValue);
+                    return;
+                }
+                if (sender == gagRadial2)
+                {
+                    lblRadial2Value.Text = Convert.ToString(args.pointerValue);
+                    return;
+                }
+                throw new Exception("unkown radial gage");
+                // the rest of them
+            }
+            catch(Exception ex)
+            {
+                MainPage.SystemLogEntry(ex.Message);
+            }
+
         }
 
         #endregion

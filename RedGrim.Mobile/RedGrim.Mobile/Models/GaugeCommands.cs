@@ -49,10 +49,10 @@ namespace RedGrim.Mobile.Models
             pidDelay = pDelay;
 
             //choose gauge content here
-            MainGauge = BuildGauge.VoltageGauge();
+            MainGauge = BuildGauge.RPMGauge();
             RadialGauge1 = BuildGauge.CoolantGauge();
-            RadialGauge2 = BuildGauge.IntakeGauge();
-            BoxGauge1 = BuildGauge.CoolantGauge();
+            RadialGauge2 = BuildGauge.VoltageGauge();
+            BoxGauge1 = BuildGauge.MPHGauge();
             BoxGauge2 = BuildGauge.IntakeGauge();
         }
 

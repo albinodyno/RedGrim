@@ -10,7 +10,7 @@ namespace RedGrim.Mobile.Models
     {
         public static Gauge VoltageGauge()
         {
-            Gauge tmpGauge = new Gauge("Voltage", "V", 50, 0, 5, "0142\r", GaugeParse.Voltage, 4);
+            Gauge tmpGauge = new Gauge("Voltage", "V", 30, 0, 5, "0142\r", GaugeParse.Voltage, 4);
             return tmpGauge;
         }
 
@@ -28,13 +28,13 @@ namespace RedGrim.Mobile.Models
 
         public static Gauge RPMGauge()
         {
-            Gauge tmpGauge = new Gauge("RPM", "", 10000, 0, 100, "010C\r", GaugeParse.RPM, 2);
+            Gauge tmpGauge = new Gauge("RPM", "", 10000, 0, 1000, "010C\r", GaugeParse.RPM, 2);
             return tmpGauge;
         }
 
         public static Gauge MPHGauge()
         {
-            Gauge tmpGauge = new Gauge("MPH", "°F", 250, -25, 25, "010D\r", GaugeParse.MPH, 2);
+            Gauge tmpGauge = new Gauge("MPH", "°F", 160, 0, 20, "010D\r", GaugeParse.MPH, 2);
             return tmpGauge;
         }
 
