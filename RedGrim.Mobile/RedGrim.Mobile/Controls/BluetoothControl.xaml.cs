@@ -26,6 +26,7 @@ namespace RedGrim.Mobile.Controls
         bool connectionSetup = false;
 
         bool loopPid = true;
+        int failCount = 0;
 
         public BluetoothControl()
         {
@@ -287,11 +288,12 @@ namespace RedGrim.Mobile.Controls
         {
             try
             {
+                failCount++;
                 tbkOBDDevice.Text = "None";
                 tbkOBDStatus.Text = "No Connection";
                 tbkBTStatus.Text = "Failed Connection";
                 tbkBTStatus.TextColor = Color.OrangeRed;
-                MainPage.SystemLogEntry(error);
+                MainPage.SystemLogEntry($"{error} - Fail Count: {failCount}");
             }
             catch (Exception)
             {

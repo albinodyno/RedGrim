@@ -62,11 +62,11 @@
             <StackLayout x:Name="SettingsOBDPage" Grid.ColumnSpan="2" IsVisible="False" BackgroundColor="Black">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Padding="5">
                     <Label FontSize="18" Text="Bluetooth - OBD Log" Margin="5" TextColor="DarkGoldenrod"/>
-                    <Button x:Name="btnUpdateLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf01e;" FontSize="18" Clicked="btnUpdateLog_Clicked" Margin="5" Background="Transparent"/>
-                    <Button x:Name="btnClearLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf12d;" FontSize="18" Clicked="btnClearLog_Clicked" Margin="5" Background="Transparent"/>
+                    <Button x:Name="btnUpdateLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf01e;" FontSize="18" Clicked="btnUpdateLog_Clicked" Margin="5" TextColor="White" Background="Transparent"/>
+                    <Button x:Name="btnClearLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf12d;" FontSize="18" Clicked="btnClearLog_Clicked" Margin="5" TextColor="White" Background="Transparent"/>
                 </StackLayout>
-                <ScrollView Margin="10" Padding="2" HeightRequest="140">
-                    <Label x:Name="tbkLog" FontSize="14" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" Text="---Start---" TextColor="White"/>
+                <ScrollView Margin="10" Padding="2" HeightRequest="140" BackgroundColor="Transparent">
+                    <Label x:Name="tbkLog" Text="---Start---" FontSize="Medium" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" BackgroundColor="Transparent" TextColor="White"/>
                 </ScrollView>
                 <Button x:Name="btnCloseLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseLog_Clicked" Margin="5" TextColor="White" Background="OrangeRed" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
@@ -75,11 +75,11 @@
             <StackLayout x:Name="SettingsErrorPage" Grid.ColumnSpan="2" IsVisible="False" Background="Black">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Padding="5">
                     <Label FontSize="18" Text="Error Log" Margin="5" TextColor="DarkGoldenrod"/>
-                    <Button x:Name="btnUpdateErrorLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf01e;" FontSize="18" Clicked="btnUpdateErrorLog_Clicked" Margin="5" Background="Transparent"/>
-                    <Button x:Name="btnClearErrorLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf12d;" FontSize="18" Clicked="btnClearErrorLog_Clicked" Margin="5" Background="Transparent"/>
+                    <Button x:Name="btnUpdateErrorLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf01e;" FontSize="18" Clicked="btnUpdateErrorLog_Clicked" Margin="5" TextColor="White" BackgroundColor="Transparent"/>
+                    <Button x:Name="btnClearErrorLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf12d;" FontSize="18" Clicked="btnClearErrorLog_Clicked" Margin="5" TextColor="White" Background="Transparent"/>
                 </StackLayout>
-                <ScrollView Margin="10" Padding="2" HeightRequest="140">
-                    <Label x:Name="tbkErrorLog" FontSize="14" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"/>
+                <ScrollView Margin="10" Padding="2" HeightRequest="140" BackgroundColor="Transparent">
+                    <Label x:Name="tbkErrorLog" Text="---Start---" FontSize="Medium" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" BackgroundColor="Transparent" TextColor="White"/>
                 </ScrollView>
                 <Button x:Name="btnCloseErrorLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseErrorLog_Clicked" TextColor="White" Background="OrangeRed" HorizontalOptions="EndAndExpand"/>
             </StackLayout>

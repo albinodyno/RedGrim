@@ -59,7 +59,6 @@ namespace RedGrim.Mobile.Models
         public static double MPH(string hex)
         {
             double value;
-
             try
             {
                 value = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
@@ -86,9 +85,25 @@ namespace RedGrim.Mobile.Models
             catch (Exception ex)
             {
                 MainPage.SystemLogEntry(ex.Message);
-                value =  0;
+                value = 0;
             }
-                return value;
+            return value;
+        }
+
+        public static double ThrottlePosition(string hex)
+        {
+            double value;
+            try
+            {
+                value = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
+                value = 100 * value / 255;
+            }
+            catch (Exception ex)
+            {
+                MainPage.SystemLogEntry(ex.Message);
+                value = 0;
+            }
+            return value;
         }
     }
 }

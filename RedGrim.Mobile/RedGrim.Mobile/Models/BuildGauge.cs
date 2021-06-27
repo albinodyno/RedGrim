@@ -28,13 +28,13 @@ namespace RedGrim.Mobile.Models
 
         public static Gauge RPMGauge()
         {
-            Gauge tmpGauge = new Gauge("RPM", "", 10000, 0, 1000, "010C\r", GaugeParse.RPM, 2);
+            Gauge tmpGauge = new Gauge("RPM", "RPM,", 10000, 0, 1000, "010C\r", GaugeParse.RPM, 4);
             return tmpGauge;
         }
 
         public static Gauge MPHGauge()
         {
-            Gauge tmpGauge = new Gauge("MPH", "°F", 160, 0, 20, "010D\r", GaugeParse.MPH, 2);
+            Gauge tmpGauge = new Gauge("MPH", "MPH", 160, 0, 20, "010D\r", GaugeParse.MPH, 2);
             return tmpGauge;
         }
 
@@ -44,10 +44,10 @@ namespace RedGrim.Mobile.Models
         //    return tmpGauge;
         //}
 
-        //public static Gauge ThrottlePosGauge()
-        //{
-        //    Gauge tmpGauge = new Gauge("CoolantTemp", "°F", 250, -25, 25, "0105\r", GaugeParse.CoolantTemp, 2);
-        //    return tmpGauge;
-        //}
+        public static Gauge ThrottlePosGauge()
+        {
+            Gauge tmpGauge = new Gauge("Throttle", "%", 100, 100, 20, "0111\r", GaugeParse.ThrottlePosition, 2);
+            return tmpGauge;
+        }
     }
 }
