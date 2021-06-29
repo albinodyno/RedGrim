@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RedGrim.Mobile.Controls;
 
 namespace RedGrim.Mobile.Models
 {
@@ -18,7 +19,7 @@ namespace RedGrim.Mobile.Models
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                BluetoothControl.SystemLogEntry(ex.Message, true);
                 value = 0;
             }
             return value;
@@ -34,7 +35,7 @@ namespace RedGrim.Mobile.Models
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                BluetoothControl.SystemLogEntry(ex.Message, true);
                 value = 0;
             }
             return value;
@@ -45,12 +46,14 @@ namespace RedGrim.Mobile.Models
             double value;
             try
             {
-                value = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
-                value = Math.Round((value / 2.55), 1);
+                double input1 = int.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+                double input2 = int.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+
+                value = Math.Round(((input1 * 256 + input2) / 4), 1);
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                BluetoothControl.SystemLogEntry(ex.Message, true);
                 value = 0;
             }
             return value;
@@ -66,7 +69,7 @@ namespace RedGrim.Mobile.Models
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                BluetoothControl.SystemLogEntry(ex.Message, true);
                 value = 0;
             }
             return value;
@@ -84,7 +87,7 @@ namespace RedGrim.Mobile.Models
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                BluetoothControl.SystemLogEntry(ex.Message, true);
                 value = 0;
             }
             return value;
@@ -96,11 +99,78 @@ namespace RedGrim.Mobile.Models
             try
             {
                 value = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
-                value = 100 * value / 255;
+                value = value / 2.55;
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                BluetoothControl.SystemLogEntry(ex.Message, true);
+                value = 0;
+            }
+            return value;
+        }
+
+        public static double FuelRate(string hex)
+        {
+            double value;
+            try
+            {
+                double input1 = int.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+                double input2 = int.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+
+                value = (((256 * input1) + input2) / 20)/3.785;
+                value = Math.Round(value, 1);
+            }
+            catch (Exception ex)
+            {
+                BluetoothControl.SystemLogEntry(ex.Message, true);
+                value = 0;
+            }
+            return value;
+        }
+
+        public static double Torque(string hex)
+        {
+            double value;
+            try
+            {
+                value = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
+                value = value / 2.55;
+            }
+            catch (Exception ex)
+            {
+                BluetoothControl.SystemLogEntry(ex.Message, true);
+                value = 0;
+            }
+            return value;
+        }
+
+        public static double EngineLoad(string hex)
+        {
+            double value;
+            try
+            {
+                value = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
+                value = value / 2.55;
+            }
+            catch (Exception ex)
+            {
+                BluetoothControl.SystemLogEntry(ex.Message, true);
+                value = 0;
+            }
+            return value;
+        }
+
+        public static double OilTemp(string hex)
+        {
+            double value;
+            try
+            {
+                value = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
+                value = ((value - 40) * 1.8) + 32;
+            }
+            catch (Exception ex)
+            {
+                BluetoothControl.SystemLogEntry(ex.Message, true);
                 value = 0;
             }
             return value;

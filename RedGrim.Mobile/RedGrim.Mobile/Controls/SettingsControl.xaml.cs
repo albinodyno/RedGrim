@@ -16,11 +16,12 @@ namespace RedGrim.Mobile.Controls
     public partial class SettingsControl : ContentView
     {
         public static Settings saveSettings = new Settings();
-        public static Settings loadedSettings = new Settings();
+        public static Settings loadedSettings;
 
         public SettingsControl()
         {
             InitializeComponent();
+            LoadData();
         }
 
         public void UpdateVersionNum()
@@ -58,12 +59,17 @@ namespace RedGrim.Mobile.Controls
         private void btnShowErrorLog_Clicked(object sender, EventArgs e)
         {
             SettingsErrorPage.IsVisible = true;
-            tbkErrorLog.Text = MainPage.errorLog;
+            tbkErrorLog.Text = BluetoothControl.errorLog;
         }
 
         private void btnSaveSettings_Clicked(object sender, EventArgs e)
         {
             SaveData();
+        }
+
+        private void btnLoadSettings_Clicked(object sender, EventArgs e)
+        {
+            LoadData();
         }
 
         private void btnResetSettings_Clicked(object sender, EventArgs e)
@@ -73,13 +79,13 @@ namespace RedGrim.Mobile.Controls
 
         private void btnUpdateErrorLog_Clicked(object sender, EventArgs e)
         {
-            tbkErrorLog.Text = MainPage.errorLog;
+            tbkErrorLog.Text = BluetoothControl.errorLog;
         }
 
         private void btnClearErrorLog_Clicked(object sender, EventArgs e)
         {
-            MainPage.errorLog = "";
-            tbkErrorLog.Text = MainPage.errorLog;
+            BluetoothControl.errorLog = "";
+            tbkErrorLog.Text = BluetoothControl.errorLog;
         }
 
         private void btnCloseErrorLog_Clicked(object sender, EventArgs e)
@@ -119,7 +125,7 @@ namespace RedGrim.Mobile.Controls
 
         #region Save/Load Methods
 
-        public static void LoadData()
+        public void LoadData()
         {
             try
             {
@@ -132,18 +138,26 @@ namespace RedGrim.Mobile.Controls
 
                 StreamReader reader = new StreamReader(loadPath, true);
                 string jsonSettings = reader.ReadToEnd();
+                reader.Close();
 
-                loadedSettings = (Settings)JsonConvert.DeserializeObject(jsonSettings);
-                saveSettings = loadedSettings;
+                loadedSettings = JsonConvert.DeserializeObject<Settings>(jsonSettings);
+
+                if (loadedSettings == null)
+                {
+                    SaveData();
+                    loadedSettings = saveSettings;
+                }
+                else
+                    saveSettings = loadedSettings;
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry($"---Load Settings Failed - {ex.Message}");
+                BluetoothControl.SystemLogEntry($"---Load Settings Failed - {ex.Message}", false);
             }
         }
 
 
-        public static void SaveData()
+        public void SaveData()
         {
             try
             {
@@ -153,11 +167,12 @@ namespace RedGrim.Mobile.Controls
 
                 StreamWriter writer = File.CreateText(savePath);
                 writer.Write(jsonSettings);
-                MainPage.SystemLogEntry("---Settings saved successfully");
+                writer.Close();
+                BluetoothControl.SystemLogEntry("---Settings saved successfully", false);
             }
             catch(Exception ex)
             {
-                MainPage.SystemLogEntry("---Failed to save settings");
+                BluetoothControl.SystemLogEntry("---Failed to save settings", false);
             }
         }
 

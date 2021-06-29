@@ -23,10 +23,12 @@ namespace RedGrim.Mobile.Controls
         string savedDeviceName = "";
 
         public static string log = "";
-        bool connectionSetup = false;
+        public static string errorLog = "";
+        public static int failCount = 0;
 
+        bool connectionSetup = false;
         bool loopPid = true;
-        int failCount = 0;
+
 
         public BluetoothControl()
         {
@@ -37,7 +39,6 @@ namespace RedGrim.Mobile.Controls
             gagRadial2.PointerPositionChanged += Radial_PointerPositionChanged;
 
             LoadAdapter();
-
         }
 
         #region Initial Bluetooth Setttings
@@ -116,6 +117,7 @@ namespace RedGrim.Mobile.Controls
         //Main handler for running through connections and tests
         public async void ConnectionHandling()
         {
+            failCount = 0;
             connectionSetup = await ConnectSocket();
             if (connectionSetup) connectionSetup = await TestConnection();
             if (connectionSetup) connectionSetup = await SetupGauges();
@@ -135,7 +137,7 @@ namespace RedGrim.Mobile.Controls
                 socket = device.CreateRfcommSocketToServiceRecord(UUID.FromString("00001101-0000-1000-8000-00805f9b34fb"));
                 await socket.ConnectAsync();
 
-                gaugeCommands = new GaugeCommands(socket, 1000, 100);
+                gaugeCommands = new GaugeCommands(socket, 1000, 250);
 
                 return true;
             }
@@ -161,13 +163,13 @@ namespace RedGrim.Mobile.Controls
                 string data = Encoding.ASCII.GetString(readBuffer);
 
 
-                UpdateLog(data);
-
+                UpdateLog($"Connection Test Successful - {data}");
+                failCount = 0;
                 return true;
             }
             catch (Exception ex)
             {
-                FailedConnection(ex.Message);
+                FailedConnection($"Connection Test Failed - {ex.Message}");
                 return false;
             }
         }
@@ -231,6 +233,7 @@ namespace RedGrim.Mobile.Controls
         #region  Run Gauges
         public async void RunGauges()
         {
+            loopPid = true;
             while (loopPid)
                 try
                 {
@@ -251,6 +254,8 @@ namespace RedGrim.Mobile.Controls
                     gagBox1Value.Text = Convert.ToString(gaugeCommands.BoxGauge1.GaugeValue);
                     gagBox2Value.Text = Convert.ToString(gaugeCommands.BoxGauge2.GaugeValue);
 
+                    if (failCount > 10)
+                        loopPid = await TestConnection();
 
                 }
                 catch (Exception ex)
@@ -258,7 +263,7 @@ namespace RedGrim.Mobile.Controls
                     FailedConnection($"Error at PID Loop - {ex.Message}");
                 }
 
-            MainPage.SystemLogEntry($"Stopped Looping");
+            SystemLogEntry($"Stopped Looping", false);
         }
 
         public async void StopGauges()
@@ -288,19 +293,21 @@ namespace RedGrim.Mobile.Controls
         {
             try
             {
-                failCount++;
+                if (device != null) device.Dispose();
+                if (socket != null) socket.Close();
+                if (gaugeCommands != null) gaugeCommands = null;
+
                 tbkOBDDevice.Text = "None";
                 tbkOBDStatus.Text = "No Connection";
-                tbkBTStatus.Text = "Failed Connection";
+                tbkBTStatus.Text = "No Connection";
                 tbkBTStatus.TextColor = Color.OrangeRed;
-                MainPage.SystemLogEntry($"{error} - Fail Count: {failCount}");
+                SystemLogEntry($"{error}", false);
             }
             catch (Exception)
             {
 
             }
         }
-
         #endregion
 
         #region Button Events
@@ -326,6 +333,20 @@ namespace RedGrim.Mobile.Controls
             BTMenuOptions.IsVisible = false;
             btnBTMenuOptions.IsVisible = true;
         }
+        private void btnStopGauges_Clicked(object sender, EventArgs e)
+        {
+            StopGauges();
+        }
+
+        private void btnStartGauges_Clicked(object sender, EventArgs e)
+        {
+            RunGauges();
+        }
+
+        private void btnAutoConnect_Clicked(object sender, EventArgs e)
+        {
+            ConnectSavedDevice();
+        }
 
         #endregion
 
@@ -336,6 +357,17 @@ namespace RedGrim.Mobile.Controls
             savedDeviceAddress = device.Address;
 
 
+        }
+
+        public static void SystemLogEntry(string entry, bool criticalFail)
+        {
+            if (criticalFail)
+            {
+                BluetoothControl.failCount++;
+                errorLog = errorLog + $"--{entry} - Critical Fail Count: {BluetoothControl.failCount}\n\n";
+            }
+            else
+                errorLog = errorLog + $"--{entry}\n\n";
         }
 
         public static void UpdateLog(string input)
@@ -362,16 +394,17 @@ namespace RedGrim.Mobile.Controls
                     lblRadial2Value.Text = Convert.ToString(args.pointerValue);
                     return;
                 }
-                throw new Exception("unkown radial gage");
+                throw new Exception("unkown radial gauge");
                 // the rest of them
             }
             catch(Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                SystemLogEntry(ex.Message, false);
             }
 
         }
 
         #endregion
+
     }
 }

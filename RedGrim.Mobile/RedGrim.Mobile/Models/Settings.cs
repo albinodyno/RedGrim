@@ -18,5 +18,14 @@ namespace RedGrim.Mobile.Models
         public string obdProtocol { get; set; }
         public int elmDelay { get; set; }
         public int pidDelay { get; set; }
+
+        public Settings()
+        {
+            btDeviceAddress = "";
+            btDeviceName = "";
+            obdProtocol = "";
+            elmDelay = 1000;
+            pidDelay = 300;
+        }
     }
 }

@@ -50,10 +50,10 @@ namespace RedGrim.Mobile.Models
 
             //choose gauge content here
             MainGauge = BuildGauge.RPMGauge();
-            RadialGauge1 = BuildGauge.CoolantGauge();
-            RadialGauge2 = BuildGauge.VoltageGauge();
-            BoxGauge1 = BuildGauge.MPHGauge();
-            BoxGauge2 = BuildGauge.IntakeGauge();
+            RadialGauge1 = BuildGauge.EngineLoadGauge();
+            RadialGauge2 = BuildGauge.ThrottlePosGauge();
+            BoxGauge1 = BuildGauge.TorqueGauge();
+            BoxGauge2 = BuildGauge.FuelRateGauge();
         }
 
         #region Write/Read ELM
@@ -72,7 +72,7 @@ namespace RedGrim.Mobile.Models
             }
             catch(Exception ex)
             {
-                MainPage.SystemLogEntry($"ELM setup failed - {ex.Message}");
+                BluetoothControl.SystemLogEntry($"ELM setup failed - {ex.Message}", false);
                 return false;
             }
         }
@@ -89,7 +89,7 @@ namespace RedGrim.Mobile.Models
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry($"ELM WRITE setup failed - {ex.Message}");
+                BluetoothControl.SystemLogEntry($"ELM WRITE setup failed - {ex.Message}", false);
             }
         }
 
@@ -105,7 +105,7 @@ namespace RedGrim.Mobile.Models
             }
             catch(Exception ex)
             {
-                MainPage.SystemLogEntry($"ELM READ setup failed - {ex.Message}");
+                BluetoothControl.SystemLogEntry($"ELM READ setup failed - {ex.Message}", false);
             }
         }
         #endregion
@@ -151,7 +151,7 @@ namespace RedGrim.Mobile.Models
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                BluetoothControl.SystemLogEntry(ex.Message, true);
             }
         }
 
@@ -196,7 +196,7 @@ namespace RedGrim.Mobile.Models
             }
             catch(Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                BluetoothControl.SystemLogEntry(ex.Message, true);
                 return false;
             }
         }
@@ -217,7 +217,7 @@ namespace RedGrim.Mobile.Models
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                BluetoothControl.SystemLogEntry(ex.Message, true);
             }
         }
 
@@ -237,7 +237,7 @@ namespace RedGrim.Mobile.Models
             }
             catch (Exception ex)
             {
-                MainPage.SystemLogEntry(ex.Message);
+                BluetoothControl.SystemLogEntry(ex.Message, true);
                 return 0;
             }
         }

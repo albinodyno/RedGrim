@@ -67,7 +67,7 @@
                         </gauge:Scale>
                     </gauge:SfCircularGauge.Scales>
                 </gauge:SfCircularGauge>
-                <Label x:Name="lblRadial1Value" Text="" FontSize="24" TextColor="Cyan" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="lblRadial1Value" Text="---" FontSize="24" TextColor="Cyan" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand"/>
 
 
                 <!--Radial Gauge 2-->
@@ -169,16 +169,20 @@
                         <Label x:Name="tbkDebug" HorizontalOptions="StartAndExpand" TextColor="Cyan"/>
                     </StackLayout>
 
-                    <Button x:Name="btnBTMenuOptions" Grid.Row="3" VerticalOptions="EndAndExpand" Text="Options" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1" Clicked="btnBTMenuOptions_Clicked"/>
+                    <StackLayout Grid.Row="3" VerticalOptions="EndAndExpand" >
+                        <Button x:Name="btnAutoConnect" Text="Auto Connect" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1" Clicked="btnAutoConnect_Clicked"/>
+                        <Button x:Name="btnBTMenuOptions" Text="Options" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1" Clicked="btnBTMenuOptions_Clicked"/>
+                    </StackLayout>
+                    
 
                     <ScrollView x:Name="BTMenuOptions" IsVisible="false" Grid.RowSpan="4" BackgroundColor="Black">
                         <StackLayout VerticalOptions="StartAndExpand">
-                            <Picker x:Name="pkrBluetoothPicker" Title="Connect" TextColor="Cyan" SelectedIndexChanged="pkrBluetoothPicker_SelectedIndexChanged"/>
+                            <Picker x:Name="pkrBluetoothPicker" Title="Connect" TitleColor="Magenta" TextColor="Cyan" SelectedIndexChanged="pkrBluetoothPicker_SelectedIndexChanged"/>
                             <!--<Button x:Name="btnPairNewDevice" Text="New Device" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1"/>-->
                             <Button x:Name="btnDisconnectDevice" Text="Disconnect" TextColor="OrangeRed" BorderColor="OrangeRed" BorderWidth=".1" Background="Transparent"/>
                             <Button x:Name="btnErrorCodes" Text="Error Codes" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1"/>
-                            <Button x:Name="btnStartGauges" Text="Force Start" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1"/>
-                            <Button x:Name="btnStopGauges" Text="Stop Gauges" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1"/>
+                            <Button x:Name="btnStartGauges" Text="Force Start" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1" Clicked="btnStartGauges_Clicked"/>
+                            <Button x:Name="btnStopGauges" Text="Stop Gauges" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1" Clicked="btnStopGauges_Clicked"/>
                             <Button x:Name="btnCloseBTMenuOptions" Text="Close" TextColor="OrangeRed" Background="Transparent" BorderColor="OrangeRed" BorderWidth=".1" Clicked="btnCloseBTMenuOptions_Clicked"/>
                         </StackLayout>
                     </ScrollView>
