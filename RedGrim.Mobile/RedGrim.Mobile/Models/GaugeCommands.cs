@@ -39,6 +39,9 @@ namespace RedGrim.Mobile.Models
         //    {"CoolantTemp", "0105\r"},
         //    {"IntakeTemp", "010F\r"},
         //    {"Voltage", "0144\r"}
+        //    {"FuelRate", "015E\r"},
+        //    {"OilTemp", "015C\r"}
+        //    {"Torque", "0162\r"}
         //};
 
         public GaugeCommands(BluetoothSocket btSocket, int eDelay, int pDelay)
