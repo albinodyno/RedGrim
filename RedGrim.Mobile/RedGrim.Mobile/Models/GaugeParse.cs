@@ -99,7 +99,8 @@ namespace RedGrim.Mobile.Models
             try
             {
                 value = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
-                value = value / 2.55;
+                value = (value / 2.55) * 100;
+                value = Math.Round(value, 1);
             }
             catch (Exception ex)
             {
@@ -150,7 +151,8 @@ namespace RedGrim.Mobile.Models
             try
             {
                 value = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
-                value = value / 2.55;
+                value = (value / 2.55)*100;
+                value = Math.Round(value, 1);
             }
             catch (Exception ex)
             {

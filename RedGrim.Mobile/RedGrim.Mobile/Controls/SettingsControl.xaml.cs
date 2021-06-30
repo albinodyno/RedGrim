@@ -18,6 +18,8 @@ namespace RedGrim.Mobile.Controls
         public static Settings saveSettings = new Settings();
         public static Settings loadedSettings;
 
+        public static bool debugMode = true;
+
         public SettingsControl()
         {
             InitializeComponent();
@@ -31,7 +33,7 @@ namespace RedGrim.Mobile.Controls
 
         private void btnGaugeSettings_Clicked(object sender, EventArgs e)
         {
-
+            GaugeSettingsPage.IsVisible = true;
         }
 
         private void btnUpdateLog_Clicked(object sender, EventArgs e)
@@ -120,7 +122,24 @@ namespace RedGrim.Mobile.Controls
 
         private void btnCloseGaugeSettings_Clicked(object sender, EventArgs e)
         {
+            GaugeSettingsPage.IsVisible = false;
+        }
 
+        private void btnDebugMode_Clicked(object sender, EventArgs e)
+        {
+            if (debugMode)
+            {
+                debugMode = false;
+                lblDebugMode.TextColor = Color.OrangeRed;
+                lblDebugMode.Text = "OFF";
+            }
+            else
+            {
+                debugMode = true;
+                lblDebugMode.TextColor = Color.Cyan;
+                lblDebugMode.Text = "ON";
+
+            }
         }
 
         #region Save/Load Methods
@@ -149,6 +168,9 @@ namespace RedGrim.Mobile.Controls
                 }
                 else
                     saveSettings = loadedSettings;
+
+                BluetoothControl.savedDeviceAddress = saveSettings.btDeviceAddress;
+                BluetoothControl.savedDeviceName = saveSettings.btDeviceName;
             }
             catch (Exception ex)
             {
@@ -157,7 +179,7 @@ namespace RedGrim.Mobile.Controls
         }
 
 
-        public void SaveData()
+        public static void SaveData()
         {
             try
             {
@@ -177,5 +199,6 @@ namespace RedGrim.Mobile.Controls
         }
 
         #endregion
+
     }
 }

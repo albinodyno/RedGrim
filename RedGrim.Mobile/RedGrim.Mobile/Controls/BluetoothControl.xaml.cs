@@ -19,8 +19,8 @@ namespace RedGrim.Mobile.Controls
         BluetoothDevice device;
         GaugeCommands gaugeCommands;
 
-        string savedDeviceAddress = "";
-        string savedDeviceName = "";
+        public static string savedDeviceAddress = "";
+        public static string savedDeviceName = "";
 
         public static string log = "";
         public static string errorLog = "";
@@ -85,6 +85,7 @@ namespace RedGrim.Mobile.Controls
                 savedDeviceAddress = SettingsControl.loadedSettings.btDeviceAddress;
 
                 device = (from bd in adapter.BondedDevices where bd.Name == savedDeviceName select bd).FirstOrDefault();
+                if (device == null) throw new Exception("not in list of available devices");
                 ConnectionHandling();
             }
 
@@ -237,6 +238,7 @@ namespace RedGrim.Mobile.Controls
             while (loopPid)
                 try
                 {
+                    UpdateLog("Started Looping...");
                     System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
                     sw.Start();
 
@@ -264,6 +266,7 @@ namespace RedGrim.Mobile.Controls
                 }
 
             SystemLogEntry($"Stopped Looping", false);
+            UpdateLog("Stopped Looping");
         }
 
         public async void StopGauges()
@@ -353,10 +356,10 @@ namespace RedGrim.Mobile.Controls
         #region Misc
         private async void SaveDevice()
         {
-            savedDeviceName = device.Name;
-            savedDeviceAddress = device.Address;
+            SettingsControl.saveSettings.btDeviceName = device.Name;
+            SettingsControl.saveSettings.btDeviceAddress = device.Address;
 
-
+            SettingsControl.SaveData();
         }
 
         public static void SystemLogEntry(string entry, bool criticalFail)
@@ -401,7 +404,6 @@ namespace RedGrim.Mobile.Controls
             {
                 SystemLogEntry(ex.Message, false);
             }
-
         }
 
         #endregion

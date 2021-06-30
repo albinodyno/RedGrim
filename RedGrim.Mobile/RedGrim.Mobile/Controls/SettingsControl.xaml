@@ -85,55 +85,15 @@
                 <Button x:Name="btnCloseErrorLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseErrorLog_Clicked" TextColor="White" Background="OrangeRed" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
 
-            <!--Gauge Settings-->
-            <StackLayout x:Name="pnlGaugeSettings" Grid.ColumnSpan="2" IsVisible="false" Background="Black">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height=".15*"/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition Height=".15*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <Label Grid.Row="0" FontSize="18" Text="Gauge Settings" Margin="5" TextColor="DarkGoldenrod" Padding="5"/>
-
-                    <!--Gauge Delay-->
-                    <StackLayout Padding="5" Margin="2" Grid.Row="1">
-                        <Label Text="Gauge Delay" VerticalOptions="Center" HorizontalOptions="Center" TextColor="DarkCyan"/>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-                            <Label Text="ELM Delay(ms) : " VerticalOptions="Center" HorizontalOptions="StartAndExpand" TextColor="DarkCyan" Margin="2" Padding="5"/>
-                            <Entry x:Name="tbkELMDelay" Text="0" TextColor="DarkCyan" Margin="2" />
-                            <Button x:Name="btnAddELM" FontFamily="Segoe MDL2 Assets" Text="&#xE948;" Clicked="btnAddELM_Clicked" TextColor="DarkCyan" Background="Black" Margin="2" Padding="5"/>
-                            <Button x:Name="btnSubELM" FontFamily="Segoe MDL2 Assets" Text="&#xE949;" Clicked="btnSubELM_Clicked" TextColor="OrangeRed" Background="Black" Margin="2" Padding="5"/>
-
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-                            <Label Text="PID Delay(ms) : " VerticalOptions="Center" HorizontalOptions="StartAndExpand" TextColor="DarkCyan" Margin="2" Padding="5"/>
-                            <Entry x:Name="tbkPIDDelay" Text="0" TextColor="DarkCyan" Margin="2"/>
-                            <Button x:Name="btnAddPID" FontFamily="Segoe MDL2 Assets" Text="&#xE948;" Clicked="btnAddPID_Clicked" TextColor="DarkCyan" Background="Black" Margin="2" Padding="5"/>
-                            <Button x:Name="btnSubPID" FontFamily="Segoe MDL2 Assets" Text="&#xE949;" Clicked="btnSubPID_Clicked" TextColor="OrangeRed" Background="Black" Margin="2" Padding="5"/>
-                        </StackLayout>
-                    </StackLayout>
-
-                    <StackLayout Padding="5" Margin="2" Orientation="Horizontal" Grid.Row="2">
-                        <Label Text="Successful Loops: " TextColor="DarkCyan" Margin="2" Padding="5"/>
-                        <Label x:Name="tbkLoopSuccess" TextColor="DarkCyan" Margin="2" Padding="5"/>
-                    </StackLayout>
-                    
-                    <StackLayout Padding="5" Margin="2" IsVisible="False" Grid.Row="2">
-                        <Label Text="Gauge Commands" VerticalOptions="Center" HorizontalOptions="Center" TextColor="DarkCyan"/>
-                        <Button VerticalOptions="Center" HorizontalOptions="Center" Text="Force Gauge Startup" Background="DarkCyan" WidthRequest="230" Padding="5" Margin="2" Clicked="Button_Clicked"/>
-                    </StackLayout>
-
-                    <Button Grid.Row="3" Grid.Column="1" x:Name="btnCloseGaugeSettings" FontFamily="Segoe MDL2 Assets" Text="&#xE8BB;" Clicked="btnCloseGaugeSettings_Clicked" FontSize="28" Margin="5" Background="Transparent" HorizontalOptions="EndAndExpand"/>
-
-                </Grid>
+            <!--Gauge Settings Page-->
+            <StackLayout x:Name="GaugeSettingsPage" Grid.ColumnSpan="2" IsVisible="False" Background="Black">
+                <StackLayout HorizontalOptions="CenterAndExpand" Padding="5">
+                    <Label FontSize="18" Text="Gauge Settings" Margin="5" TextColor="DarkGoldenrod" HorizontalOptions="CenterAndExpand"/>
+                    <Button x:Name="btnDebugMode" Text="Debug Mode" HorizontalOptions="CenterAndExpand" FontSize="24" Clicked="btnDebugMode_Clicked" Margin="5" TextColor="Cyan" BackgroundColor="Transparent" BorderColor="Cyan" BorderWidth="1"/>
+                    <Label x:Name="lblDebugMode" HorizontalOptions="CenterAndExpand" FontSize="18" Text="ON" Margin="5" TextColor="Cyan"/>
+                </StackLayout>
+                <Button x:Name="btnCloseGaugeSettings" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseGaugeSettings_Clicked"  TextColor="White" Background="OrangeRed" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
-
         </Grid>
 
     </ContentView.Content>

@@ -55,8 +55,8 @@ namespace RedGrim.Mobile.Models
             MainGauge = BuildGauge.RPMGauge();
             RadialGauge1 = BuildGauge.EngineLoadGauge();
             RadialGauge2 = BuildGauge.ThrottlePosGauge();
-            BoxGauge1 = BuildGauge.TorqueGauge();
-            BoxGauge2 = BuildGauge.FuelRateGauge();
+            BoxGauge1 = BuildGauge.CoolantTempGauge();
+            BoxGauge2 = BuildGauge.IntakeTempGauge();
         }
 
         #region Write/Read ELM
@@ -167,7 +167,7 @@ namespace RedGrim.Mobile.Models
                 int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
                 string data = Encoding.ASCII.GetString(readBuffer);
 
-                BluetoothControl.UpdateLog(data);
+                if( SettingsControl.debugMode ) BluetoothControl.UpdateLog(data);
 
                 string[] dt = data.Split('<');
 
@@ -233,7 +233,7 @@ namespace RedGrim.Mobile.Models
                 int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
                 string data = Encoding.ASCII.GetString(readBuffer);
 
-                BluetoothControl.UpdateLog(data);
+                if (SettingsControl.debugMode) BluetoothControl.UpdateLog(data);
 
                 double output = gauge.ParseGauge(data.Substring(9, gauge.HexNum));
                 return output;
