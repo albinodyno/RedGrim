@@ -19,8 +19,8 @@ namespace RedGrim.Mobile.Models
         //DataWriter obdWriter;
         //DataReader obdReader;
 
-        public int elmDelay = 1000;
-        public int pidDelay = 300;
+        public static int elmDelay = 1000;
+        public static int pidDelay = 300;
         bool success;
 
         public Gauge MainGauge;

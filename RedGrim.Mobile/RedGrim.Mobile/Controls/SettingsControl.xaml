@@ -86,13 +86,34 @@
             </StackLayout>
 
             <!--Gauge Settings Page-->
+
             <StackLayout x:Name="GaugeSettingsPage" Grid.ColumnSpan="2" IsVisible="False" Background="Black">
-                <StackLayout HorizontalOptions="CenterAndExpand" Padding="5">
-                    <Label FontSize="18" Text="Gauge Settings" Margin="5" TextColor="DarkGoldenrod" HorizontalOptions="CenterAndExpand"/>
-                    <Button x:Name="btnDebugMode" Text="Debug Mode" HorizontalOptions="CenterAndExpand" FontSize="24" Clicked="btnDebugMode_Clicked" Margin="5" TextColor="Cyan" BackgroundColor="Transparent" BorderColor="Cyan" BorderWidth="1"/>
-                    <Label x:Name="lblDebugMode" HorizontalOptions="CenterAndExpand" FontSize="18" Text="ON" Margin="5" TextColor="Cyan"/>
-                </StackLayout>
+                
+                <Frame Grid.ColumnSpan="2" BorderColor="Purple" BackgroundColor="Transparent">
+                    <StackLayout HorizontalOptions="CenterAndExpand" Padding="5">
+                        <Label FontSize="18" Text="Gauge Settings" Margin="5" TextColor="DarkGoldenrod" HorizontalOptions="CenterAndExpand"/>
+                        <Button x:Name="btnDebugMode" Text="Debug Mode" HorizontalOptions="CenterAndExpand" FontSize="24" Clicked="btnDebugMode_Clicked" Margin="5" TextColor="Cyan" BackgroundColor="Transparent" BorderColor="Cyan" BorderWidth="1"/>
+                        <Label x:Name="lblDebugMode" HorizontalOptions="CenterAndExpand" FontSize="18" Text="ON" Margin="5" TextColor="Cyan"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.ColumnSpan="2" BorderColor="Purple" BackgroundColor="Transparent">
+                    <StackLayout HorizontalOptions="CenterAndExpand" Padding="5">
+                        <Label FontSize="18" Text="ELM/PID Delay" Margin="5" TextColor="DarkGoldenrod" HorizontalOptions="CenterAndExpand"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Label x:Name="lblPIDDelay" FontSize="20" Text="---" Margin="5" TextColor="Cyan" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Stepper x:Name="stpPIDDelay" Minimum="0" Maximum="2000" Increment="50" ValueChanged="stpPIDDelay_ValueChanged"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label x:Name="lblELMDelay" FontSize="20" Text="---" Margin="5" TextColor="Cyan" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Stepper x:Name="stpELMDelay" Minimum="0" Maximum="2000" Increment="50" ValueChanged="stpELMDelay_ValueChanged"/>
+                        </StackLayout>
+                        <Button x:Name="btnDelaySave" Text="Save" HorizontalOptions="CenterAndExpand" FontSize="24" Clicked="btnDelaySave_Clicked" Margin="5" TextColor="Cyan" BackgroundColor="Transparent" BorderColor="Cyan" BorderWidth="1"/>
+                    </StackLayout>
+                </Frame>
                 <Button x:Name="btnCloseGaugeSettings" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseGaugeSettings_Clicked"  TextColor="White" Background="OrangeRed" HorizontalOptions="EndAndExpand"/>
+                    
+                    
             </StackLayout>
         </Grid>
 

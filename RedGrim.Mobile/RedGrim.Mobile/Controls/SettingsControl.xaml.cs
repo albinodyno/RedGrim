@@ -125,6 +125,7 @@ namespace RedGrim.Mobile.Controls
             GaugeSettingsPage.IsVisible = false;
         }
 
+
         private void btnDebugMode_Clicked(object sender, EventArgs e)
         {
             if (debugMode)
@@ -140,6 +141,27 @@ namespace RedGrim.Mobile.Controls
                 lblDebugMode.Text = "ON";
 
             }
+        }
+        
+        private void btnDelaySave_Clicked(object sender, EventArgs e)
+        {
+            GaugeCommands.pidDelay = Convert.ToInt32(stpPIDDelay.Value);
+            GaugeCommands.elmDelay = Convert.ToInt32(stpELMDelay.Value);
+
+            saveSettings.pidDelay = Convert.ToInt32(stpPIDDelay.Value);
+            saveSettings.elmDelay = Convert.ToInt32(stpELMDelay.Value);
+
+            SaveData();
+        }
+
+        private void stpELMDelay_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            lblELMDelay.Text = Convert.ToString(stpELMDelay.Value);
+        }
+
+        private void stpPIDDelay_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            lblPIDDelay.Text = Convert.ToString(stpPIDDelay.Value);
         }
 
         #region Save/Load Methods
@@ -171,6 +193,12 @@ namespace RedGrim.Mobile.Controls
 
                 BluetoothControl.savedDeviceAddress = saveSettings.btDeviceAddress;
                 BluetoothControl.savedDeviceName = saveSettings.btDeviceName;
+
+                stpPIDDelay.Value = saveSettings.pidDelay;
+                stpELMDelay.Value = saveSettings.elmDelay;
+
+                lblPIDDelay.Text = Convert.ToString(saveSettings.pidDelay);
+                lblELMDelay.Text = Convert.ToString(saveSettings.elmDelay);
             }
             catch (Exception ex)
             {
@@ -198,7 +226,7 @@ namespace RedGrim.Mobile.Controls
             }
         }
 
-        #endregion
 
+        #endregion
     }
 }
