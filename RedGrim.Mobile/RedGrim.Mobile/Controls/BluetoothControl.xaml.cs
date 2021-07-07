@@ -74,15 +74,19 @@ namespace RedGrim.Mobile.Controls
         #endregion
 
         #region Bluetooth Device Setup and Gauges Setup
-        public async void ConnectSavedDevice()
+        public void ConnectSavedDevice()
         {
-            tbkBTStatus.Text = "Atempting Connection...";
+            if (gaugeCommands != null) return;
+
+            tbkBTStatus.Text = "Atempting...";
             tbkBTStatus.TextColor = Color.Purple;
 
             try
             {
                 savedDeviceName = SettingsControl.loadedSettings.btDeviceName;
                 savedDeviceAddress = SettingsControl.loadedSettings.btDeviceAddress;
+
+                tbkBTStatus.Text = savedDeviceName + "...";
 
                 device = (from bd in adapter.BondedDevices where bd.Name == savedDeviceName select bd).FirstOrDefault();
                 if (device == null) throw new Exception("not in list of available devices");
@@ -95,9 +99,9 @@ namespace RedGrim.Mobile.Controls
             }
         }
 
-        public async void ConnectDevice()
+        public void ConnectDevice()
         {
-            tbkBTStatus.Text = "Atempting Connection...";
+            tbkBTStatus.Text = "Atempting...";
             tbkBTStatus.TextColor = Color.Purple;
 
             try
@@ -163,6 +167,7 @@ namespace RedGrim.Mobile.Controls
                 int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
                 string data = Encoding.ASCII.GetString(readBuffer);
 
+                if (!data.Contains("ELM")) throw new Exception("Connection Broken");
 
                 UpdateLog($"Connection Test Successful - {data}");
                 failCount = 0;
@@ -209,7 +214,6 @@ namespace RedGrim.Mobile.Controls
                 FailedConnection(ex.Message);
                 return false;
             }
-
         }
 
         public async Task<bool> TestGauges()
@@ -235,10 +239,10 @@ namespace RedGrim.Mobile.Controls
         public async void RunGauges()
         {
             loopPid = true;
+            UpdateLog("Started Looping...");
             while (loopPid)
                 try
                 {
-                    UpdateLog("Started Looping...");
                     System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
                     sw.Start();
 
@@ -258,20 +262,28 @@ namespace RedGrim.Mobile.Controls
 
                     if (failCount > 10)
                         loopPid = await TestConnection();
-
                 }
                 catch (Exception ex)
                 {
                     FailedConnection($"Error at PID Loop - {ex.Message}");
+                    loopPid = false;
                 }
-
-            SystemLogEntry($"Stopped Looping", false);
-            UpdateLog("Stopped Looping");
+            ResetGauges();
+            UpdateLog("...Stopped Looping");
         }
 
         public async void StopGauges()
         {
             loopPid = false;
+        }
+
+        public void ResetGauges()
+        {
+            gagRadialMain.Scales[0].Pointers[0].Value = 0;
+            gagRadial1.Scales[0].Pointers[0].Value = 0;
+            gagRadial2.Scales[0].Pointers[0].Value = 0;
+            gagBox1Value.Text = "---"; ;
+            gagBox2Value.Text = "---";
         }
         #endregion
 
@@ -280,8 +292,6 @@ namespace RedGrim.Mobile.Controls
         {
             try
             {
-                tbkOBDDevice.Text = device.Name;
-                tbkOBDStatus.Text = "Connected";
                 tbkBTStatus.Text = "Connected";
                 tbkBTStatus.TextColor = Color.Cyan;
                 SaveDevice();
@@ -300,8 +310,6 @@ namespace RedGrim.Mobile.Controls
                 if (socket != null) socket.Close();
                 if (gaugeCommands != null) gaugeCommands = null;
 
-                tbkOBDDevice.Text = "None";
-                tbkOBDStatus.Text = "No Connection";
                 tbkBTStatus.Text = "No Connection";
                 tbkBTStatus.TextColor = Color.OrangeRed;
                 SystemLogEntry($"{error}", false);
@@ -325,17 +333,6 @@ namespace RedGrim.Mobile.Controls
             LoadDevices();
         }
 
-        private void btnBTMenuOptions_Clicked(object sender, EventArgs e)
-        {
-            BTMenuOptions.IsVisible = true;
-            btnBTMenuOptions.IsVisible = false;
-        }
-
-        private void btnCloseBTMenuOptions_Clicked(object sender, EventArgs e)
-        {
-            BTMenuOptions.IsVisible = false;
-            btnBTMenuOptions.IsVisible = true;
-        }
         private void btnStopGauges_Clicked(object sender, EventArgs e)
         {
             StopGauges();
@@ -343,12 +340,24 @@ namespace RedGrim.Mobile.Controls
 
         private void btnStartGauges_Clicked(object sender, EventArgs e)
         {
+            tbkBTStatus.Text = "Atempting...";
+            tbkBTStatus.TextColor = Color.Purple;
             RunGauges();
         }
 
         private void btnAutoConnect_Clicked(object sender, EventArgs e)
         {
             ConnectSavedDevice();
+        }
+
+        private void btnErrorLog_Clicked(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void btnOBDLog_Clicked(object sender, EventArgs e)
+        {
+
         }
 
         #endregion

@@ -137,57 +137,26 @@
             </Grid>
 
             <!--BT Status-->
-            <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" x:Name="tbkBTStatus" TextColor="Purple" Text="No Connection" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Subtitle"/>
+            <Button Grid.Row="2" Grid.Column="2" x:Name="tbkBTStatus" TextColor="Purple" FontSize="12" BackgroundColor="Transparent" Text="No Connection" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+            <Button Grid.Row="2" Grid.Column="3" x:Name="btnAutoConnect" TextColor="Cyan" FontSize="12" Background="Transparent" Text="Auto Connect" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Clicked="btnAutoConnect_Clicked"/>
 
             <!--BT Settings Panel-->
             <Frame x:Name="pnlBTSettings" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2" IsVisible="false" VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" Background="Black" BorderColor="OrangeRed" CornerRadius="10">
-
-                <Grid Background="Black">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height=".25*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height=".5*"/>
-                        <RowDefinition Height="1*"/>
-
-                    </Grid.RowDefinitions>
-
-                    <Label Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" Text="OBDII Connection" TextColor="OrangeRed"/>
-
-                    <StackLayout Grid.Row="1" HorizontalOptions="StartAndExpand">
-                        <StackLayout Orientation="Horizontal">
-                            <Label HorizontalOptions="StartAndExpand" Text="Device:" TextColor="Cyan"/>
-                            <Label x:Name="tbkOBDDevice" HorizontalOptions="StartAndExpand" Text="None" TextColor="Cyan"/>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Label HorizontalOptions="StartAndExpand" Text="Status:" TextColor="Cyan"></Label>
-                            <Label x:Name="tbkOBDStatus" HorizontalOptions="StartAndExpand" Text="Not Started" TextColor="Cyan"/>
-                        </StackLayout>
-
-                        <Label x:Name="tbkDebug" HorizontalOptions="StartAndExpand" TextColor="Cyan"/>
+                <StackLayout>
+                    <StackLayout VerticalOptions="StartAndExpand">
+                        <Button x:Name="btnErrorCodes" Text="Error Codes" TextColor="OrangeRed" Background="Transparent" BorderColor="OrangeRed" BorderWidth=".1"/>
+                        <Button x:Name="btnStartGauges" Text="Force Start" TextColor="OrangeRed" Background="Transparent" BorderColor="OrangeRed" BorderWidth=".1" Clicked="btnStartGauges_Clicked"/>
+                        <Button x:Name="btnStopGauges" Text="Stop Gauges" TextColor="OrangeRed" Background="Transparent" BorderColor="OrangeRed" BorderWidth=".1" Clicked="btnStopGauges_Clicked"/>
+                        <Button x:Name="btnDisconnectDevice" Text="Disconnect" TextColor="OrangeRed" BorderColor="OrangeRed" BorderWidth=".1" Background="Transparent"/>
+                        <Button x:Name="btnErrorLog" Text="Error Log" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1" Clicked="btnErrorLog_Clicked" Margin="0,30,0,0"/>
+                        <Button x:Name="btnOBDLog" Text="OBD Log" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1" Clicked="btnOBDLog_Clicked"/>
                     </StackLayout>
 
-                    <StackLayout Grid.Row="3" VerticalOptions="EndAndExpand" >
-                        <Button x:Name="btnAutoConnect" Text="Auto Connect" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1" Clicked="btnAutoConnect_Clicked"/>
-                        <Button x:Name="btnBTMenuOptions" Text="Options" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1" Clicked="btnBTMenuOptions_Clicked"/>
-                    </StackLayout>
-                    
-
-                    <ScrollView x:Name="BTMenuOptions" IsVisible="false" Grid.RowSpan="4" BackgroundColor="Black">
-                        <StackLayout VerticalOptions="StartAndExpand">
-                            <Picker x:Name="pkrBluetoothPicker" Title="Connect" TitleColor="Magenta" TextColor="Cyan" SelectedIndexChanged="pkrBluetoothPicker_SelectedIndexChanged"/>
-                            <!--<Button x:Name="btnPairNewDevice" Text="New Device" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1"/>-->
-                            <Button x:Name="btnDisconnectDevice" Text="Disconnect" TextColor="OrangeRed" BorderColor="OrangeRed" BorderWidth=".1" Background="Transparent"/>
-                            <Button x:Name="btnErrorCodes" Text="Error Codes" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1"/>
-                            <Button x:Name="btnStartGauges" Text="Force Start" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1" Clicked="btnStartGauges_Clicked"/>
-                            <Button x:Name="btnStopGauges" Text="Stop Gauges" TextColor="Cyan" Background="Transparent" BorderColor="Cyan" BorderWidth=".1" Clicked="btnStopGauges_Clicked"/>
-                            <Button x:Name="btnCloseBTMenuOptions" Text="Close" TextColor="OrangeRed" Background="Transparent" BorderColor="OrangeRed" BorderWidth=".1" Clicked="btnCloseBTMenuOptions_Clicked"/>
-                        </StackLayout>
-                    </ScrollView>
-                </Grid>
+                    <Picker x:Name="pkrBluetoothPicker" Title="Connect" TitleColor="Magenta"  TextColor="Cyan" SelectedIndexChanged="pkrBluetoothPicker_SelectedIndexChanged"/>
+                </StackLayout>
             </Frame>
+            
+            
         </Grid>
     </ContentView.Content>
 </ContentView>

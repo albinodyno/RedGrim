@@ -54,7 +54,18 @@ namespace RedGrim.Mobile
                 SettingsPage.IsVisible = false;
                 MapPage.IsVisible = false;
             }
+        }
 
+        public void ShowOBDLog()
+        {
+            SettingsPage.IsVisible = true;
+            SettingsPage.ShowOBDLog();
+        }
+
+        public void ShowErrorLog()
+        {
+            SettingsPage.IsVisible = true;
+            SettingsPage.ShowErrorLog();
         }
 
         private void btnMapLaunch_Clicked(object sender, EventArgs e)

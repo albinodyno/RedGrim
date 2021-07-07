@@ -54,14 +54,12 @@ namespace RedGrim.Mobile.Controls
 
         private void btnShowLog_Clicked(object sender, EventArgs e)
         {
-            SettingsOBDPage.IsVisible = true;
-            tbkLog.Text = BluetoothControl.log;
+            ShowOBDLog();
         }
 
         private void btnShowErrorLog_Clicked(object sender, EventArgs e)
         {
-            SettingsErrorPage.IsVisible = true;
-            tbkErrorLog.Text = BluetoothControl.errorLog;
+            ShowErrorLog();
         }
 
         private void btnSaveSettings_Clicked(object sender, EventArgs e)
@@ -164,6 +162,18 @@ namespace RedGrim.Mobile.Controls
             lblPIDDelay.Text = Convert.ToString(stpPIDDelay.Value);
         }
 
+        public void ShowOBDLog()
+        {
+            tbkLog.Text = BluetoothControl.log;
+            SettingsOBDPage.IsVisible = true;
+        }
+
+        public void ShowErrorLog()
+        {
+            tbkErrorLog.Text = BluetoothControl.errorLog;
+            SettingsErrorPage.IsVisible = true;
+        }
+
         #region Save/Load Methods
 
         public void LoadData()
@@ -218,11 +228,11 @@ namespace RedGrim.Mobile.Controls
                 StreamWriter writer = File.CreateText(savePath);
                 writer.Write(jsonSettings);
                 writer.Close();
-                BluetoothControl.SystemLogEntry("---Settings saved successfully", false);
+                BluetoothControl.SystemLogEntry("Settings saved successfully", false);
             }
             catch(Exception ex)
             {
-                BluetoothControl.SystemLogEntry("---Failed to save settings", false);
+                BluetoothControl.SystemLogEntry("Failed to save settings", false);
             }
         }
 
