@@ -15,6 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedGrim.Mobile", "RedGrim.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UwpBluetoothObd", "UwpBluetoothObd\UwpBluetoothObd.csproj", "{B87C8B4C-03F6-4BD7-A1C4-832856DDC60D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RedGrim_Aux", "RedGrim_Aux", "{2D5A1FCC-AAE8-4EA0-8144-23492491571D}"
+	ProjectSection(SolutionItems) = preProject
+		RedGrim_Aux\RedGrim_Aux.ino = RedGrim_Aux\RedGrim_Aux.ino
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

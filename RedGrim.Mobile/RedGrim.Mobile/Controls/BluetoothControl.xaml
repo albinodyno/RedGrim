@@ -41,7 +41,6 @@
 
             <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2" BackgroundColor="Black" Margin="3">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0"/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
@@ -55,7 +54,7 @@
                 </Grid.RowDefinitions>
 
                 <!--Box Gauge 1-->
-                <Frame Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
+                <Frame Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
                     <StackLayout VerticalOptions="FillAndExpand">
                         <Label x:Name="gagBox1Label" Text="---" HorizontalOptions="CenterAndExpand" TextColor="Cyan" FontSize="Title"/>
 
@@ -68,7 +67,7 @@
                 </Frame>
 
                 <!--Box Gauge 2-->
-                <Frame Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
+                <Frame Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
 
                     <StackLayout VerticalOptions="FillAndExpand">
                         <Label x:Name="gagBox2Label" Text="---" HorizontalOptions="CenterAndExpand" TextColor="Cyan" FontSize="Title"/>
@@ -82,7 +81,7 @@
                 </Frame>
 
                 <!--Box Gauge 3-->
-                <Frame Grid.Row="3" Grid.Column="1" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
+                <Frame Grid.Row="3" Grid.Column="0" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
 
                     <StackLayout VerticalOptions="FillAndExpand">
                         <Label x:Name="gagBox3Label" Text="---" HorizontalOptions="CenterAndExpand" TextColor="Cyan" FontSize="Title"/>
@@ -96,7 +95,7 @@
                 </Frame>
 
                 <!--Box Gauge 4-->
-                <Frame Grid.Row="3" Grid.Column="2" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
+                <Frame Grid.Row="3" Grid.Column="1" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
 
                     <StackLayout VerticalOptions="FillAndExpand">
                         <Label x:Name="gagBox4Label" Text="---" HorizontalOptions="CenterAndExpand" TextColor="Cyan" FontSize="Title"/>
@@ -112,11 +111,11 @@
             </Grid>
 
             <!--BT Status-->
-            <Button Grid.Row="2" Grid.Column="2" x:Name="tbkBTStatus" TextColor="Magenta" FontSize="12" BackgroundColor="Transparent" Text="No Connection" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
-            <Button Grid.Row="2" Grid.Column="3" x:Name="btnAutoConnect" TextColor="Cyan" FontSize="12" Background="Transparent" Text="OBD Connect" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Clicked="btnAutoConnect_Clicked"/>
+            <Button Grid.Row="2" Grid.Column="2" x:Name="tbkBTStatus" TextColor="Magenta" BorderColor="Gray" CornerRadius="5" BorderWidth="1" FontSize="12" BackgroundColor="Transparent" Text="No Connection" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Button Grid.Row="2" Grid.Column="3" x:Name="btnAutoConnect" TextColor="Cyan" BorderColor="Cyan" CornerRadius="5" BorderWidth="1" FontSize="12" Background="Transparent" Text="OBD Connect" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Clicked="btnAutoConnect_Clicked"/>
 
             <!--BT Settings Panel-->
-            <Frame x:Name="pnlBTSettings" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2" IsVisible="false" VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" Background="Black" BorderColor="OrangeRed" CornerRadius="10">
+            <Frame x:Name="pnlBTSettings" Grid.Column="2" Grid.RowSpan="3" Grid.ColumnSpan="2" IsVisible="false" VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" Background="Black" BorderColor="OrangeRed" CornerRadius="5">
                 <StackLayout>
                     <StackLayout VerticalOptions="StartAndExpand">
                         <Button x:Name="btnErrorCodes" Text="Error Codes" TextColor="OrangeRed" Background="Transparent" BorderColor="OrangeRed" BorderWidth=".1"/>
