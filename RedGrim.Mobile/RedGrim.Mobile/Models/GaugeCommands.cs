@@ -24,10 +24,12 @@ namespace RedGrim.Mobile.Models
         bool success;
 
         public Gauge MainGauge;
-        public Gauge RadialGauge1;
-        public Gauge RadialGauge2;
+        //public Gauge RadialGauge1;
+        //public Gauge RadialGauge2;
         public Gauge BoxGauge1;
         public Gauge BoxGauge2;
+        public Gauge BoxGauge3;
+        public Gauge BoxGauge4;
 
 
         //public Dictionary<string, string> obdCommands = new Dictionary<string, string>()
@@ -44,19 +46,29 @@ namespace RedGrim.Mobile.Models
         //    {"Torque", "0162\r"}
         //};
 
-        public GaugeCommands(BluetoothSocket btSocket, int eDelay, int pDelay)
+        public GaugeCommands(BluetoothSocket btSocket)
         {
             socket = btSocket;
 
-            elmDelay = eDelay;
-            pidDelay = pDelay;
+            try
+            {
+                elmDelay = SettingsControl.saveSettings.elmDelay;
+                pidDelay = SettingsControl.saveSettings.pidDelay;
+            }
+            catch (Exception)
+            {
+
+            }
+
 
             //choose gauge content here
             MainGauge = BuildGauge.RPMGauge();
-            RadialGauge1 = BuildGauge.EngineLoadGauge();
-            RadialGauge2 = BuildGauge.ThrottlePosGauge();
+            //RadialGauge1 = BuildGauge.EngineLoadGauge();
+            //RadialGauge2 = BuildGauge.ThrottlePosGauge();
             BoxGauge1 = BuildGauge.CoolantTempGauge();
             BoxGauge2 = BuildGauge.IntakeTempGauge();
+            BoxGauge3 = BuildGauge.EngineLoadGauge();
+            BoxGauge4 = BuildGauge.ThrottlePosGauge();
         }
 
         #region Write/Read ELM
@@ -118,10 +130,12 @@ namespace RedGrim.Mobile.Models
         public async Task<bool> ExecutePIDs()
         {
             await WritePID(MainGauge.OBDCommand);
-            await WritePID(RadialGauge1.OBDCommand);
-            await WritePID(RadialGauge2.OBDCommand);
+            //await WritePID(RadialGauge1.OBDCommand);
+            //await WritePID(RadialGauge2.OBDCommand);
             await WritePID(BoxGauge1.OBDCommand);
             await WritePID(BoxGauge2.OBDCommand);
+            await WritePID(BoxGauge3.OBDCommand);
+            await WritePID(BoxGauge4.OBDCommand);
 
             await Task.Delay(pidDelay);
 
@@ -132,10 +146,12 @@ namespace RedGrim.Mobile.Models
         public async Task ExecuteSinglePIDs()
         {
             await WriteSinglePID(MainGauge);
-            await WriteSinglePID(RadialGauge1);
-            await WriteSinglePID(RadialGauge2);
+            //await WriteSinglePID(RadialGauge1);
+            //await WriteSinglePID(RadialGauge2);
             await WriteSinglePID(BoxGauge1);
             await WriteSinglePID(BoxGauge2);
+            await WriteSinglePID(BoxGauge3);
+            await WriteSinglePID(BoxGauge4);
         }
         #endregion
 
@@ -184,16 +200,16 @@ namespace RedGrim.Mobile.Models
                 MainGauge.GaugeValue = MainGauge.ParseGauge(data.Substring(index, MainGauge.HexNum));
                 index += MainGauge.HexNum + 11;
 
-                RadialGauge1.GaugeValue = RadialGauge1.ParseGauge(data.Substring(index, RadialGauge1.HexNum));
-                index += RadialGauge1.HexNum + 11;
-
-                RadialGauge2.GaugeValue = RadialGauge2.ParseGauge(data.Substring(index, RadialGauge2.HexNum));
-                index += RadialGauge2.HexNum + 11;
-
                 BoxGauge1.GaugeValue = BoxGauge1.ParseGauge(data.Substring(index, BoxGauge1.HexNum));
                 index += BoxGauge1.HexNum + 11;
 
                 BoxGauge2.GaugeValue = BoxGauge2.ParseGauge(data.Substring(index, BoxGauge2.HexNum));
+                index += BoxGauge2.HexNum + 11;
+
+                BoxGauge3.GaugeValue = BoxGauge3.ParseGauge(data.Substring(index, BoxGauge3.HexNum));
+                index += BoxGauge3.HexNum + 11;
+
+                BoxGauge4.GaugeValue = BoxGauge4.ParseGauge(data.Substring(index, BoxGauge4.HexNum));
 
                 return true;
             }

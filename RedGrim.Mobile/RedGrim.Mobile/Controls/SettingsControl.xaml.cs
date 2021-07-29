@@ -150,6 +150,8 @@ namespace RedGrim.Mobile.Controls
             saveSettings.elmDelay = Convert.ToInt32(stpELMDelay.Value);
 
             SaveData();
+
+            GaugeSettingsPage.IsVisible = false;
         }
 
         private void stpELMDelay_ValueChanged(object sender, ValueChangedEventArgs e)

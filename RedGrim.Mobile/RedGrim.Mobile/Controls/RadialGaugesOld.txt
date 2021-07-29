@@ -1,0 +1,40 @@
+﻿                <!--Radial Gauge 1
+                <gauge:SfCircularGauge x:Name="gagRadial1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0">
+                    <gauge:SfCircularGauge.Headers>
+                        <gauge:Header Text="" ForegroundColor="Cyan" TextSize="Small"/>
+                    </gauge:SfCircularGauge.Headers>
+                    <gauge:SfCircularGauge.Scales>
+                        <gauge:Scale LabelColor="White" SweepAngle="250" StartAngle="145">
+                            <gauge:Scale.Ranges>
+                                <gauge:Range StartValue="0" EndValue="0"/>
+                            </gauge:Scale.Ranges>
+                            <gauge:Scale.Pointers>
+                                <gauge:NeedlePointer  Value="0" Color="White"/>
+                                <gauge:RangePointer Value="0" />
+                                <gauge:MarkerPointer Value="0" />
+                            </gauge:Scale.Pointers>
+                        </gauge:Scale>
+                    </gauge:SfCircularGauge.Scales>
+                </gauge:SfCircularGauge>
+                <Label x:Name="lblRadial1Value" Text="" FontSize="24" TextColor="Cyan" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand"/>-->
+
+
+                <!--Radial Gauge 2
+                <gauge:SfCircularGauge x:Name="gagRadial2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="1">
+                    <gauge:SfCircularGauge.Headers>
+                        <gauge:Header Text="" ForegroundColor="Cyan" TextSize="Small"/>
+                    </gauge:SfCircularGauge.Headers>
+                    <gauge:SfCircularGauge.Scales>
+                        <gauge:Scale LabelColor="White"  SweepAngle="250" StartAngle="145">
+                            <gauge:Scale.Ranges>
+                                <gauge:Range StartValue="0" EndValue="0"/>
+                            </gauge:Scale.Ranges>
+                            <gauge:Scale.Pointers>
+                                <gauge:NeedlePointer  Value="0" Color="White"/>
+                                <gauge:RangePointer Value="0" />
+                                <gauge:MarkerPointer Value="0" />
+                            </gauge:Scale.Pointers>
+                        </gauge:Scale>
+                    </gauge:SfCircularGauge.Scales>
+                </gauge:SfCircularGauge>
+                <Label x:Name="lblRadial2Value" Grid.Column="1" Text="" FontSize="24" TextColor="Cyan" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand"/>-->

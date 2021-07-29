@@ -19,7 +19,7 @@
             </Grid.RowDefinitions>
 
             <!--Radial Gauge Main-->
-            <gauge:SfCircularGauge x:Name="gagRadialMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <gauge:SfCircularGauge x:Name="gagRadialMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="6">
                 <gauge:SfCircularGauge.Headers>
                     <gauge:Header Text="---" ForegroundColor="Cyan" TextSize="Large"/>
                 </gauge:SfCircularGauge.Headers>
@@ -30,7 +30,7 @@
 
                         </gauge:Scale.Ranges>
                         <gauge:Scale.Pointers>
-                            <gauge:NeedlePointer  Value="0" />
+                            <gauge:NeedlePointer  Value="0" Color="White" Type="Bar"/>
                             <gauge:RangePointer Value="50" />
                             <gauge:MarkerPointer Value="70" />
                         </gauge:Scale.Pointers>
@@ -39,106 +39,81 @@
             </gauge:SfCircularGauge>
             <Label x:Name="lblMainValue" Text="---" FontSize="40" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TextColor="Cyan" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand"/>
 
-            <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2" BackgroundColor="Black" Margin="3">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0"/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height=".05*"/>
+                    <RowDefinition />
+                    <RowDefinition Height=".05*"/>
+                    <RowDefinition Height=".05*"/>
+                    <RowDefinition />
+                    <RowDefinition Height=".05*"/>
                 </Grid.RowDefinitions>
 
-                <!--Radial Gauge 1-->
-                <gauge:SfCircularGauge x:Name="gagRadial1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0">
-                    <gauge:SfCircularGauge.Headers>
-                        <gauge:Header Text="---" ForegroundColor="Cyan" TextSize="Small"/>
-                    </gauge:SfCircularGauge.Headers>
-                    <gauge:SfCircularGauge.Scales>
-                        <gauge:Scale LabelColor="White" SweepAngle="250" StartAngle="145">
-                            <gauge:Scale.Ranges>
-                                <gauge:Range StartValue="0" EndValue="0"/>
-                            </gauge:Scale.Ranges>
-                            <gauge:Scale.Pointers>
-                                <gauge:NeedlePointer  Value="0" />
-                                <gauge:RangePointer Value="0" />
-                                <gauge:MarkerPointer Value="0" />
-                            </gauge:Scale.Pointers>
-                        </gauge:Scale>
-                    </gauge:SfCircularGauge.Scales>
-                </gauge:SfCircularGauge>
-                <Label x:Name="lblRadial1Value" Text="---" FontSize="24" TextColor="Cyan" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand"/>
-
-
-                <!--Radial Gauge 2-->
-                <gauge:SfCircularGauge x:Name="gagRadial2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="1">
-                    <gauge:SfCircularGauge.Headers>
-                        <gauge:Header Text="---" ForegroundColor="Cyan" TextSize="Small"/>
-                    </gauge:SfCircularGauge.Headers>
-                    <gauge:SfCircularGauge.Scales>
-                        <gauge:Scale LabelColor="White"  SweepAngle="250" StartAngle="145">
-                            <gauge:Scale.Ranges>
-                                <gauge:Range StartValue="0" EndValue="0"/>
-                            </gauge:Scale.Ranges>
-                            <gauge:Scale.Pointers>
-                                <gauge:NeedlePointer  Value="0" />
-                                <gauge:RangePointer Value="0" />
-                                <gauge:MarkerPointer Value="0" />
-                            </gauge:Scale.Pointers>
-                        </gauge:Scale>
-                    </gauge:SfCircularGauge.Scales>
-                </gauge:SfCircularGauge>
-                <Label x:Name="lblRadial2Value" Grid.Column="1" Text="---" FontSize="24" TextColor="Cyan" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand"/>
-
-                <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".05*"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width=".05*"/>
-                        <ColumnDefinition Width=".05*"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width=".05*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height=".05*"/>
-                        <RowDefinition />
-                        <RowDefinition Height=".05*"/>
-                    </Grid.RowDefinitions>
-
-                    <!--Box Gauge 1-->
-                    <Frame Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" BorderColor="Cyan" BackgroundColor="Transparent" Margin="0,0,0,5"/>
-
-                    <StackLayout Grid.Row="0" Grid.Column="1" VerticalOptions="EndAndExpand">
+                <!--Box Gauge 1-->
+                <Frame Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
+                    <StackLayout VerticalOptions="FillAndExpand">
                         <Label x:Name="gagBox1Label" Text="---" HorizontalOptions="CenterAndExpand" TextColor="Cyan" FontSize="Title"/>
-                    </StackLayout>
 
-                    <StackLayout Grid.Row="1" Grid.Column="1" VerticalOptions="CenterAndExpand">
-                        <StackLayout Orientation="Horizontal">
+                        <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
                             <Label x:Name="gagBox1Value" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Text="---" TextColor="Cyan" FontSize="36"/>
-                            <Label x:Name="gagBox1UoM" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Text="" TextColor="Cyan" FontSize="34"/>
+                            <Label x:Name="gagBox1UoM" VerticalOptions="Fill" HorizontalOptions="StartAndExpand" Text="" TextColor="Cyan" FontSize="34"/>
                         </StackLayout>
-                    </StackLayout>
 
-                    <!--Box Gauge 2-->
-                    <Frame Grid.Row="0" Grid.Column="4" Grid.RowSpan="3" BorderColor="Cyan" BackgroundColor="Transparent" Margin="0,0,0,5"/>
-                    
-                    <StackLayout Grid.Row="0" Grid.Column="4" VerticalOptions="EndAndExpand">
+                    </StackLayout>
+                </Frame>
+
+                <!--Box Gauge 2-->
+                <Frame Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
+
+                    <StackLayout VerticalOptions="FillAndExpand">
                         <Label x:Name="gagBox2Label" Text="---" HorizontalOptions="CenterAndExpand" TextColor="Cyan" FontSize="Title"/>
-                    </StackLayout>
 
-                    <StackLayout  Grid.Row="1" Grid.Column="4" VerticalOptions="CenterAndExpand">
-                        <StackLayout Orientation="Horizontal">
+                        <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
                             <Label x:Name="gagBox2Value" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Text="---" TextColor="Cyan" FontSize="36"/>
                             <Label x:Name="gagBox2UoM" VerticalOptions="Fill" HorizontalOptions="StartAndExpand" Text="" TextColor="Cyan" FontSize="34"/>
                         </StackLayout>
-                    </StackLayout>
 
-                </Grid>
+                    </StackLayout>
+                </Frame>
+
+                <!--Box Gauge 3-->
+                <Frame Grid.Row="3" Grid.Column="1" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
+
+                    <StackLayout VerticalOptions="FillAndExpand">
+                        <Label x:Name="gagBox3Label" Text="---" HorizontalOptions="CenterAndExpand" TextColor="Cyan" FontSize="Title"/>
+
+                        <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                            <Label x:Name="gagBox3Value" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Text="---" TextColor="Cyan" FontSize="36"/>
+                            <Label x:Name="gagBox3UoM" VerticalOptions="Fill" HorizontalOptions="StartAndExpand" Text="" TextColor="Cyan" FontSize="34"/>
+                        </StackLayout>
+
+                    </StackLayout>
+                </Frame>
+
+                <!--Box Gauge 4-->
+                <Frame Grid.Row="3" Grid.Column="2" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
+
+                    <StackLayout VerticalOptions="FillAndExpand">
+                        <Label x:Name="gagBox4Label" Text="---" HorizontalOptions="CenterAndExpand" TextColor="Cyan" FontSize="Title"/>
+
+                        <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                            <Label x:Name="gagBox4Value" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Text="---" TextColor="Cyan" FontSize="36"/>
+                            <Label x:Name="gagBox4UoM" VerticalOptions="Fill" HorizontalOptions="StartAndExpand" Text="" TextColor="Cyan" FontSize="34"/>
+                        </StackLayout>
+
+                    </StackLayout>
+                </Frame>
+                
             </Grid>
 
             <!--BT Status-->
-            <Button Grid.Row="2" Grid.Column="2" x:Name="tbkBTStatus" TextColor="Purple" FontSize="12" BackgroundColor="Transparent" Text="No Connection" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
-            <Button Grid.Row="2" Grid.Column="3" x:Name="btnAutoConnect" TextColor="Cyan" FontSize="12" Background="Transparent" Text="Auto Connect" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Clicked="btnAutoConnect_Clicked"/>
+            <Button Grid.Row="2" Grid.Column="2" x:Name="tbkBTStatus" TextColor="Magenta" FontSize="12" BackgroundColor="Transparent" Text="No Connection" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+            <Button Grid.Row="2" Grid.Column="3" x:Name="btnAutoConnect" TextColor="Cyan" FontSize="12" Background="Transparent" Text="OBD Connect" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Clicked="btnAutoConnect_Clicked"/>
 
             <!--BT Settings Panel-->
             <Frame x:Name="pnlBTSettings" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2" IsVisible="false" VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" Background="Black" BorderColor="OrangeRed" CornerRadius="10">

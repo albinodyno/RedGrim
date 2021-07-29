@@ -45,6 +45,7 @@ namespace RedGrim.Mobile
                 SettingsPage.UpdateVersionNum();
                 SettingsPage.IsVisible = true;
                 MapPage.IsVisible = false;
+                AuxPage.IsVisible = false;
             }
             else
             {
@@ -53,19 +54,8 @@ namespace RedGrim.Mobile
                 pnlSideMenu.IsVisible = true;
                 SettingsPage.IsVisible = false;
                 MapPage.IsVisible = false;
+                AuxPage.IsVisible = false;
             }
-        }
-
-        public void ShowOBDLog()
-        {
-            SettingsPage.IsVisible = true;
-            SettingsPage.ShowOBDLog();
-        }
-
-        public void ShowErrorLog()
-        {
-            SettingsPage.IsVisible = true;
-            SettingsPage.ShowErrorLog();
         }
 
         private void btnMapLaunch_Clicked(object sender, EventArgs e)
@@ -76,6 +66,7 @@ namespace RedGrim.Mobile
                 BluetoothPage.IsVisible = false;
                 pnlSideMenu.IsVisible = true;
                 SettingsPage.IsVisible = false;
+                AuxPage.IsVisible = false;
             }
             else
             {
@@ -83,6 +74,28 @@ namespace RedGrim.Mobile
                 BluetoothPage.IsVisible = true;
                 pnlSideMenu.IsVisible = true;
                 SettingsPage.IsVisible = false;
+                AuxPage.IsVisible = false;
+            }
+        }
+
+        private void btnAuxLaunch_Clicked(object sender, EventArgs e)
+        {
+            if (!AuxPage.IsVisible)
+            {
+                MapPage.IsVisible = false;
+                SettingsPage.IsVisible = false;
+                BluetoothPage.IsVisible = true;
+                AuxPage.IsVisible = true;
+                pnlSideMenu.IsVisible = true;
+
+            }
+            else
+            {
+                MapPage.IsVisible = false;
+                SettingsPage.IsVisible = false;
+                AuxPage.IsVisible = false;
+                BluetoothPage.IsVisible = true;
+                pnlSideMenu.IsVisible = true;
             }
         }
     }

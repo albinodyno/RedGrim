@@ -35,8 +35,8 @@ namespace RedGrim.Mobile.Controls
             InitializeComponent();
 
             gagRadialMain.PointerPositionChanged += Radial_PointerPositionChanged;
-            gagRadial1.PointerPositionChanged += Radial_PointerPositionChanged;
-            gagRadial2.PointerPositionChanged += Radial_PointerPositionChanged;
+            //gagRadial1.PointerPositionChanged += Radial_PointerPositionChanged;
+            //gagRadial2.PointerPositionChanged += Radial_PointerPositionChanged;
 
             LoadAdapter();
         }
@@ -57,7 +57,6 @@ namespace RedGrim.Mobile.Controls
             {
                 FailedConnection(ex.Message);
             }
-
         }
 
         public void LoadDevices()
@@ -79,7 +78,7 @@ namespace RedGrim.Mobile.Controls
             if (gaugeCommands != null) return;
 
             tbkBTStatus.Text = "Atempting...";
-            tbkBTStatus.TextColor = Color.Purple;
+            tbkBTStatus.TextColor = Color.Magenta;
 
             try
             {
@@ -98,11 +97,10 @@ namespace RedGrim.Mobile.Controls
                 FailedConnection($"Saved Device not found - {ex.Message}");
             }
         }
-
         public void ConnectDevice()
         {
             tbkBTStatus.Text = "Atempting...";
-            tbkBTStatus.TextColor = Color.Purple;
+            tbkBTStatus.TextColor = Color.Magenta;
 
             try
             {
@@ -142,7 +140,7 @@ namespace RedGrim.Mobile.Controls
                 socket = device.CreateRfcommSocketToServiceRecord(UUID.FromString("00001101-0000-1000-8000-00805f9b34fb"));
                 await socket.ConnectAsync();
 
-                gaugeCommands = new GaugeCommands(socket, 1000, 250);
+                gaugeCommands = new GaugeCommands(socket);
 
                 return true;
             }
@@ -158,16 +156,16 @@ namespace RedGrim.Mobile.Controls
             try
             {
                 // Write data to the device
-                byte[] writeBuffer = Encoding.ASCII.GetBytes("ATZ\r");
+                byte[] writeBuffer = Encoding.ASCII.GetBytes("010D\r");
                 await gaugeCommands.socket.OutputStream.WriteAsync(writeBuffer, 0, writeBuffer.Length);
                 await gaugeCommands.socket.OutputStream.FlushAsync();
 
                 // Read data from the device
-                byte[] readBuffer = new byte[50];
+                byte[] readBuffer = new byte[512];
                 int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
                 string data = Encoding.ASCII.GetString(readBuffer);
 
-                if (!data.Contains("ELM")) throw new Exception("Connection Broken");
+                if (data.Contains("ERROR")) throw new Exception($"Testing Connection Failed: {data}");
 
                 UpdateLog($"Connection Test Successful - {data}");
                 failCount = 0;
@@ -189,15 +187,15 @@ namespace RedGrim.Mobile.Controls
                 gagRadialMain.Scales[0].StartValue = gaugeCommands.MainGauge.Min;
                 gagRadialMain.Scales[0].EndValue = gaugeCommands.MainGauge.Max;
 
-                gagRadial1.Headers[0].Text = $"{gaugeCommands.RadialGauge1.Name} ({gaugeCommands.RadialGauge1.UOM})";
-                gagRadial1.Scales[0].Interval = gaugeCommands.RadialGauge1.TickSpacing;
-                gagRadial1.Scales[0].StartValue = gaugeCommands.RadialGauge1.Min;
-                gagRadial1.Scales[0].EndValue = gaugeCommands.RadialGauge1.Max;
+                //gagRadial1.Headers[0].Text = $"{gaugeCommands.RadialGauge1.Name} ({gaugeCommands.RadialGauge1.UOM})";
+                //gagRadial1.Scales[0].Interval = gaugeCommands.RadialGauge1.TickSpacing;
+                //gagRadial1.Scales[0].StartValue = gaugeCommands.RadialGauge1.Min;
+                //gagRadial1.Scales[0].EndValue = gaugeCommands.RadialGauge1.Max;
 
-                gagRadial2.Headers[0].Text = $"{gaugeCommands.RadialGauge2.Name} ({gaugeCommands.RadialGauge2.UOM})";
-                gagRadial2.Scales[0].Interval = gaugeCommands.RadialGauge2.TickSpacing;
-                gagRadial2.Scales[0].StartValue = gaugeCommands.RadialGauge2.Min;
-                gagRadial2.Scales[0].EndValue = gaugeCommands.RadialGauge2.Max;
+                //gagRadial2.Headers[0].Text = $"{gaugeCommands.RadialGauge2.Name} ({gaugeCommands.RadialGauge2.UOM})";
+                //gagRadial2.Scales[0].Interval = gaugeCommands.RadialGauge2.TickSpacing;
+                //gagRadial2.Scales[0].StartValue = gaugeCommands.RadialGauge2.Min;
+                //gagRadial2.Scales[0].EndValue = gaugeCommands.RadialGauge2.Max;
 
                 gagBox1Label.Text = gaugeCommands.BoxGauge1.Name;
                 gagBox1Value.Text = "0";
@@ -206,6 +204,14 @@ namespace RedGrim.Mobile.Controls
                 gagBox2Label.Text = gaugeCommands.BoxGauge2.Name;
                 gagBox2Value.Text = "0";
                 gagBox2UoM.Text = gaugeCommands.BoxGauge2.UOM;
+
+                gagBox3Label.Text = gaugeCommands.BoxGauge3.Name;
+                gagBox3Value.Text = "0";
+                gagBox3UoM.Text = gaugeCommands.BoxGauge3.UOM;
+
+                gagBox4Label.Text = gaugeCommands.BoxGauge4.Name;
+                gagBox4Value.Text = "0";
+                gagBox4UoM.Text = gaugeCommands.BoxGauge4.UOM;
 
                 return true;
             }
@@ -236,7 +242,7 @@ namespace RedGrim.Mobile.Controls
         #endregion
 
         #region  Run Gauges
-        public async void RunGauges()
+        public async void RunGauges1()
         {
             loopPid = true;
             UpdateLog("Started Looping...");
@@ -255,10 +261,59 @@ namespace RedGrim.Mobile.Controls
 
                     //Update Gauge UI
                     gagRadialMain.Scales[0].Pointers[0].Value = gaugeCommands.MainGauge.GaugeValue;
-                    gagRadial1.Scales[0].Pointers[0].Value = gaugeCommands.RadialGauge1.GaugeValue;
-                    gagRadial2.Scales[0].Pointers[0].Value = gaugeCommands.RadialGauge2.GaugeValue;
+                    //gagRadial1.Scales[0].Pointers[0].Value = gaugeCommands.RadialGauge1.GaugeValue;
+                    //gagRadial2.Scales[0].Pointers[0].Value = gaugeCommands.RadialGauge2.GaugeValue;
                     gagBox1Value.Text = Convert.ToString(gaugeCommands.BoxGauge1.GaugeValue);
                     gagBox2Value.Text = Convert.ToString(gaugeCommands.BoxGauge2.GaugeValue);
+                    gagBox3Value.Text = Convert.ToString(gaugeCommands.BoxGauge3.GaugeValue);
+                    gagBox4Value.Text = Convert.ToString(gaugeCommands.BoxGauge4.GaugeValue);
+
+                    if (failCount > 10)
+                        loopPid = await TestConnection();
+                }
+                catch (Exception ex)
+                {
+                    FailedConnection($"Error at PID Loop - {ex.Message}");
+                    loopPid = false;
+                }
+            ResetGauges();
+            UpdateLog("...Stopped Looping");
+        }
+
+        public async void RunGauges()
+        {
+            loopPid = true;
+            UpdateLog("Started Looping...");
+            while (loopPid)
+                try
+                {
+                    System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                    sw.Start();
+
+                    await gaugeCommands.WriteSinglePID(gaugeCommands.MainGauge);
+                    gagRadialMain.Scales[0].Pointers[0].Value = gaugeCommands.MainGauge.GaugeValue;
+
+                    //await gaugeCommands.WriteSinglePID(gaugeCommands.RadialGauge1);
+                    //gagRadial1.Scales[0].Pointers[0].Value = gaugeCommands.RadialGauge1.GaugeValue;
+
+                    //await gaugeCommands.WriteSinglePID(gaugeCommands.RadialGauge2);
+                    //gagRadial2.Scales[0].Pointers[0].Value = gaugeCommands.RadialGauge2.GaugeValue;
+
+                    await gaugeCommands.WriteSinglePID(gaugeCommands.BoxGauge1);
+                    gagBox1Value.Text = Convert.ToString(gaugeCommands.BoxGauge1.GaugeValue);
+
+                    await gaugeCommands.WriteSinglePID(gaugeCommands.BoxGauge2);
+                    gagBox2Value.Text = Convert.ToString(gaugeCommands.BoxGauge2.GaugeValue);
+
+                    await gaugeCommands.WriteSinglePID(gaugeCommands.BoxGauge3);
+                    gagBox3Value.Text = Convert.ToString(gaugeCommands.BoxGauge3.GaugeValue);
+
+                    await gaugeCommands.WriteSinglePID(gaugeCommands.BoxGauge4);
+                    gagBox4Value.Text = Convert.ToString(gaugeCommands.BoxGauge4.GaugeValue);
+
+
+                    sw.Stop();
+                    UpdateLog($"-----Time to Execute: {Convert.ToString(sw.ElapsedMilliseconds)}");
 
                     if (failCount > 10)
                         loopPid = await TestConnection();
@@ -280,10 +335,12 @@ namespace RedGrim.Mobile.Controls
         public void ResetGauges()
         {
             gagRadialMain.Scales[0].Pointers[0].Value = 0;
-            gagRadial1.Scales[0].Pointers[0].Value = 0;
-            gagRadial2.Scales[0].Pointers[0].Value = 0;
-            gagBox1Value.Text = "---"; ;
+            //gagRadial1.Scales[0].Pointers[0].Value = 0;
+            //gagRadial2.Scales[0].Pointers[0].Value = 0;
+            gagBox1Value.Text = "---";
             gagBox2Value.Text = "---";
+            gagBox3Value.Text = "---";
+            gagBox4Value.Text = "---";
         }
         #endregion
 
@@ -341,7 +398,7 @@ namespace RedGrim.Mobile.Controls
         private void btnStartGauges_Clicked(object sender, EventArgs e)
         {
             tbkBTStatus.Text = "Atempting...";
-            tbkBTStatus.TextColor = Color.Purple;
+            tbkBTStatus.TextColor = Color.Magenta;
             RunGauges();
         }
 
@@ -396,18 +453,18 @@ namespace RedGrim.Mobile.Controls
                     lblMainValue.Text = Convert.ToString(args.pointerValue);
                     return;
                 }
-                if (sender == gagRadial1)
-                {
-                    lblRadial1Value.Text = Convert.ToString(args.pointerValue);
-                    return;
-                }
-                if (sender == gagRadial2)
-                {
-                    lblRadial2Value.Text = Convert.ToString(args.pointerValue);
-                    return;
-                }
-                throw new Exception("unkown radial gauge");
-                // the rest of them
+                //if (sender == gagRadial1)
+                //{
+                //    lblRadial1Value.Text = Convert.ToString(args.pointerValue);
+                //    return;
+                //}
+                //if (sender == gagRadial2)
+                //{
+                //    lblRadial2Value.Text = Convert.ToString(args.pointerValue);
+                //    return;
+                //}
+                //throw new Exception("unkown radial gauge");
+                //// the rest of them
             }
             catch(Exception ex)
             {

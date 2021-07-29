@@ -3,8 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RedGrim.Mobile.Controls.AuxControl">
   <ContentView.Content>
-      <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
-  </ContentView.Content>
+        <Grid  Background="Black" Margin="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height=".15*"/>
+            </Grid.RowDefinitions>
+            
+
+            <!--Button Borders-->
+            <Frame x:Name="bdr1" Grid.Row="0" Grid.Column="0" BorderColor="LightGray" Background="Black" CornerRadius="5"/>
+            <Frame x:Name="bdr2" Grid.Row="0" Grid.Column="1" BorderColor="LightGray" Background="Black" CornerRadius="5"/>
+            <Frame x:Name="bdr3" Grid.Row="1" Grid.Column="0" BorderColor="LightGray" Background="Black" CornerRadius="5"/>
+            <Frame x:Name="bdr4" Grid.Row="1" Grid.Column="1" BorderColor="LightGray" Background="Black" CornerRadius="5"/>
+
+            <!--On Buttons-->
+            <Button x:Name="btnAux1On" Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent" TextColor="LightGray" Text="AUX 1" FontSize="Large" IsVisible="True" Clicked="btnAux1On_Clicked"/>
+            <Button x:Name="btnAux2On" Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent" TextColor="LightGray" Text="AUX 2" FontSize="Large" IsVisible="True" Clicked="btnAux2On_Clicked"/>
+            <Button x:Name="btnAux3On" Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" TextColor="LightGray" Text="AUX 3" FontSize="Large" IsVisible="True" Clicked="btnAux3On_Clicked"/>
+            <Button x:Name="btnAux4On" Grid.Row="1" Grid.Column="1" BackgroundColor="Transparent" TextColor="LightGray" Text="AUX 4" FontSize="Large" IsVisible="True" Clicked="btnAux4On_Clicked"/>
+
+            <!--Off Buttons-->
+            <Button x:Name="btnAux1Off" Grid.Row="0" Grid.Column="0" Background="Transparent" TextColor="OrangeRed" Text="\| AUX 1 |/" FontAttributes="Bold" FontSize="Large" IsVisible="False" Clicked="btnAux1Off_Clicked"/>
+            <Button x:Name="btnAux2Off" Grid.Row="0" Grid.Column="1" Background="Transparent" TextColor="OrangeRed" Text="\| AUX 2 |/" FontAttributes="Bold" FontSize="Large" IsVisible="False" Clicked="btnAux2Off_Clicked"/>
+            <Button x:Name="btnAux3Off" Grid.Row="1" Grid.Column="0" Background="Transparent" TextColor="OrangeRed" Text="\| AUX 3 |/" FontAttributes="Bold" FontSize="Large" IsVisible="False" Clicked="btnAux3Off_Clicked"/>
+            <Button x:Name="btnAux4Off" Grid.Row="1" Grid.Column="1" Background="Transparent" TextColor="OrangeRed" Text="\| AUX 4 |/" FontAttributes="Bold" FontSize="Large" IsVisible="False" Clicked="btnAux4Off_Clicked"/>
+
+            <!--Aux Options-->
+            <Button x:Name="tbkAuxStatus" Grid.Row="2" Grid.Column="0" Text="No Connection" TextColor="Magenta" FontSize="12" Background="Transparent" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+            <Button x:Name="btnAuxConnect" Grid.Row="2" Grid.Column="1" Text="AUX Connect" TextColor="Cyan" FontSize="12" Background="Transparent" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Clicked="btnAuxConnect_Clicked"/>
+
+        </Grid>
+    </ContentView.Content>
 </ContentView>
