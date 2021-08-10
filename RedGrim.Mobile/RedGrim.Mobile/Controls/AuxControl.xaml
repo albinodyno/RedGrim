@@ -34,8 +34,8 @@
             <Button x:Name="btnAux4Off" Grid.Row="1" Grid.Column="1" Background="Transparent" TextColor="OrangeRed" Text="\| AUX 4 |/" FontAttributes="Bold" FontSize="Large" IsVisible="False" Clicked="btnAux4Off_Clicked"/>
 
             <!--Aux Options-->
-            <Button x:Name="tbkAuxStatus" Grid.Row="2" Grid.Column="0" Text="No Connection" TextColor="Magenta" FontSize="12" Background="Transparent" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
-            <Button x:Name="btnAuxConnect" Grid.Row="2" Grid.Column="1" Text="AUX Connect" TextColor="Cyan" FontSize="12" Background="Transparent" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Clicked="btnAuxConnect_Clicked"/>
+            <Button x:Name="tbkAuxStatus" Grid.Row="2" Grid.Column="0" Text="No Connection" BorderColor="Gray" CornerRadius="5" BorderWidth="1" TextColor="Magenta" FontSize="12" Background="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+            <Button x:Name="btnAuxConnect" Grid.Row="2" Grid.Column="1" Text="AUX Connect" BorderColor="Cyan" CornerRadius="5" BorderWidth="1" TextColor="Cyan" FontSize="12" Background="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Clicked="btnAuxConnect_Clicked"/>
 
         </Grid>
     </ContentView.Content>

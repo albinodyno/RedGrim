@@ -19,19 +19,18 @@
             </Grid.RowDefinitions>
 
             <!--Radial Gauge Main-->
-            <gauge:SfCircularGauge x:Name="gagRadialMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="6">
+            <gauge:SfCircularGauge x:Name="gagRadialMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="10">
                 <gauge:SfCircularGauge.Headers>
                     <gauge:Header Text="---" ForegroundColor="Cyan" TextSize="Large"/>
                 </gauge:SfCircularGauge.Headers>
                 <gauge:SfCircularGauge.Scales>
-                    <gauge:Scale StartValue="-20" EndValue="220" Interval="20" LabelColor="White" RimColor="Purple" RadiusFactor="1" RimThickness="10">
+                    <gauge:Scale StartValue="0" EndValue="100" Interval="10" LabelColor="White" RimColor="cyan" RadiusFactor="1" RimThickness="20">
                         <gauge:Scale.Ranges>
-                            <gauge:Range StartValue="-20" EndValue="180" Color="Cyan"/>
-
+                            <gauge:Range StartValue="0" EndValue="100" Color="Cyan" Thickness="20"/>
                         </gauge:Scale.Ranges>
                         <gauge:Scale.Pointers>
                             <gauge:NeedlePointer  Value="0" Color="White" Type="Bar"/>
-                            <gauge:RangePointer Value="50" />
+                            <gauge:RangePointer Value="10" />
                             <gauge:MarkerPointer Value="70" />
                         </gauge:Scale.Pointers>
                     </gauge:Scale>
@@ -39,7 +38,7 @@
             </gauge:SfCircularGauge>
             <Label x:Name="lblMainValue" Text="---" FontSize="40" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TextColor="Cyan" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand"/>
 
-            <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2" BackgroundColor="Black" Margin="3">
+            <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2" BackgroundColor="Black">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -54,7 +53,7 @@
                 </Grid.RowDefinitions>
 
                 <!--Box Gauge 1-->
-                <Frame Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
+                <Frame x:Name="gagBox1Frame" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
                     <StackLayout VerticalOptions="FillAndExpand">
                         <Label x:Name="gagBox1Label" Text="---" HorizontalOptions="CenterAndExpand" TextColor="Cyan" FontSize="Title"/>
 
@@ -67,7 +66,7 @@
                 </Frame>
 
                 <!--Box Gauge 2-->
-                <Frame Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
+                <Frame x:Name="gagBox2Frame" Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
 
                     <StackLayout VerticalOptions="FillAndExpand">
                         <Label x:Name="gagBox2Label" Text="---" HorizontalOptions="CenterAndExpand" TextColor="Cyan" FontSize="Title"/>
@@ -81,7 +80,7 @@
                 </Frame>
 
                 <!--Box Gauge 3-->
-                <Frame Grid.Row="3" Grid.Column="0" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
+                <Frame x:Name="gagBox3Frame" Grid.Row="3" Grid.Column="0" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
 
                     <StackLayout VerticalOptions="FillAndExpand">
                         <Label x:Name="gagBox3Label" Text="---" HorizontalOptions="CenterAndExpand" TextColor="Cyan" FontSize="Title"/>
@@ -95,7 +94,7 @@
                 </Frame>
 
                 <!--Box Gauge 4-->
-                <Frame Grid.Row="3" Grid.Column="1" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
+                <Frame x:Name="gagBox4Frame" Grid.Row="3" Grid.Column="1" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
 
                     <StackLayout VerticalOptions="FillAndExpand">
                         <Label x:Name="gagBox4Label" Text="---" HorizontalOptions="CenterAndExpand" TextColor="Cyan" FontSize="Title"/>

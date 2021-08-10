@@ -15,6 +15,8 @@ namespace RedGrim.Mobile.Models
         private int min = 0;
         private int tickSpacing = 10;
         private string obdCommand = "";
+        private int warning = 0;
+        private int critical = 0;
 
         //public string Name { get => name; set => SetProperty(ref name, value); }
         //public string UOM { get => uom; set => SetProperty(ref uom, value); }
@@ -32,13 +34,15 @@ namespace RedGrim.Mobile.Models
         public string OBDCommand { get { return obdCommand; } set { obdCommand = value; } }
         public Func<string, double> ParseGauge { get; set; }
         public int HexNum { get; set; }
+        public int Warning { get { return warning; } set { warning = value; } }
+        public int Critical { get { return critical; } set { critical = value; } }
 
         public Gauge()
         {
 
         }
 
-        public Gauge(string gName, string gUOM, int gMax, int gMin, int gTickSpacing, string gOBDCommand, Func<string, double> ParseGaugeMethod, int gHexNum)
+        public Gauge(string gName, string gUOM, int gMax, int gMin, int gTickSpacing, string gOBDCommand, Func<string, double> ParseGaugeMethod, int gHexNum, int warning, int critical)
         {
             name = gName;
             uom = gUOM;
@@ -48,6 +52,8 @@ namespace RedGrim.Mobile.Models
             obdCommand = gOBDCommand;
             ParseGauge = ParseGaugeMethod;
             HexNum = gHexNum;
+            Warning = warning;
+            Critical = critical;
         }
     }
 }

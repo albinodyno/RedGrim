@@ -6,34 +6,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using Android.Bluetooth;
-//using Windows.Devices.Bluetooth;
-//using Windows.Devices.Bluetooth.Rfcomm;
-//using Windows.Networking.Sockets;
-//using Windows.Storage.Streams;
 
 namespace RedGrim.Mobile.Models
 {
     class GaugeCommands
     {
         public BluetoothSocket socket;
-        //DataWriter obdWriter;
-        //DataReader obdReader;
 
         public static int elmDelay = 1000;
         public static int pidDelay = 300;
         bool success;
 
         public Gauge MainGauge;
-        //public Gauge RadialGauge1;
-        //public Gauge RadialGauge2;
         public Gauge BoxGauge1;
         public Gauge BoxGauge2;
         public Gauge BoxGauge3;
         public Gauge BoxGauge4;
 
-
-        //public Dictionary<string, string> obdCommands = new Dictionary<string, string>()
-        //{
         //    {"RPM", "010C\r"},
         //    {"MPH","010D\r"},
         //    {"EngineLoad", "0104\r"},
@@ -44,7 +33,6 @@ namespace RedGrim.Mobile.Models
         //    {"FuelRate", "015E\r"},
         //    {"OilTemp", "015C\r"}
         //    {"Torque", "0162\r"}
-        //};
 
         public GaugeCommands(BluetoothSocket btSocket)
         {
@@ -60,11 +48,8 @@ namespace RedGrim.Mobile.Models
 
             }
 
-
             //choose gauge content here
             MainGauge = BuildGauge.RPMGauge();
-            //RadialGauge1 = BuildGauge.EngineLoadGauge();
-            //RadialGauge2 = BuildGauge.ThrottlePosGauge();
             BoxGauge1 = BuildGauge.CoolantTempGauge();
             BoxGauge2 = BuildGauge.IntakeTempGauge();
             BoxGauge3 = BuildGauge.EngineLoadGauge();
@@ -186,7 +171,6 @@ namespace RedGrim.Mobile.Models
                 if( SettingsControl.debugMode ) BluetoothControl.UpdateLog(data);
 
                 string[] dt = data.Split('<');
-
 
 
                 MainGauge.GaugeValue = GaugeParse.Voltage(dt[0].Substring(dt[0].Length-MainGauge.HexNum, MainGauge.HexNum));
