@@ -18,6 +18,7 @@
             <!--Button Borders-->
             <Frame x:Name="bdr1" Grid.Row="0" Grid.Column="0" BorderColor="LightGray" Background="Black" CornerRadius="5"/>
             <Frame x:Name="bdr2" Grid.Row="0" Grid.Column="1" BorderColor="LightGray" Background="Black" CornerRadius="5"/>
+
             <Frame x:Name="bdr3" Grid.Row="1" Grid.Column="0" BorderColor="LightGray" Background="Black" CornerRadius="5"/>
             <Frame x:Name="bdr4" Grid.Row="1" Grid.Column="1" BorderColor="LightGray" Background="Black" CornerRadius="5"/>
 

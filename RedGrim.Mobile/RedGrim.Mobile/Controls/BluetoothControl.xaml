@@ -4,7 +4,7 @@
              xmlns:gauge="clr-namespace:Syncfusion.SfGauge.XForms;assembly=Syncfusion.SfGauge.XForms"
              x:Class="RedGrim.Mobile.Controls.BluetoothControl">
   <ContentView.Content>
-        <Grid x:Name="grdGauges">
+        <Grid x:Name="grdGauges" Margin="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -24,9 +24,9 @@
                     <gauge:Header Text="---" ForegroundColor="Cyan" TextSize="Large"/>
                 </gauge:SfCircularGauge.Headers>
                 <gauge:SfCircularGauge.Scales>
-                    <gauge:Scale StartValue="0" EndValue="100" Interval="10" LabelColor="White" RimColor="cyan" RadiusFactor="1" RimThickness="20">
+                    <gauge:Scale StartValue="0" EndValue="100" Interval="10" LabelColor="White" RimColor="Magenta" RadiusFactor="1" RimThickness="10">
                         <gauge:Scale.Ranges>
-                            <gauge:Range StartValue="0" EndValue="100" Color="Cyan" Thickness="20"/>
+                            <gauge:Range StartValue="0" EndValue="100" Color="Cyan" Thickness="25"/>
                         </gauge:Scale.Ranges>
                         <gauge:Scale.Pointers>
                             <gauge:NeedlePointer  Value="0" Color="White" Type="Bar"/>

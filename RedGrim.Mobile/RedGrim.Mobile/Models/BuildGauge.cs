@@ -16,19 +16,19 @@ namespace RedGrim.Mobile.Models
 
         public static Gauge CoolantTempGauge()
         {
-            Gauge tmpGauge = new Gauge("Coolant", "°F", 250, -25, 25, "0105\r", GaugeParse.CoolantTemp, 2, 185, 205);
+            Gauge tmpGauge = new Gauge("Coolant", "°F", 250, -25, 25, "0105\r", GaugeParse.CoolantTemp, 2, 190, 205);
             return tmpGauge;
         }
 
         public static Gauge IntakeTempGauge()
         {
-            Gauge tmpGauge = new Gauge("Intake", "°F", 250, -25, 25, "010F\r", GaugeParse.Intaketemp, 2, 120, 145);
+            Gauge tmpGauge = new Gauge("Intake", "°F", 250, -25, 25, "010F\r", GaugeParse.Intaketemp, 2, 115, 145);
             return tmpGauge;
         }
 
         public static Gauge RPMGauge()
         {
-            Gauge tmpGauge = new Gauge("RPM", "", 10000, 0, 1000, "010C\r", GaugeParse.RPM, 4, 3000, 6000);
+            Gauge tmpGauge = new Gauge("RPM", "", 10000, 0, 1000, "010C\r", GaugeParse.RPM, 4, 4000, 6000);
             return tmpGauge;
         }
 
@@ -40,13 +40,13 @@ namespace RedGrim.Mobile.Models
 
         public static Gauge EngineLoadGauge()
         {
-            Gauge tmpGauge = new Gauge("Load", "%", 100, 0, 20, "0104\r", GaugeParse.EngineLoad, 2, 65, 85);
+            Gauge tmpGauge = new Gauge("Load", "%", 100, 0, 20, "0104\r", GaugeParse.EngineLoad, 2, 75, 85);
             return tmpGauge;
         }
 
         public static Gauge ThrottlePosGauge()
         {
-            Gauge tmpGauge = new Gauge("Throttle", "%", 100, 0, 20, "0111\r", GaugeParse.ThrottlePosition, 2, 65, 85);
+            Gauge tmpGauge = new Gauge("Throttle", "%", 100, 0, 20, "0111\r", GaugeParse.ThrottlePosition, 2, 75, 85);
             return tmpGauge;
         }
 
@@ -58,7 +58,7 @@ namespace RedGrim.Mobile.Models
 
         public static Gauge TorqueGauge()
         {
-            Gauge tmpGauge = new Gauge("Torque", "%", 100, 0, 20, "0162\r", GaugeParse.Torque, 2, 65, 85);
+            Gauge tmpGauge = new Gauge("Torque", "%", 100, 0, 20, "0162\r", GaugeParse.Torque, 2, 75, 85);
             return tmpGauge;
         }
 

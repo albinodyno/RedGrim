@@ -30,8 +30,8 @@
                     <Button x:Name="btnUpdateLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf01e;" FontSize="18" Clicked="btnUpdateLog_Clicked" TextColor="White" Background="Transparent"/>
                     <Button x:Name="btnClearLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf12d;" FontSize="18" Clicked="btnClearLog_Clicked" TextColor="White" Background="Transparent"/>
                 </StackLayout>
-                <ScrollView Margin="10" Padding="2" HeightRequest="140" BackgroundColor="Transparent" VerticalOptions="StartAndExpand">
-                    <Label x:Name="tbkLog" Text="---Start---" FontSize="Medium" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" BackgroundColor="Transparent" TextColor="White"/>
+                <ScrollView HeightRequest="140" BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
+                    <Label x:Name="tbkLog" Text="---Start---" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent" TextColor="White"/>
                 </ScrollView>
                 <Button x:Name="btnCloseLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseLog_Clicked" TextColor="White" Background="OrangeRed" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
@@ -39,7 +39,7 @@
             <!--Error Log-->
             <StackLayout x:Name="SettingsErrorPage" Grid.ColumnSpan="2" IsVisible="False" BackgroundColor="Black" VerticalOptions="FillAndExpand">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                    <Label FontSize="18" Text="Error Log" VerticalOptions="Center" TextColor="DarkGoldenrod"/>
+                    <Label FontSize="18" Text="System Log" VerticalOptions="Center" TextColor="DarkGoldenrod"/>
                     <Button x:Name="btnUpdateErrorLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf01e;" FontSize="18" Clicked="btnUpdateErrorLog_Clicked" TextColor="White" BackgroundColor="Transparent"/>
                     <Button x:Name="btnClearErrorLog" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf12d;" FontSize="18" Clicked="btnClearErrorLog_Clicked" TextColor="White" Background="Transparent"/>
                 </StackLayout>

@@ -98,5 +98,11 @@ namespace RedGrim.Mobile
                 pnlSideMenu.IsVisible = true;
             }
         }
+
+        private void btnConnectAll_Clicked(object sender, EventArgs e)
+        {
+            BluetoothPage.ConnectSavedDevice();
+            AuxPage.ConnectSavedDevice();
+        }
     }
 }

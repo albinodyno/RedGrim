@@ -35,8 +35,6 @@ namespace RedGrim.Mobile.Controls
             InitializeComponent();
 
             gagRadialMain.PointerPositionChanged += Radial_PointerPositionChanged;
-            //gagRadial1.PointerPositionChanged += Radial_PointerPositionChanged;
-            //gagRadial2.PointerPositionChanged += Radial_PointerPositionChanged;
 
             LoadAdapter();
         }
