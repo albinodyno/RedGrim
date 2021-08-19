@@ -18,7 +18,7 @@ namespace RedGrim.Mobile.Controls
         BluetoothSocket socket;
         BluetoothDevice device;
 
-        string auxDeviceName = "HC05";
+        string auxDeviceName = "HC-05";
         bool connected = false;
 
         public AuxControl()
@@ -130,7 +130,7 @@ namespace RedGrim.Mobile.Controls
             btnAux1On.IsVisible = false;
             btnAux1Off.IsVisible = true;
             bdr1.BorderColor = Color.OrangeRed;
-            if (connected) SendCommand("101");
+            if (connected) SendCommand("1");
         }
 
         private void btnAux2On_Clicked(object sender, EventArgs e)
@@ -138,7 +138,7 @@ namespace RedGrim.Mobile.Controls
             btnAux2On.IsVisible = false;
             btnAux2Off.IsVisible = true;
             bdr2.BorderColor = Color.OrangeRed;
-            if (connected) SendCommand("201");
+            if (connected) SendCommand("2");
         }
 
         private void btnAux3On_Clicked(object sender, EventArgs e)
@@ -146,7 +146,7 @@ namespace RedGrim.Mobile.Controls
             btnAux3On.IsVisible = false;
             btnAux3Off.IsVisible = true;
             bdr3.BorderColor = Color.OrangeRed;
-            if (connected) SendCommand("301");
+            if (connected) SendCommand("3");
         }
 
         private void btnAux4On_Clicked(object sender, EventArgs e)
@@ -154,7 +154,7 @@ namespace RedGrim.Mobile.Controls
             btnAux4On.IsVisible = false;
             btnAux4Off.IsVisible = true;
             bdr4.BorderColor = Color.OrangeRed;
-            if (connected) SendCommand("401");
+            if (connected) SendCommand("4");
         }
 
         //OFF
@@ -163,7 +163,7 @@ namespace RedGrim.Mobile.Controls
             btnAux1Off.IsVisible = false;
             btnAux1On.IsVisible = true;
             bdr1.BorderColor = Color.LightGray;
-            if (connected) SendCommand("100");
+            if (connected) SendCommand("5");
         }
 
         private void btnAux2Off_Clicked(object sender, EventArgs e)
@@ -171,7 +171,7 @@ namespace RedGrim.Mobile.Controls
             btnAux2Off.IsVisible = false;
             btnAux2On.IsVisible = true;
             bdr2.BorderColor = Color.LightGray;
-            if (connected) SendCommand("200");
+            if (connected) SendCommand("6");
         }
 
         private void btnAux3Off_Clicked(object sender, EventArgs e)
@@ -179,7 +179,7 @@ namespace RedGrim.Mobile.Controls
             btnAux3Off.IsVisible = false;
             btnAux3On.IsVisible = true;
             bdr3.BorderColor = Color.LightGray;
-            if (connected) SendCommand("300");
+            if (connected) SendCommand("7");
         }
 
         private void btnAux4Off_Clicked(object sender, EventArgs e)
@@ -187,7 +187,7 @@ namespace RedGrim.Mobile.Controls
             btnAux4Off.IsVisible = false;
             btnAux4On.IsVisible = true;
             bdr4.BorderColor = Color.LightGray;
-            if (connected) SendCommand("400");
+            if (connected) SendCommand("8");
         }
 
         #endregion

@@ -1,9 +1,13 @@
+#include <stdlib.h>
+
 #define pin13 13
 #define pin11 11
 #define pin9 9
 #define pin7 7
 
+String input = "";
 int command = 0;
+
 
 void setup() 
 {
@@ -31,60 +35,60 @@ void loop()
 {
   if (Serial.available() > 0)
   {
-      command = Serial.read();
-
-      switch(command)
+    //input = Serial.readString();
+    //Serial.println("Input - " + input);
+    command = Serial.read();
+    Serial.println(command);
+    
+    switch(command)
+    {
+      //AUX1
+      case 53:
       {
-        //AUX1
-        case 100:
-        {
-            digitalWrite(pin13, HIGH);
-            break;
-        }
-        case 101:
-        {
-            digitalWrite(pin13, LOW);
-            break;
-        }
+          digitalWrite(pin13, HIGH);
+          break;
+      }
+      case 49:
+      {
+          digitalWrite(pin13, LOW);
+          break;
+      }
 
-        //AUX2
-        case 200:
-        {
-            digitalWrite(pin11, HIGH);
-            break;
-        }
-        case 201:
-        {
-            digitalWrite(pin11, LOW);
-            break;
-        }
+      //AUX2
+      case 54:
+      {
+          digitalWrite(pin11, HIGH);
+          break;
+      }
+      case 50:
+      {
+          digitalWrite(pin11, LOW);
+          break;
+      }
 
-        //AUX3
-        case 300:
-        {
-            digitalWrite(pin9, HIGH);
-            break;
-        }
-        case 301:
-        {
-            digitalWrite(pin9, LOW);
-            break;
-        }
+      //AUX3
+      case 55:
+      {
+          digitalWrite(pin9, HIGH);
+          break;
+      }
+      case 51:
+      {
+          digitalWrite(pin9, LOW);
+          break;
+      }
 
-        //AUX4
-        case 400:
-        {
-            digitalWrite(pin7, HIGH);
-            break;
-        }
-        case 401:
-        {
-            digitalWrite(pin7, LOW);
-            break;
-        }
-
-
-        
-      } 
+      //AUX4
+      case 56:
+      {
+          digitalWrite(pin7, HIGH);
+          break;
+      }
+      case 52:
+      {
+          digitalWrite(pin7, LOW);
+          break;
+      }    
+    } 
   }
 }
