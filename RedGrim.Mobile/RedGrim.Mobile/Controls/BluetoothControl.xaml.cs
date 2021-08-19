@@ -120,7 +120,7 @@ namespace RedGrim.Mobile.Controls
         {
             failCount = 0;
             connectionSetup = await ConnectSocket();
-            if (connectionSetup) connectionSetup = await TestConnection();
+            if (connectionSetup) connectionSetup = await TestConnection(true);
             if (connectionSetup) connectionSetup = await SetupGauges();
             if (connectionSetup) connectionSetup = await TestGauges();
             if (connectionSetup) SuccessfulConnection();
@@ -149,12 +149,16 @@ namespace RedGrim.Mobile.Controls
             }
         }
 
-        private async Task<bool> TestConnection()
+        private async Task<bool> TestConnection(bool coldStart)
         {
             try
             {
                 // Write data to the device
-                byte[] writeBuffer = Encoding.ASCII.GetBytes("0142\r");
+                byte[] writeBuffer;
+
+                if(coldStart) writeBuffer = Encoding.ASCII.GetBytes("ATZ\r");
+                else writeBuffer = Encoding.ASCII.GetBytes("010D\r");
+
                 await gaugeCommands.socket.OutputStream.WriteAsync(writeBuffer, 0, writeBuffer.Length);
                 await gaugeCommands.socket.OutputStream.FlushAsync();
 
@@ -251,88 +255,88 @@ namespace RedGrim.Mobile.Controls
 
                     await gaugeCommands.WriteSinglePID(gaugeCommands.BoxGauge1);
                     gagBox1Value.Text = Convert.ToString(gaugeCommands.BoxGauge1.GaugeValue);
-                    if (gaugeCommands.BoxGauge1.GaugeValue >= gaugeCommands.BoxGauge1.Warning)
-                    {
-                        //gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.OrangeRed;
-                        gagBox1Frame.BorderColor = Color.OrangeRed;
-                        gagBox1Label.TextColor = Color.OrangeRed;
-                        gagBox1UoM.TextColor = Color.OrangeRed;
-                        gagBox1Value.TextColor = Color.OrangeRed;
-                    }
-                    else
-                    {
-                        //gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.Cyan;
-                        gagBox1Frame.BorderColor = Color.Cyan;
-                        gagBox1Label.TextColor = Color.Cyan;
-                        gagBox1UoM.TextColor = Color.Cyan;
-                        gagBox1Value.TextColor = Color.Cyan;
-                    }
+                    if (gaugeCommands.BoxGauge1.GaugeValue >= gaugeCommands.BoxGauge1.Warning) gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.OrangeRed;
+                    //{
+                    //    //gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.OrangeRed;
+                    //    gagBox1Frame.BorderColor = Color.OrangeRed;
+                    //    gagBox1Label.TextColor = Color.OrangeRed;
+                    //    gagBox1UoM.TextColor = Color.OrangeRed;
+                    //    gagBox1Value.TextColor = Color.OrangeRed;
+                    //}
+                    else gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.Cyan;
+                    //{
+                    //    //gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.Cyan;
+                    //    gagBox1Frame.BorderColor = Color.Cyan;
+                    //    gagBox1Label.TextColor = Color.Cyan;
+                    //    gagBox1UoM.TextColor = Color.Cyan;
+                    //    gagBox1Value.TextColor = Color.Cyan;
+                    //}
 
                     await gaugeCommands.WriteSinglePID(gaugeCommands.BoxGauge2);
                     gagBox2Value.Text = Convert.ToString(gaugeCommands.BoxGauge2.GaugeValue);
-                    if (gaugeCommands.BoxGauge2.GaugeValue >= gaugeCommands.BoxGauge2.Warning)
-                    {
-                        //gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.OrangeRed;
-                        gagBox2Frame.BorderColor = Color.OrangeRed;
-                        gagBox2Label.TextColor = Color.OrangeRed;
-                        gagBox2UoM.TextColor = Color.OrangeRed;
-                        gagBox2Value.TextColor = Color.OrangeRed;
-                    }
-                    else
-                    {
-                        //gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.Cyan;
-                        gagBox2Frame.BorderColor = Color.Cyan;
-                        gagBox2Label.TextColor = Color.Cyan;
-                        gagBox2UoM.TextColor = Color.Cyan;
-                        gagBox2Value.TextColor = Color.Cyan;
-                    }
+                    if (gaugeCommands.BoxGauge2.GaugeValue >= gaugeCommands.BoxGauge2.Warning) gagBox2Frame.BorderColor = gagBox2Label.TextColor = gagBox2UoM.TextColor = gagBox2Value.TextColor = Color.OrangeRed;
+                    //{
+                    //    //gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.OrangeRed;
+                    //    gagBox2Frame.BorderColor = Color.OrangeRed;
+                    //    gagBox2Label.TextColor = Color.OrangeRed;
+                    //    gagBox2UoM.TextColor = Color.OrangeRed;
+                    //    gagBox2Value.TextColor = Color.OrangeRed;
+                    //}
+                    else gagBox2Frame.BorderColor = gagBox2Label.TextColor = gagBox2UoM.TextColor = gagBox2Value.TextColor = Color.Cyan;
+                    //{
+                    //    //gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.Cyan;
+                    //    gagBox2Frame.BorderColor = Color.Cyan;
+                    //    gagBox2Label.TextColor = Color.Cyan;
+                    //    gagBox2UoM.TextColor = Color.Cyan;
+                    //    gagBox2Value.TextColor = Color.Cyan;
+                    //}
 
 
                     await gaugeCommands.WriteSinglePID(gaugeCommands.BoxGauge3);
                     gagBox3Value.Text = Convert.ToString(gaugeCommands.BoxGauge3.GaugeValue);
-                    if (gaugeCommands.BoxGauge3.GaugeValue >= gaugeCommands.BoxGauge3.Warning)
-                    {
-                        //gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.OrangeRed;
-                        gagBox3Frame.BorderColor = Color.OrangeRed;
-                        gagBox3Label.TextColor = Color.OrangeRed;
-                        gagBox3UoM.TextColor = Color.OrangeRed;
-                        gagBox3Value.TextColor = Color.OrangeRed;
-                    }
-                    else
-                    {
-                        //gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.Cyan;
-                        gagBox3Frame.BorderColor = Color.Cyan;
-                        gagBox3Label.TextColor = Color.Cyan;
-                        gagBox3UoM.TextColor = Color.Cyan;
-                        gagBox3Value.TextColor = Color.Cyan;
-                    }
+                    if (gaugeCommands.BoxGauge3.GaugeValue >= gaugeCommands.BoxGauge3.Warning) gagBox3Frame.BorderColor = gagBox3Label.TextColor = gagBox3UoM.TextColor = gagBox3Value.TextColor = Color.OrangeRed;
+                    //{
+                    //    //gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.OrangeRed;
+                    //    gagBox3Frame.BorderColor = Color.OrangeRed;
+                    //    gagBox3Label.TextColor = Color.OrangeRed;
+                    //    gagBox3UoM.TextColor = Color.OrangeRed;
+                    //    gagBox3Value.TextColor = Color.OrangeRed;
+                    //}
+                    else gagBox3Frame.BorderColor = gagBox3Label.TextColor = gagBox3UoM.TextColor = gagBox3Value.TextColor = Color.Cyan;
+                    //{
+                    //    //gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.Cyan;
+                    //    gagBox3Frame.BorderColor = Color.Cyan;
+                    //    gagBox3Label.TextColor = Color.Cyan;
+                    //    gagBox3UoM.TextColor = Color.Cyan;
+                    //    gagBox3Value.TextColor = Color.Cyan;
+                    //}
 
 
                     await gaugeCommands.WriteSinglePID(gaugeCommands.BoxGauge4);
                     gagBox4Value.Text = Convert.ToString(gaugeCommands.BoxGauge4.GaugeValue);
-                    if (gaugeCommands.BoxGauge4.GaugeValue >= gaugeCommands.BoxGauge4.Warning)
-                    {
-                        //gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.OrangeRed;
-                        gagBox4Frame.BorderColor = Color.OrangeRed;
-                        gagBox4Label.TextColor = Color.OrangeRed;
-                        gagBox4UoM.TextColor = Color.OrangeRed;
-                        gagBox4Value.TextColor = Color.OrangeRed;
-                    }
-                    else
-                    {
-                        //gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.Cyan;
-                        gagBox4Frame.BorderColor = Color.Cyan;
-                        gagBox4Label.TextColor = Color.Cyan;
-                        gagBox4UoM.TextColor = Color.Cyan;
-                        gagBox4Value.TextColor = Color.Cyan;
-                    }
+                    if (gaugeCommands.BoxGauge4.GaugeValue >= gaugeCommands.BoxGauge4.Warning) gagBox4Frame.BorderColor = gagBox4Label.TextColor = gagBox4UoM.TextColor = gagBox4Value.TextColor = Color.OrangeRed;
+                    //{
+                    //    //gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.OrangeRed;
+                    //    gagBox4Frame.BorderColor = Color.OrangeRed;
+                    //    gagBox4Label.TextColor = Color.OrangeRed;
+                    //    gagBox4UoM.TextColor = Color.OrangeRed;
+                    //    gagBox4Value.TextColor = Color.OrangeRed;
+                    //}
+                    else gagBox4Frame.BorderColor = gagBox4Label.TextColor = gagBox4UoM.TextColor = gagBox4Value.TextColor = Color.Cyan;
+                    //{
+                    //    //gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.Cyan;
+                    //    gagBox4Frame.BorderColor = Color.Cyan;
+                    //    gagBox4Label.TextColor = Color.Cyan;
+                    //    gagBox4UoM.TextColor = Color.Cyan;
+                    //    gagBox4Value.TextColor = Color.Cyan;
+                    //}
 
 
                     sw.Stop();
                     UpdateLog($"-----Time to Execute: {Convert.ToString(sw.ElapsedMilliseconds)}");
 
                     if (failCount > 10)
-                        loopPid = await TestConnection();
+                        loopPid = await TestConnection(false);
                 }
                 catch (Exception ex)
                 {

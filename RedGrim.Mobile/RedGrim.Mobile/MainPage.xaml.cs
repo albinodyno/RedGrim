@@ -17,6 +17,7 @@ namespace RedGrim.Mobile
             InitializeComponent();
             VersionTracking.Track();
             VersionNumber = VersionTracking.CurrentVersion;
+            DeviceDisplay.KeepScreenOn = !DeviceDisplay.KeepScreenOn;
         }
 
         private void btnBTSetup_Clicked(object sender, EventArgs e)
