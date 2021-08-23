@@ -4,6 +4,7 @@ using System.Threading;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using RedGrim.Mobile.Controls;
+using System.Collections.Generic;
 
 namespace RedGrim.Mobile
 {
@@ -11,6 +12,7 @@ namespace RedGrim.Mobile
     public partial class MainPage : ContentPage
     {
         public static string VersionNumber;
+        private static List<string> InitializedPages = new List<string>();
 
         public MainPage()
         {
@@ -18,6 +20,19 @@ namespace RedGrim.Mobile
             VersionTracking.Track();
             VersionNumber = VersionTracking.CurrentVersion;
             DeviceDisplay.KeepScreenOn = !DeviceDisplay.KeepScreenOn;
+            Battery.BatteryInfoChanged += Battery_BatteryInfoChanged;
+            StartUp();
+        }
+
+        void Battery_BatteryInfoChanged(object sender, BatteryInfoChangedEventArgs e)
+        {
+            //var level = e.ChargeLevel;
+            //var state = e.State;
+            //var source = e.PowerSource;
+            //Console.WriteLine($"Reading: Level: {level}, State: {state}, Source: {source}");
+
+            if (e.PowerSource != BatteryPowerSource.Battery) StartUp();
+            BluetoothControl.SystemLogEntry($"Power State changed to: {e.PowerSource}", false);
         }
 
         private void btnBTSetup_Clicked(object sender, EventArgs e)
@@ -105,5 +120,16 @@ namespace RedGrim.Mobile
             BluetoothPage.ConnectSavedDevice();
             AuxPage.ConnectSavedDevice();
         }
+
+
+        private void StartUp()
+        {
+            if (Battery.PowerSource != BatteryPowerSource.Battery)
+            {
+                BluetoothPage.ConnectSavedDevice();
+                AuxPage.ConnectSavedDevice();
+            }
+        }
+
     }
 }

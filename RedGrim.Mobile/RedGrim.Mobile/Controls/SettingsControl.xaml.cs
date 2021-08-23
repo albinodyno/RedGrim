@@ -31,6 +31,8 @@ namespace RedGrim.Mobile.Controls
             lblVersionNumber.Text = MainPage.VersionNumber;
         }
 
+        #region Button Events
+
         private void btnGaugeSettings_Clicked(object sender, EventArgs e)
         {
             GaugeSettingsPage.IsVisible = true;
@@ -164,6 +166,10 @@ namespace RedGrim.Mobile.Controls
             lblPIDDelay.Text = Convert.ToString(stpPIDDelay.Value);
         }
 
+        #endregion
+
+        #region Button Methods
+
         public void ShowOBDLog()
         {
             tbkLog.Text = BluetoothControl.log;
@@ -175,6 +181,8 @@ namespace RedGrim.Mobile.Controls
             tbkErrorLog.Text = BluetoothControl.errorLog;
             SettingsErrorPage.IsVisible = true;
         }
+
+        #endregion
 
         #region Save/Load Methods
 

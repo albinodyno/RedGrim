@@ -40,7 +40,7 @@ namespace RedGrim.Mobile.Models
 
         public static Gauge EngineLoadGauge()
         {
-            Gauge tmpGauge = new Gauge("Load", "%", 100, 0, 20, "0104\r", GaugeParse.EngineLoad, 2, 75, 85);
+            Gauge tmpGauge = new Gauge("Load", "%", 100, 0, 20, "0104\r", GaugeParse.EngineLoad, 2, 95, 100);
             return tmpGauge;
         }
 
