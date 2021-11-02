@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using RedGrim.Mobile.Controls;
 
-namespace RedGrim.Mobile.Models
+namespace RedGrim.Mobile.Tools
 {
-    public static class GaugeParse
+    public static class ParseGauge
     {
         public static double CoolantTemp(string hex)
         {

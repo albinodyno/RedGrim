@@ -14,6 +14,13 @@ namespace RedGrim.Mobile.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BluetoothControl : ContentView
     {
+        public ViewModels.SampleViewModel ViewModel
+        {
+            get => BindingContext as ViewModels.SampleViewModel;
+            set => BindingContext = value;
+        }
+
+
         BluetoothAdapter adapter;
         BluetoothSocket socket;
         BluetoothDevice device;
@@ -22,6 +29,7 @@ namespace RedGrim.Mobile.Controls
         public static string savedDeviceAddress = "";
         public static string savedDeviceName = "";
 
+        public static string errorCodeLog = "";
         public static string log = "";
         public static string errorLog = "";
         public static int failCount = 0;
@@ -30,9 +38,17 @@ namespace RedGrim.Mobile.Controls
         bool loopPid = true;
 
 
+        private void SAMPLETEST()
+        {
+            string someValueFromBT = "TEST";
+            //nameGauge1.ViewModel.gaugeValue = someValueFromBT;
+        }
+
+
         public BluetoothControl()
         {
             InitializeComponent();
+            ViewModel = new ViewModels.SampleViewModel();
             gagRadialMain.PointerPositionChanged += Radial_PointerPositionChanged;
             LoadAdapter();
         }
@@ -69,7 +85,7 @@ namespace RedGrim.Mobile.Controls
         #endregion
 
         #region Bluetooth Device Setup and Gauges Setup
-        public void ConnectSavedDevice()
+        public async void ConnectSavedDevice()
         {
             if (gaugeCommands != null) return;
 
@@ -85,7 +101,7 @@ namespace RedGrim.Mobile.Controls
 
                 device = (from bd in adapter.BondedDevices where bd.Name == savedDeviceName select bd).FirstOrDefault();
                 if (device == null) throw new Exception("not in list of available devices");
-                ConnectionHandling();
+                await ConnectionHandling();
             }
 
             catch (Exception ex)
@@ -93,7 +109,7 @@ namespace RedGrim.Mobile.Controls
                 FailedConnection($"Saved Device not found - {ex.Message}");
             }
         }
-        public void ConnectDevice()
+        public async void ConnectDevice()
         {
             tbkBTStatus.Text = "Atempting...";
             tbkBTStatus.TextColor = Color.Magenta;
@@ -105,7 +121,7 @@ namespace RedGrim.Mobile.Controls
                 else
                     device = (from bd in adapter.BondedDevices where bd.Name == pkrBluetoothPicker.Items[pkrBluetoothPicker.SelectedIndex] select bd).FirstOrDefault();
 
-                ConnectionHandling();
+                await ConnectionHandling();
             }
             catch(Exception ex)
             {
@@ -114,7 +130,7 @@ namespace RedGrim.Mobile.Controls
         }
 
         //Main handler for running through connections and tests
-        public async void ConnectionHandling()
+        public async Task ConnectionHandling()
         {
             failCount = 0;
             connectionSetup = await ConnectSocket();
@@ -160,7 +176,7 @@ namespace RedGrim.Mobile.Controls
                 await gaugeCommands.socket.OutputStream.WriteAsync(writeBuffer, 0, writeBuffer.Length);
                 await gaugeCommands.socket.OutputStream.FlushAsync();
 
-                await Task.Delay(1000);
+                await Task.Delay(1500);
 
                 // Read data from the device
                 byte[] readBuffer = new byte[512];
@@ -286,7 +302,6 @@ namespace RedGrim.Mobile.Controls
                     loopPid = false;
                 }
 
-
             ResetGauges();
             UpdateLog("...Stopped Looping");
         }
@@ -346,6 +361,38 @@ namespace RedGrim.Mobile.Controls
         }
         #endregion
 
+        #region PID Error Code Reading
+
+        private async void ReadCodes()
+        {
+            try
+            {
+                List<string> troubleCodes = await gaugeCommands.WriteTroubleRequest();
+
+                if (troubleCodes.Count < 1)
+                {
+                    WriteTroubleCode("<<<--No trouble codes detected-->>>");
+                    return;
+                }
+
+                foreach (string c in troubleCodes) WriteTroubleCode(c);
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }
+
+        private async void WriteTroubleCode(string code)
+        {
+            //Textbox that hold the trouble code window write the code
+        }
+
+
+
+        #endregion
+
+
         #region Button Events
 
         public void ToggleMenu()
@@ -385,6 +432,25 @@ namespace RedGrim.Mobile.Controls
 
         }
 
+        private void btnErrorCodes_Clicked(object sender, EventArgs e)
+        {
+            OBDErrorCodePage.IsVisible = true;
+        }
+
+        private void btnUpdateErrorCodePage_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClearErrorCodePage_Clicked(object sender, EventArgs e)
+        {
+            tbkErrorCode.Text = "";
+        }
+        private void btnCloseErrorCodePage_Clicked(object sender, EventArgs e)
+        {
+            OBDErrorCodePage.IsVisible = false;
+        }
+
         #endregion
 
         #region Misc
@@ -412,6 +478,12 @@ namespace RedGrim.Mobile.Controls
             log = log + "\r\n" + input;
         }
 
+        private static void UpdateErrorCodes(string input)
+        {
+            errorCodeLog = errorCodeLog + "\r\n" + input;
+        }
+
+
         private void Radial_PointerPositionChanged(object sender, Syncfusion.SfGauge.XForms.PointerPositionChangedArgs args)
         {
             try
@@ -427,6 +499,8 @@ namespace RedGrim.Mobile.Controls
                 SystemLogEntry(ex.Message, false);
             }
         }
+
+
 
         #endregion
 
@@ -468,6 +542,5 @@ namespace RedGrim.Mobile.Controls
         //}
 
         #endregion
-
     }
 }

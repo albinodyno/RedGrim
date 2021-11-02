@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Timers;
 using System.ComponentModel;
 using System.Threading;
 using Xamarin.Forms;
@@ -12,7 +13,8 @@ namespace RedGrim.Mobile
     public partial class MainPage : ContentPage
     {
         public static string VersionNumber;
-        private static List<string> InitializedPages = new List<string>();
+        private static System.Timers.Timer clockTimer;
+        public static string currentTime;
 
         public MainPage()
         {
@@ -21,16 +23,36 @@ namespace RedGrim.Mobile
             VersionNumber = VersionTracking.CurrentVersion;
             DeviceDisplay.KeepScreenOn = !DeviceDisplay.KeepScreenOn;
             Battery.BatteryInfoChanged += Battery_BatteryInfoChanged;
+            //SetTimer();
             StartUp();
+        }
+
+        public void SetTimer()
+        {
+            // Create a timer with a two second interval.
+            clockTimer = new System.Timers.Timer(60000);
+            // Hook up the Elapsed event for the timer. 
+            clockTimer.Elapsed += OnTimedEvent;
+            clockTimer.AutoReset = true;
+            clockTimer.Enabled = true;
+
+            currentTime = DateTime.Now.ToShortTimeString();
+            //lblClock.Text = currentTime;
+        }
+
+        public async void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            currentTime = DateTime.Now.ToShortTimeString();
+            //lblClock.Text = currentTime;
+        }
+
+        private void UpdateClock()
+        {
+
         }
 
         void Battery_BatteryInfoChanged(object sender, BatteryInfoChangedEventArgs e)
         {
-            //var level = e.ChargeLevel;
-            //var state = e.State;
-            //var source = e.PowerSource;
-            //Console.WriteLine($"Reading: Level: {level}, State: {state}, Source: {source}");
-
             if (e.PowerSource != BatteryPowerSource.Battery) StartUp();
             BluetoothControl.SystemLogEntry($"Power State changed to: {e.PowerSource}", false);
         }

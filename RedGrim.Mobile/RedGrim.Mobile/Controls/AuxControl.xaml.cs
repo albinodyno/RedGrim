@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -27,12 +26,12 @@ namespace RedGrim.Mobile.Controls
         }
 
         #region Aux Bluetooth Connection
-        private void btnAuxConnect_Clicked(object sender, EventArgs e)
+        private async void btnAuxConnect_Clicked(object sender, EventArgs e)
         {
             tbkAuxStatus.Text = "Connecting...";
 
             if (!connected) ConnectSavedDevice();
-            else TestConnection();
+            else await TestConnection();
         }
 
         public async void ConnectSavedDevice()
@@ -64,7 +63,7 @@ namespace RedGrim.Mobile.Controls
             }
         }
 
-        public async void TestConnection()
+        public async Task TestConnection()
         {
             try
             {
@@ -116,7 +115,7 @@ namespace RedGrim.Mobile.Controls
             }
             catch(Exception ex)
             {
-                TestConnection();
+                await TestConnection();
             }
         }
 

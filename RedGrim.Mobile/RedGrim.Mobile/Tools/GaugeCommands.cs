@@ -1,4 +1,5 @@
 ﻿using RedGrim.Mobile.Controls;
+using RedGrim.Mobile.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -172,12 +173,7 @@ namespace RedGrim.Mobile.Models
 
                 string[] dt = data.Split('<');
 
-
-                MainGauge.GaugeValue = GaugeParse.Voltage(dt[0].Substring(dt[0].Length-MainGauge.HexNum, MainGauge.HexNum));
-                //RadialGauge1.GaugeValue = GaugeParse.CoolantTemp(data.Substring(24, 2));
-                //RadialGauge2.GaugeValue = GaugeParse.Intaketemp(data.Substring(37, 2));
-                //BoxGauge1.GaugeValue = GaugeParse.CoolantTemp(data.Substring(50, 2));
-                //BoxGauge2.GaugeValue = GaugeParse.Intaketemp(data.Substring(63, 2));
+                MainGauge.GaugeValue = ParseGauge.Voltage(dt[0].Substring(dt[0].Length-MainGauge.HexNum, MainGauge.HexNum));
 
                 int index = 9;
 
@@ -245,6 +241,94 @@ namespace RedGrim.Mobile.Models
             }
         }
 
+        #endregion
+
+        #region PID Error Code Reading
+
+        public async Task<List<string>> WriteTroubleRequest()
+        {
+            List<string> troubleCodes = new List<string>();
+            try
+            {
+                byte[] writeBuffer = Encoding.ASCII.GetBytes("03\r");
+                await socket.OutputStream.WriteAsync(writeBuffer, 0, writeBuffer.Length);
+                await socket.OutputStream.FlushAsync();
+
+                await Task.Delay(elmDelay);
+                return await ReadTroubleResponse();
+            }
+            catch (Exception ex)
+            {
+                BluetoothControl.SystemLogEntry($"Trouble Code Request Failed - {ex.Message}", false);
+                return new List<string>();
+            }
+        }
+
+        public async Task<List<string>> ReadTroubleResponse()
+        {
+            try
+            {
+                byte[] readBuffer = new byte[512];
+                int length = await socket.InputStream.ReadAsync(readBuffer, 0, readBuffer.Length);
+                string data = Encoding.ASCII.GetString(readBuffer);
+
+                return await ParseTroubleResponse(data);
+            }
+            catch (Exception ex)
+            {
+                BluetoothControl.SystemLogEntry($"Trouble Code Response Failed - {ex.Message}", false);
+                return new List<string>();
+            }
+        }
+
+        public async Task<List<string>> ParseTroubleResponse(string input)
+        {
+            List<string> troubleCodes = new List<string>();
+            try
+            {
+                BluetoothControl.UpdateLog(input);
+
+                int loop = input.Length / 8;
+                int index = 0;
+
+                for(int i =0; i < loop; i ++)
+                {
+                    string hex = input.Substring(index, 8);
+                    troubleCodes.Add(hex);
+
+                    index = index + 8;
+                }
+
+                foreach(string t in troubleCodes)
+                {
+                    //Parse the hex into string
+                }
+            }
+            catch(Exception ex)
+            {
+                BluetoothControl.SystemLogEntry($"Trouble Code Parsing Failed - {ex.Message}", false);
+                troubleCodes.Add("Error Parsing Trouble Code - check system log");
+            }
+            return troubleCodes;
+        }
+
+
+        public async Task ClearTroubleCodes()
+        {
+            try
+            {
+                byte[] writeBuffer = Encoding.ASCII.GetBytes("04\r");
+                await socket.OutputStream.WriteAsync(writeBuffer, 0, writeBuffer.Length);
+                await socket.OutputStream.FlushAsync();
+
+                await Task.Delay(elmDelay);
+                BluetoothControl.SystemLogEntry($"<<<--Trouble Codes Cleared, Engine Light Reset-->>>", false);
+            }
+            catch (Exception ex)
+            {
+                BluetoothControl.SystemLogEntry($"Trouble Code Clear Failed - {ex.Message}", false);
+            }
+        }
         #endregion
     }
 }

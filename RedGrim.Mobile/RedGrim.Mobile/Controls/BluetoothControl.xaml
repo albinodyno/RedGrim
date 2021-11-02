@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:RedGrim.Mobile.Controls"
              xmlns:gauge="clr-namespace:Syncfusion.SfGauge.XForms;assembly=Syncfusion.SfGauge.XForms"
              x:Class="RedGrim.Mobile.Controls.BluetoothControl">
   <ContentView.Content>
@@ -18,8 +19,11 @@
                 <RowDefinition Height=".15*"/>
             </Grid.RowDefinitions>
 
+            <!--<Label Text="{Binding SomeLabel}"/>
+            <SquareGauge BindingContext="{Binding SquareViewmodel1}"/>-->
+
             <!--Radial Gauge Main-->
-            <gauge:SfCircularGauge x:Name="gagRadialMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="10">
+            <gauge:SfCircularGauge x:Name="gagRadialMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="10" VerticalOptions="FillAndExpand">
                 <gauge:SfCircularGauge.Headers>
                     <gauge:Header Text="---" ForegroundColor="Cyan" TextSize="Large"/>
                 </gauge:SfCircularGauge.Headers>
@@ -51,6 +55,12 @@
                     <RowDefinition />
                     <RowDefinition Height=".05*"/>
                 </Grid.RowDefinitions>
+
+                <!--<controls:GaugeControl x:Name="nameGauge1"/>
+                <controls:GaugeControl x:Name="nameGauge2"/>
+                <controls:GaugeControl x:Name="nameGauge3"/>
+                <controls:GaugeControl x:Name="nameGauge4"/>-->
+
 
                 <!--Box Gauge 1-->
                 <Frame x:Name="gagBox1Frame" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" BorderColor="Cyan" CornerRadius="5" BackgroundColor="Transparent">
@@ -110,14 +120,14 @@
             </Grid>
 
             <!--BT Status-->
-            <Button Grid.Row="2" Grid.Column="2" x:Name="tbkBTStatus" TextColor="Magenta" BorderColor="Gray" CornerRadius="5" BorderWidth="1" FontSize="12" BackgroundColor="Transparent" Text="No Connection" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Button Grid.Row="2" Grid.Column="2" x:Name="tbkBTStatus" TextColor="Magenta" BorderColor="Transparent" CornerRadius="5" BorderWidth="1" FontSize="12" BackgroundColor="Transparent" Text="No Connection" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
             <Button Grid.Row="2" Grid.Column="3" x:Name="btnAutoConnect" TextColor="Cyan" BorderColor="Cyan" CornerRadius="5" BorderWidth="1" FontSize="12" Background="Transparent" Text="OBD Connect" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Clicked="btnAutoConnect_Clicked"/>
 
             <!--BT Settings Panel-->
             <Frame x:Name="pnlBTSettings" Grid.Column="2" Grid.RowSpan="3" Grid.ColumnSpan="2" IsVisible="false" VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" Background="Black" BorderColor="OrangeRed" CornerRadius="5">
                 <StackLayout>
                     <StackLayout VerticalOptions="StartAndExpand">
-                        <Button x:Name="btnErrorCodes" Text="Error Codes" TextColor="OrangeRed" Background="Transparent" BorderColor="OrangeRed" BorderWidth=".1"/>
+                        <Button x:Name="btnErrorCodes" Text="Error Codes" TextColor="OrangeRed" Background="Transparent" BorderColor="OrangeRed" BorderWidth=".1" Clicked="btnErrorCodes_Clicked"/>
                         <Button x:Name="btnStartGauges" Text="Force Start" TextColor="OrangeRed" Background="Transparent" BorderColor="OrangeRed" BorderWidth=".1" Clicked="btnStartGauges_Clicked"/>
                         <Button x:Name="btnStopGauges" Text="Stop Gauges" TextColor="OrangeRed" Background="Transparent" BorderColor="OrangeRed" BorderWidth=".1" Clicked="btnStopGauges_Clicked"/>
                         <Button x:Name="btnDisconnectDevice" Text="Disconnect" TextColor="OrangeRed" BorderColor="OrangeRed" BorderWidth=".1" Background="Transparent"/>
@@ -128,8 +138,20 @@
                     <Picker x:Name="pkrBluetoothPicker" Title="Connect" TitleColor="Magenta"  TextColor="Cyan" SelectedIndexChanged="pkrBluetoothPicker_SelectedIndexChanged"/>
                 </StackLayout>
             </Frame>
-            
-            
+
+            <!--Error Log-->
+            <StackLayout x:Name="OBDErrorCodePage" Grid.ColumnSpan="2" Grid.RowSpan="5" IsVisible="False" BackgroundColor="Black" VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                    <Label FontSize="18" Text="Engine Error Codes" VerticalOptions="Center" TextColor="DarkGoldenrod"/>
+                    <Button x:Name="btnUpdateErrorCodePage" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf01e;" FontSize="18" Clicked="btnUpdateErrorCodePage_Clicked"  TextColor="White" BackgroundColor="Transparent"/>
+                    <Button x:Name="btnClearErrorCodePage" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf12d;" FontSize="18" Clicked="btnClearErrorCodePage_Clicked"  TextColor="White" Background="Transparent"/>
+                </StackLayout>
+                <ScrollView HeightRequest="140" BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
+                    <Label x:Name="tbkErrorCode" Text="---Start---" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Start" BackgroundColor="Transparent" TextColor="White"/>
+                </ScrollView>
+                <Button x:Name="btnCloseErrorCodePage" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseErrorCodePage_Clicked" TextColor="White" Background="OrangeRed" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+
         </Grid>
     </ContentView.Content>
 </ContentView>

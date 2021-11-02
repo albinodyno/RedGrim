@@ -18,7 +18,6 @@
             <!--Button Borders-->
             <Frame x:Name="bdr1" Grid.Row="0" Grid.Column="0" BorderColor="LightGray" Background="Black" CornerRadius="5"/>
             <Frame x:Name="bdr2" Grid.Row="0" Grid.Column="1" BorderColor="LightGray" Background="Black" CornerRadius="5"/>
-
             <Frame x:Name="bdr3" Grid.Row="1" Grid.Column="0" BorderColor="LightGray" Background="Black" CornerRadius="5"/>
             <Frame x:Name="bdr4" Grid.Row="1" Grid.Column="1" BorderColor="LightGray" Background="Black" CornerRadius="5"/>
 
@@ -35,7 +34,7 @@
             <Button x:Name="btnAux4Off" Grid.Row="1" Grid.Column="1" Background="Transparent" TextColor="OrangeRed" Text="\| AUX 4 |/" FontAttributes="Bold" FontSize="Large" IsVisible="False" Clicked="btnAux4Off_Clicked"/>
 
             <!--Aux Options-->
-            <Button x:Name="tbkAuxStatus" Grid.Row="2" Grid.Column="0" Text="No Connection" BorderColor="Gray" CornerRadius="5" BorderWidth="1" TextColor="Magenta" FontSize="12" Background="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+            <Button x:Name="tbkAuxStatus" Grid.Row="2" Grid.Column="0" Text="No Connection" BorderColor="Transparent" CornerRadius="5" BorderWidth="1" TextColor="Magenta" FontSize="12" Background="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
             <Button x:Name="btnAuxConnect" Grid.Row="2" Grid.Column="1" Text="AUX Connect" BorderColor="Cyan" CornerRadius="5" BorderWidth="1" TextColor="Cyan" FontSize="12" Background="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Clicked="btnAuxConnect_Clicked"/>
 
         </Grid>
