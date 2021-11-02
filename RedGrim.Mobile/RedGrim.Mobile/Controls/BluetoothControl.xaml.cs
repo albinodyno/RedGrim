@@ -37,12 +37,11 @@ namespace RedGrim.Mobile.Controls
         bool loopPid = true;
 
 
-        private void SAMPLETEST()
-        {
-            string someValueFromBT = "TEST";
-            //nameGauge1.ViewModel.gaugeValue = someValueFromBT;
-        }
-
+        //private void SAMPLETEST()
+        //{
+        //    string someValueFromBT = "TEST";
+        //    //nameGauge1.ViewModel.gaugeValue = someValueFromBT;
+        //}
 
         public BluetoothControl()
         {
@@ -102,7 +101,6 @@ namespace RedGrim.Mobile.Controls
                 if (device == null) throw new Exception("not in list of available devices");
                 await ConnectionHandling();
             }
-
             catch (Exception ex)
             {
                 FailedConnection($"Saved Device not found - {ex.Message}");
@@ -422,17 +420,18 @@ namespace RedGrim.Mobile.Controls
 
         private void btnErrorLog_Clicked(object sender, EventArgs e)
         {
-           
+            //IDK if this is doable or worth it
         }
 
         private void btnOBDLog_Clicked(object sender, EventArgs e)
         {
-
+            //IDK if this is doable or worth it
         }
 
         private void btnErrorCodes_Clicked(object sender, EventArgs e)
         {
             OBDErrorCodePage.IsVisible = true;
+            tbkErrorCode.Text = "---Ready---";
         }
         private void btnGetErrorCodes_Clicked(object sender, EventArgs e)
         {
