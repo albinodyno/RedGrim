@@ -111,7 +111,6 @@ namespace RedGrim.Mobile.Models
         }
         #endregion
 
-
         #region Execute PID Commands
         public async Task<bool> ExecutePIDs()
         {
@@ -140,7 +139,6 @@ namespace RedGrim.Mobile.Models
             await WriteSinglePID(BoxGauge4);
         }
         #endregion
-
 
         #region Write/Read PID
         public async Task WritePID(string command) //For Single Write/Read: Add parameter for Gauge

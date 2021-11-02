@@ -29,7 +29,6 @@ namespace RedGrim.Mobile.Controls
         public static string savedDeviceAddress = "";
         public static string savedDeviceName = "";
 
-        public static string errorCodeLog = "";
         public static string log = "";
         public static string errorLog = "";
         public static int failCount = 0;
@@ -392,7 +391,6 @@ namespace RedGrim.Mobile.Controls
 
         #endregion
 
-
         #region Button Events
 
         public void ToggleMenu()
@@ -436,15 +434,13 @@ namespace RedGrim.Mobile.Controls
         {
             OBDErrorCodePage.IsVisible = true;
         }
-
-        private void btnUpdateErrorCodePage_Clicked(object sender, EventArgs e)
+        private void btnGetErrorCodes_Clicked(object sender, EventArgs e)
         {
-
+            GetErrorCodes();
         }
-
         private void btnClearErrorCodePage_Clicked(object sender, EventArgs e)
         {
-            tbkErrorCode.Text = "";
+            ClearErrorCodes();
         }
         private void btnCloseErrorCodePage_Clicked(object sender, EventArgs e)
         {
@@ -478,9 +474,29 @@ namespace RedGrim.Mobile.Controls
             log = log + "\r\n" + input;
         }
 
-        private static void UpdateErrorCodes(string input)
+        private async void GetErrorCodes()
         {
-            errorCodeLog = errorCodeLog + "\r\n" + input;
+            List<string> errorCodes = new List<string>();
+            if (gaugeCommands != null)
+            {          
+                errorCodes = await gaugeCommands.WriteTroubleRequest();
+
+                if (errorCodes.Count < 1)
+                    tbkErrorCode.Text = "<<<---No error codes--->>>";
+
+                foreach(string s in errorCodes)
+                    tbkErrorCode.Text = tbkErrorCode.Text + $"--{s}\n\n";
+            }
+            else
+                tbkErrorCode.Text = "<<<--No Connection-->>";
+        }
+
+        private async void ClearErrorCodes()
+        {
+            if (gaugeCommands != null)
+                await gaugeCommands.ClearTroubleCodes();
+            else
+                tbkErrorCode.Text = "<<<--No Connection-->>";
         }
 
 
@@ -542,5 +558,7 @@ namespace RedGrim.Mobile.Controls
         //}
 
         #endregion
+
+
     }
 }

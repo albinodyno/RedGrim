@@ -140,17 +140,19 @@
             </Frame>
 
             <!--Error Log-->
-            <StackLayout x:Name="OBDErrorCodePage" Grid.ColumnSpan="2" Grid.RowSpan="5" IsVisible="False" BackgroundColor="Black" VerticalOptions="FillAndExpand">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                    <Label FontSize="18" Text="Engine Error Codes" VerticalOptions="Center" TextColor="DarkGoldenrod"/>
-                    <Button x:Name="btnUpdateErrorCodePage" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf01e;" FontSize="18" Clicked="btnUpdateErrorCodePage_Clicked"  TextColor="White" BackgroundColor="Transparent"/>
-                    <Button x:Name="btnClearErrorCodePage" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf12d;" FontSize="18" Clicked="btnClearErrorCodePage_Clicked"  TextColor="White" Background="Transparent"/>
+            <Frame x:Name="OBDErrorCodePage" Grid.ColumnSpan="2" Grid.RowSpan="3" IsVisible="false" VerticalOptions="FillAndExpand" Background="Black" BorderColor="OrangeRed" CornerRadius="5">
+                <StackLayout BackgroundColor="Black" VerticalOptions="FillAndExpand">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                        <Label FontSize="18" Text="Engine Error Codes" VerticalOptions="Center" TextColor="DarkGoldenrod"/>
+                        <Button x:Name="btnGetErrorCodes" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf019;" FontSize="18" Clicked="btnGetErrorCodes_Clicked" TextColor="White" BackgroundColor="Transparent"/>
+                        <Button x:Name="btnClearErrorCodePage" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf7d2;" FontSize="18" Clicked="btnClearErrorCodePage_Clicked"  TextColor="White" Background="Transparent"/>
+                    </StackLayout>
+                    <ScrollView HeightRequest="140" BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
+                        <Label x:Name="tbkErrorCode" Text="---Start---" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Start" BackgroundColor="Transparent" TextColor="White"/>
+                    </ScrollView>
+                    <Button x:Name="btnCloseErrorCodePage" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseErrorCodePage_Clicked" TextColor="White" Background="OrangeRed" HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
-                <ScrollView HeightRequest="140" BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
-                    <Label x:Name="tbkErrorCode" Text="---Start---" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Start" BackgroundColor="Transparent" TextColor="White"/>
-                </ScrollView>
-                <Button x:Name="btnCloseErrorCodePage" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseErrorCodePage_Clicked" TextColor="White" Background="OrangeRed" HorizontalOptions="EndAndExpand"/>
-            </StackLayout>
+            </Frame>
 
         </Grid>
     </ContentView.Content>
