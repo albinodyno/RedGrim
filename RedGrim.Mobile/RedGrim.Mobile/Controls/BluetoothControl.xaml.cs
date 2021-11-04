@@ -475,6 +475,7 @@ namespace RedGrim.Mobile.Controls
 
         private async void GetErrorCodes()
         {
+            tbkErrorCode.Text = "Retrieving trouble codes...";
             List<string> errorCodes = new List<string>();
             if (gaugeCommands != null)
             {          
@@ -493,7 +494,11 @@ namespace RedGrim.Mobile.Controls
         private async void ClearErrorCodes()
         {
             if (gaugeCommands != null)
+            {
                 await gaugeCommands.ClearTroubleCodes();
+                tbkErrorCode.Text = "---Ready---";
+            }
+
             else
                 tbkErrorCode.Text = "<<<--No Connection-->>";
         }
