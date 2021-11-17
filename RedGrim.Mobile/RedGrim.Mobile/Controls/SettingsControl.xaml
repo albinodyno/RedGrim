@@ -13,15 +13,15 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <StackLayout Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand">
-                <Button x:Name="btnGaugeSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Gauge Settings" Clicked="btnGaugeSettings_Clicked"  Background="Cyan" TextColor="Black"/>
-                <Button x:Name="btnShowLog" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="OBD Log" Clicked="btnShowLog_Clicked" Background="Cyan" TextColor="Black" Margin="2"/>
-                <Button x:Name="btnShowErrorLog" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="System Logs" Clicked="btnShowErrorLog_Clicked" Background="Cyan" TextColor="Black" Margin="0,0,0,40"/>
-                <Button x:Name="btnSaveSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Save" Clicked="btnSaveSettings_Clicked" Background="Cyan" TextColor="Black"/>
-                <Button x:Name="btnLoadSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Load" Clicked="btnLoadSettings_Clicked" Background="Cyan" TextColor="Black"/>
-                <Button x:Name="btnResetSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Reset To Default" Clicked="btnResetSettings_Clicked" Background="OrangeRed" TextColor="Black"/>
-                <Label x:Name="lblVersionNumber" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Version Number" Background="Black" TextColor="OrangeRed"/>
-            </StackLayout>
+            <ScrollView Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand">
+                <StackLayout>
+                    <Button x:Name="btnGaugeSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Gauge Settings" Clicked="btnGaugeSettings_Clicked"  Background="Cyan" TextColor="Black"/>
+                    <Button x:Name="btnShowLog" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="OBD Log" Clicked="btnShowLog_Clicked" Background="Cyan" TextColor="Black" Margin="2"/>
+                    <Button x:Name="btnShowErrorLog" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="System Logs" Clicked="btnShowErrorLog_Clicked" Background="Cyan" TextColor="Black" Margin="0,0,0,40"/>
+                    <Label x:Name="lblVersionNumber" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Version Number" FontSize="20" Background="Black" TextColor="OrangeRed"/>
+                </StackLayout>
+            </ScrollView>
+
 
             <!--OBD Log-->
             <StackLayout x:Name="SettingsOBDPage" Grid.ColumnSpan="2" IsVisible="False" BackgroundColor="Black" VerticalOptions="FillAndExpand">
@@ -72,6 +72,15 @@
                             <Stepper x:Name="stpELMDelay" Minimum="0" Maximum="2000" Increment="50" ValueChanged="stpELMDelay_ValueChanged"/>
                         </StackLayout>
                         <Button x:Name="btnDelaySave" Text="Save" HorizontalOptions="CenterAndExpand" FontSize="24" Clicked="btnDelaySave_Clicked" TextColor="Cyan" BackgroundColor="Transparent" BorderColor="Cyan" BorderWidth="1"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.ColumnSpan="2" BorderColor="Purple" BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
+                    <StackLayout>
+                        <Label FontSize="18" Text="Defaults" TextColor="DarkGoldenrod" HorizontalOptions="CenterAndExpand"/>
+                        <Button IsVisible="false" x:Name="btnSaveSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Save" Clicked="btnSaveSettings_Clicked" Background="Cyan" TextColor="Black"/>
+                        <Button x:Name="btnLoadSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Load" Clicked="btnLoadSettings_Clicked" Background="Cyan" TextColor="Black"/>
+                        <Button IsVisible="false" x:Name="btnResetSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Reset To Default" Clicked="btnResetSettings_Clicked" Background="OrangeRed" TextColor="Black"/>
                     </StackLayout>
                 </Frame>
                 <Button x:Name="btnCloseGaugeSettings" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf00d;" FontSize="28" Clicked="btnCloseGaugeSettings_Clicked" TextColor="White" Background="OrangeRed" HorizontalOptions="EndAndExpand"/>

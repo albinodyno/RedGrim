@@ -36,12 +36,12 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf102;" FontSize="48" Background="transparent" TextColor="Cyan" x:Name="btnConnectAll" Clicked="btnConnectAll_Clicked"/>
+                <Button Grid.Row="0" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf102;" FontSize="40"  Background="transparent" TextColor="Cyan" x:Name="btnConnectAll" Clicked="btnConnectAll_Clicked"/>
 
-                <Button Grid.Row="1" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf3fd;" FontSize="48" Background="transparent" TextColor="Cyan" x:Name="btnBTSetup" Clicked="btnBTSetup_Clicked"/>
-                <Button Grid.Row="2" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf0e7;" FontSize="48" Background="transparent" TextColor="Cyan" x:Name="btnAuxLaunch" Clicked="btnAuxLaunch_Clicked"/>
+                <Button Grid.Row="1" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf3fd;" FontSize="40" Background="transparent" TextColor="Cyan" x:Name="btnBTSetup" Clicked="btnBTSetup_Clicked"/>
+                <Button Grid.Row="2" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf0e7;" FontSize="40" Background="transparent" TextColor="Cyan" x:Name="btnAuxLaunch" Clicked="btnAuxLaunch_Clicked"/>
                 <!--<Button Grid.Row="3" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf5a0;" FontSize="48" Background="transparent" TextColor="Cyan" x:Name="btnMapLaunch" Clicked="btnMapLaunch_Clicked"/>-->
-                <Button Grid.Row="3" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf013;" FontSize="48" Background="transparent" TextColor="OrangeRed" x:Name="btnSettingsLaunch" Clicked="btnSettingsLaunch_Clicked"/>
+                <Button Grid.Row="3" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf013;" FontSize="40" Background="transparent" TextColor="OrangeRed" x:Name="btnSettingsLaunch" Clicked="btnSettingsLaunch_Clicked"/>
            
             </Grid>
         </Frame>
