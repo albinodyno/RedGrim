@@ -20,7 +20,7 @@ namespace RedGrim.Mobile
         {
             InitializeComponent();
             VersionTracking.Track();
-            VersionNumber = $"RedGrim : {VersionTracking.CurrentVersion}";
+            VersionNumber = $"v{VersionTracking.CurrentVersion}";
             DeviceDisplay.KeepScreenOn = !DeviceDisplay.KeepScreenOn;
             Battery.BatteryInfoChanged += Battery_BatteryInfoChanged;
             //SetTimer();

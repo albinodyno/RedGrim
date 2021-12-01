@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using RedGrim.Mobile.Tools;
 
 namespace RedGrim.Mobile.Controls
 {
@@ -128,32 +129,52 @@ namespace RedGrim.Mobile.Controls
         {
             btnAux1On.IsVisible = false;
             btnAux1Off.IsVisible = true;
-            bdr1.BorderColor = Color.OrangeRed;
-            if (connected) SendCommand("1");
+            if (connected)
+            {
+                SendCommand("1");
+                bdr1.BorderColor = ColorMaster.ColorText;
+            }
+            else
+                bdr1.BorderColor = ColorMaster.ColorCritical;
         }
 
         private void btnAux2On_Clicked(object sender, EventArgs e)
         {
             btnAux2On.IsVisible = false;
             btnAux2Off.IsVisible = true;
-            bdr2.BorderColor = Color.OrangeRed;
-            if (connected) SendCommand("2");
+            if (connected)
+            {
+                SendCommand("2");
+                bdr2.BorderColor = ColorMaster.ColorText;
+            }
+            else
+                bdr2.BorderColor = ColorMaster.ColorCritical;
         }
 
         private void btnAux3On_Clicked(object sender, EventArgs e)
         {
             btnAux3On.IsVisible = false;
             btnAux3Off.IsVisible = true;
-            bdr3.BorderColor = Color.OrangeRed;
-            if (connected) SendCommand("3");
+            if (connected)
+            {
+                SendCommand("3");
+                bdr3.BorderColor = ColorMaster.ColorText;
+            }
+            else
+                bdr3.BorderColor = ColorMaster.ColorCritical;
         }
 
         private void btnAux4On_Clicked(object sender, EventArgs e)
         {
             btnAux4On.IsVisible = false;
             btnAux4Off.IsVisible = true;
-            bdr4.BorderColor = Color.OrangeRed;
-            if (connected) SendCommand("4");
+            if (connected)
+            {
+                SendCommand("4");
+                bdr4.BorderColor = ColorMaster.ColorText;
+            }
+            else
+                bdr4.BorderColor = ColorMaster.ColorCritical;
         }
 
         //OFF

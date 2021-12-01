@@ -28,10 +28,10 @@
             <Button x:Name="btnAux4On" Grid.Row="1" Grid.Column="1" BackgroundColor="Transparent" TextColor="LightGray" Text="AUX 4" FontSize="Large" IsVisible="True" Clicked="btnAux4On_Clicked"/>
 
             <!--Off Buttons-->
-            <Button x:Name="btnAux1Off" Grid.Row="0" Grid.Column="0" Background="Transparent" TextColor="OrangeRed" Text="\| AUX 1 |/" FontAttributes="Bold" FontSize="Large" IsVisible="False" Clicked="btnAux1Off_Clicked"/>
-            <Button x:Name="btnAux2Off" Grid.Row="0" Grid.Column="1" Background="Transparent" TextColor="OrangeRed" Text="\| AUX 2 |/" FontAttributes="Bold" FontSize="Large" IsVisible="False" Clicked="btnAux2Off_Clicked"/>
-            <Button x:Name="btnAux3Off" Grid.Row="1" Grid.Column="0" Background="Transparent" TextColor="OrangeRed" Text="\| AUX 3 |/" FontAttributes="Bold" FontSize="Large" IsVisible="False" Clicked="btnAux3Off_Clicked"/>
-            <Button x:Name="btnAux4Off" Grid.Row="1" Grid.Column="1" Background="Transparent" TextColor="OrangeRed" Text="\| AUX 4 |/" FontAttributes="Bold" FontSize="Large" IsVisible="False" Clicked="btnAux4Off_Clicked"/>
+            <Button x:Name="btnAux1Off" Grid.Row="0" Grid.Column="0" Background="Transparent" TextColor="DarkGoldenrod" Text="\| AUX 1 |/" FontAttributes="Bold" FontSize="Large" IsVisible="False" Clicked="btnAux1Off_Clicked"/>
+            <Button x:Name="btnAux2Off" Grid.Row="0" Grid.Column="1" Background="Transparent" TextColor="DarkGoldenrod" Text="\| AUX 2 |/" FontAttributes="Bold" FontSize="Large" IsVisible="False" Clicked="btnAux2Off_Clicked"/>
+            <Button x:Name="btnAux3Off" Grid.Row="1" Grid.Column="0" Background="Transparent" TextColor="DarkGoldenrod" Text="\| AUX 3 |/" FontAttributes="Bold" FontSize="Large" IsVisible="False" Clicked="btnAux3Off_Clicked"/>
+            <Button x:Name="btnAux4Off" Grid.Row="1" Grid.Column="1" Background="Transparent" TextColor="DarkGoldenrod" Text="\| AUX 4 |/" FontAttributes="Bold" FontSize="Large" IsVisible="False" Clicked="btnAux4Off_Clicked"/>
 
             <!--Aux Options-->
             <Button x:Name="tbkAuxStatus" Grid.Row="2" Grid.Column="0" Text="No Connection" BorderColor="Transparent" CornerRadius="5" BorderWidth="1" TextColor="Magenta" FontSize="12" Background="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />

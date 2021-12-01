@@ -18,7 +18,7 @@ namespace RedGrim.Mobile.Controls
         public static Settings saveSettings = new Settings();
         public static Settings loadedSettings;
 
-        public static bool debugMode = true;
+        public static bool debugMode = false;
 
         public SettingsControl()
         {

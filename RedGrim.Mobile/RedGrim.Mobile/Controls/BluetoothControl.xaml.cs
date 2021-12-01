@@ -1,6 +1,7 @@
 ﻿using Android.Bluetooth;
 using Java.Util;
 using RedGrim.Mobile.Models;
+using RedGrim.Mobile.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace RedGrim.Mobile.Controls
         {
             InitializeComponent();
             ViewModel = new ViewModels.SampleViewModel();
-            gagRadialMain.PointerPositionChanged += Radial_PointerPositionChanged;
+            //gagRadialMain.PointerPositionChanged += Radial_PointerPositionChanged;
             LoadAdapter();
         }
 
@@ -88,7 +89,7 @@ namespace RedGrim.Mobile.Controls
             if (gaugeCommands != null) return;
 
             tbkBTStatus.Text = "Atempting...";
-            tbkBTStatus.TextColor = Color.Magenta;
+            tbkBTStatus.TextColor = ColorMaster.ColorSecondary;
 
             try
             {
@@ -109,7 +110,7 @@ namespace RedGrim.Mobile.Controls
         public async void ConnectDevice()
         {
             tbkBTStatus.Text = "Atempting...";
-            tbkBTStatus.TextColor = Color.Magenta;
+            tbkBTStatus.TextColor = ColorMaster.ColorSecondary;
 
             try
             {
@@ -197,11 +198,15 @@ namespace RedGrim.Mobile.Controls
         {
             try
             {
-                gagRadialMain.Headers[0].Text = $"{gaugeCommands.MainGauge.Name} ({gaugeCommands.MainGauge.UOM})";
-                gagRadialMain.Scales[0].Interval = gaugeCommands.MainGauge.TickSpacing;
-                gagRadialMain.Scales[0].EndValue = gaugeCommands.MainGauge.Max;
-                gagRadialMain.Scales[0].StartValue = gaugeCommands.MainGauge.Min;
-                gagRadialMain.Scales[0].Ranges[0].StartValue = gaugeCommands.MainGauge.Min;
+                //gagRadialMain.Headers[0].Text = $"{gaugeCommands.MainGauge.Name} ({gaugeCommands.MainGauge.UOM})";
+                //gagRadialMain.Scales[0].Interval = gaugeCommands.MainGauge.TickSpacing;
+                //gagRadialMain.Scales[0].EndValue = gaugeCommands.MainGauge.Max;
+                //gagRadialMain.Scales[0].StartValue = gaugeCommands.MainGauge.Min;
+                //gagRadialMain.Scales[0].Ranges[0].StartValue = gaugeCommands.MainGauge.Min;
+
+                gagMainLabel.Text = gaugeCommands.MainGauge.Name;
+                gagMainValue.Text = "0";
+                gagMainUoM.Text = gaugeCommands.MainGauge.UOM;
 
                 gagBox1Label.Text = gaugeCommands.BoxGauge1.Name;
                 gagBox1Value.Text = "0";
@@ -259,33 +264,40 @@ namespace RedGrim.Mobile.Controls
                     System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
                     sw.Start();
 
+                    //await gaugeCommands.WriteSinglePID(gaugeCommands.MainGauge);
+                    //gagRadialMain.Scales[0].Pointers[0].Value = gaugeCommands.MainGauge.GaugeValue;
+                    //gagRadialMain.Scales[0].Ranges[0].EndValue = gaugeCommands.MainGauge.GaugeValue;
+
+                    //Main gauge
                     await gaugeCommands.WriteSinglePID(gaugeCommands.MainGauge);
-                    gagRadialMain.Scales[0].Pointers[0].Value = gaugeCommands.MainGauge.GaugeValue;
-                    gagRadialMain.Scales[0].Ranges[0].EndValue = gaugeCommands.MainGauge.GaugeValue;
+                    gagBox1Value.Text = Convert.ToString(gaugeCommands.MainGauge.GaugeValue);
+                    await gagMainProgBar.ProgressTo((gaugeCommands.MainGauge.GaugeValue / gaugeCommands.MainGauge.Max), 200, Easing.Linear);
+                    if (gaugeCommands.MainGauge.GaugeValue >= gaugeCommands.MainGauge.Warning) gagMainFrame.BorderColor = gagMainLabel.TextColor = gagMainUoM.TextColor = gagMainValue.TextColor = ColorMaster.ColorCritical;
+                    else gagMainFrame.BorderColor = gagMainLabel.TextColor = gagMainUoM.TextColor = gagMainValue.TextColor = ColorMaster.ColorPrimary;
 
                     //Box Gauge 1
                     await gaugeCommands.WriteSinglePID(gaugeCommands.BoxGauge1);
                     gagBox1Value.Text = Convert.ToString(gaugeCommands.BoxGauge1.GaugeValue);
-                    if (gaugeCommands.BoxGauge1.GaugeValue >= gaugeCommands.BoxGauge1.Warning) gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.OrangeRed;
-                    else gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = Color.Cyan;
+                    if (gaugeCommands.BoxGauge1.GaugeValue >= gaugeCommands.BoxGauge1.Warning) gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = ColorMaster.ColorCritical;
+                    else gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = ColorMaster.ColorPrimary;
 
                     //Box Gauge 2
                     await gaugeCommands.WriteSinglePID(gaugeCommands.BoxGauge2);
                     gagBox2Value.Text = Convert.ToString(gaugeCommands.BoxGauge2.GaugeValue);
-                    if (gaugeCommands.BoxGauge2.GaugeValue >= gaugeCommands.BoxGauge2.Warning) gagBox2Frame.BorderColor = gagBox2Label.TextColor = gagBox2UoM.TextColor = gagBox2Value.TextColor = Color.OrangeRed;
-                    else gagBox2Frame.BorderColor = gagBox2Label.TextColor = gagBox2UoM.TextColor = gagBox2Value.TextColor = Color.Cyan;
+                    if (gaugeCommands.BoxGauge2.GaugeValue >= gaugeCommands.BoxGauge2.Warning) gagBox2Frame.BorderColor = gagBox2Label.TextColor = gagBox2UoM.TextColor = gagBox2Value.TextColor = ColorMaster.ColorCritical;
+                    else gagBox2Frame.BorderColor = gagBox2Label.TextColor = gagBox2UoM.TextColor = gagBox2Value.TextColor = ColorMaster.ColorPrimary;
 
                     //Box Gauge 3
                     await gaugeCommands.WriteSinglePID(gaugeCommands.BoxGauge3);
                     gagBox3Value.Text = Convert.ToString(gaugeCommands.BoxGauge3.GaugeValue);
-                    if (gaugeCommands.BoxGauge3.GaugeValue >= gaugeCommands.BoxGauge3.Warning) gagBox3Frame.BorderColor = gagBox3Label.TextColor = gagBox3UoM.TextColor = gagBox3Value.TextColor = Color.OrangeRed;
-                    else gagBox3Frame.BorderColor = gagBox3Label.TextColor = gagBox3UoM.TextColor = gagBox3Value.TextColor = Color.Cyan;
+                    if (gaugeCommands.BoxGauge3.GaugeValue >= gaugeCommands.BoxGauge3.Warning) gagBox3Frame.BorderColor = gagBox3Label.TextColor = gagBox3UoM.TextColor = gagBox3Value.TextColor = ColorMaster.ColorCritical;
+                    else gagBox3Frame.BorderColor = gagBox3Label.TextColor = gagBox3UoM.TextColor = gagBox3Value.TextColor = ColorMaster.ColorPrimary;
 
                     //Box Gauge 4
                     await gaugeCommands.WriteSinglePID(gaugeCommands.BoxGauge4);
                     gagBox4Value.Text = Convert.ToString(gaugeCommands.BoxGauge4.GaugeValue);
-                    if (gaugeCommands.BoxGauge4.GaugeValue >= gaugeCommands.BoxGauge4.Warning) gagBox4Frame.BorderColor = gagBox4Label.TextColor = gagBox4UoM.TextColor = gagBox4Value.TextColor = Color.OrangeRed;
-                    else gagBox4Frame.BorderColor = gagBox4Label.TextColor = gagBox4UoM.TextColor = gagBox4Value.TextColor = Color.Cyan;
+                    if (gaugeCommands.BoxGauge4.GaugeValue >= gaugeCommands.BoxGauge4.Warning) gagBox4Frame.BorderColor = gagBox4Label.TextColor = gagBox4UoM.TextColor = gagBox4Value.TextColor = ColorMaster.ColorCritical;
+                    else gagBox4Frame.BorderColor = gagBox4Label.TextColor = gagBox4UoM.TextColor = gagBox4Value.TextColor = ColorMaster.ColorPrimary;
 
                     sw.Stop();
                     UpdateLog($"-----Time to Execute: {Convert.ToString(sw.ElapsedMilliseconds)}");
@@ -316,7 +328,10 @@ namespace RedGrim.Mobile.Controls
 
         public void ResetGauges()
         {
-            gagRadialMain.Scales[0].Pointers[0].Value = 0;
+            //gagRadialMain.Scales[0].Pointers[0].Value = 0;
+            gagMainValue.Text = "---";
+            gagMainProgBar.Progress = 0;
+
             gagBox1Value.Text = "---";
             gagBox2Value.Text = "---";
             gagBox3Value.Text = "---";
@@ -330,8 +345,15 @@ namespace RedGrim.Mobile.Controls
             try
             {
                 tbkBTStatus.Text = "Connected";
-                tbkBTStatus.TextColor = Color.Cyan;
+                tbkBTStatus.TextColor = ColorMaster.ColorPrimary;
                 SaveDevice();
+
+                //Clear Logs on startup
+                if (!SettingsControl.debugMode)
+                {
+                    log = String.Empty;
+                    errorLog = String.Empty;
+                }
             }
             catch (Exception ex)
             {
@@ -348,7 +370,7 @@ namespace RedGrim.Mobile.Controls
                 if (gaugeCommands != null) gaugeCommands = null;
 
                 tbkBTStatus.Text = "No Connection";
-                tbkBTStatus.TextColor = Color.OrangeRed;
+                tbkBTStatus.TextColor = ColorMaster.ColorCritical;
                 SystemLogEntry($"{error}", false);
             }
             catch (Exception)
@@ -360,32 +382,37 @@ namespace RedGrim.Mobile.Controls
 
         #region PID Error Code Reading
 
-        private async void ReadCodes()
+        private async void GetErrorCodes()
         {
-            try
+            tbkErrorCode.Text = "Retrieving trouble codes...";
+            List<string> errorCodes = new List<string>();
+            if (gaugeCommands != null)
             {
-                List<string> troubleCodes = await gaugeCommands.WriteTroubleRequest();
+                errorCodes = await gaugeCommands.WriteTroubleRequest();
 
-                if (troubleCodes.Count < 1)
+                if (errorCodes.Count < 1)
+                    tbkErrorCode.Text = "<<<---No error codes--->>>";
+
+                foreach (string s in errorCodes)
                 {
-                    WriteTroubleCode("<<<--No trouble codes detected-->>>");
-                    return;
+                    tbkErrorCode.Text = tbkErrorCode.Text + $"--{s}\n\n";
                 }
-
-                foreach (string c in troubleCodes) WriteTroubleCode(c);
             }
-            catch(Exception ex)
-            {
-
-            }
+            else
+                tbkErrorCode.Text = "<<<--No Connection-->>";
         }
 
-        private async void WriteTroubleCode(string code)
+        private async void ClearErrorCodes()
         {
-            //Textbox that hold the trouble code window write the code
+            if (gaugeCommands != null)
+            {
+                await gaugeCommands.ClearTroubleCodes();
+                tbkErrorCode.Text = "---Ready---";
+            }
+
+            else
+                tbkErrorCode.Text = "<<<--No Connection-->>";
         }
-
-
 
         #endregion
 
@@ -473,51 +500,20 @@ namespace RedGrim.Mobile.Controls
             log = log + "\r\n" + input;
         }
 
-        private async void GetErrorCodes()
-        {
-            tbkErrorCode.Text = "Retrieving trouble codes...";
-            List<string> errorCodes = new List<string>();
-            if (gaugeCommands != null)
-            {          
-                errorCodes = await gaugeCommands.WriteTroubleRequest();
-
-                if (errorCodes.Count < 1)
-                    tbkErrorCode.Text = "<<<---No error codes--->>>";
-
-                foreach(string s in errorCodes)
-                    tbkErrorCode.Text = tbkErrorCode.Text + $"--{s}\n\n";
-            }
-            else
-                tbkErrorCode.Text = "<<<--No Connection-->>";
-        }
-
-        private async void ClearErrorCodes()
-        {
-            if (gaugeCommands != null)
-            {
-                await gaugeCommands.ClearTroubleCodes();
-                tbkErrorCode.Text = "---Ready---";
-            }
-
-            else
-                tbkErrorCode.Text = "<<<--No Connection-->>";
-        }
-
-
         private void Radial_PointerPositionChanged(object sender, Syncfusion.SfGauge.XForms.PointerPositionChangedArgs args)
         {
-            try
-            {
-                if (sender == gagRadialMain)
-                {
-                    lblMainValue.Text = Convert.ToString(args.pointerValue);
-                    return;
-                }
-            }
-            catch(Exception ex)
-            {
-                SystemLogEntry(ex.Message, false);
-            }
+            //try
+            //{
+            //    if (sender == gagRadialMain)
+            //    {
+            //        lblMainValue.Text = Convert.ToString(args.pointerValue);
+            //        return;
+            //    }
+            //}
+            //catch(Exception ex)
+            //{
+            //    SystemLogEntry(ex.Message, false);
+            //}
         }
 
 
