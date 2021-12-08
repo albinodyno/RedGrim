@@ -57,7 +57,6 @@
                     <ProgressBar x:Name="gagMainProgBar" Progress="0" ProgressColor="OrangeRed" HeightRequest="20"/>
                 </StackLayout>
             </Frame>
-            
 
             <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2" BackgroundColor="Black">
                 <Grid.ColumnDefinitions>

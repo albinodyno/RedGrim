@@ -21,40 +21,38 @@ namespace RedGrim.Mobile
             InitializeComponent();
             VersionTracking.Track();
             VersionNumber = $"v{VersionTracking.CurrentVersion}";
+
             DeviceDisplay.KeepScreenOn = !DeviceDisplay.KeepScreenOn;
             Battery.BatteryInfoChanged += Battery_BatteryInfoChanged;
             //SetTimer();
             StartUp();
         }
 
-        public void SetTimer()
+        #region Start
+
+        private void StartUp()
         {
-            // Create a timer with a two second interval.
-            clockTimer = new System.Timers.Timer(60000);
-            // Hook up the Elapsed event for the timer. 
-            clockTimer.Elapsed += OnTimedEvent;
-            clockTimer.AutoReset = true;
-            clockTimer.Enabled = true;
-
-            currentTime = DateTime.Now.ToShortTimeString();
-            //lblClock.Text = currentTime;
-        }
-
-        public async void OnTimedEvent(Object source, ElapsedEventArgs e)
-        {
-            currentTime = DateTime.Now.ToShortTimeString();
-            //lblClock.Text = currentTime;
-        }
-
-        private void UpdateClock()
-        {
-
+            if (Battery.PowerSource != BatteryPowerSource.Battery)
+            {
+                BluetoothPage.ConnectSavedDevice();
+                AuxPage.ConnectSavedDevice();
+            }
         }
 
         void Battery_BatteryInfoChanged(object sender, BatteryInfoChangedEventArgs e)
         {
             if (e.PowerSource != BatteryPowerSource.Battery) StartUp();
             BluetoothControl.SystemLogEntry($"Power State changed to: {e.PowerSource}", false);
+        }
+
+        #endregion
+
+        #region Button Events
+
+        private void btnConnectAll_Clicked(object sender, EventArgs e)
+        {
+            BluetoothPage.ConnectSavedDevice();
+            AuxPage.ConnectSavedDevice();
         }
 
         private void btnBTSetup_Clicked(object sender, EventArgs e)
@@ -137,21 +135,33 @@ namespace RedGrim.Mobile
             }
         }
 
-        private void btnConnectAll_Clicked(object sender, EventArgs e)
-        {
-            BluetoothPage.ConnectSavedDevice();
-            AuxPage.ConnectSavedDevice();
-        }
+        #endregion
 
+        #region Clock
+        //public void SetTimer()
+        //{
+        //    // Create a timer with a two second interval.
+        //    clockTimer = new System.Timers.Timer(60000);
+        //    // Hook up the Elapsed event for the timer. 
+        //    clockTimer.Elapsed += OnTimedEvent;
+        //    clockTimer.AutoReset = true;
+        //    clockTimer.Enabled = true;
 
-        private void StartUp()
-        {
-            if (Battery.PowerSource != BatteryPowerSource.Battery)
-            {
-                BluetoothPage.ConnectSavedDevice();
-                AuxPage.ConnectSavedDevice();
-            }
-        }
+        //    currentTime = DateTime.Now.ToShortTimeString();
+        //    //lblClock.Text = currentTime;
+        //}
+
+        //public async void OnTimedEvent(Object source, ElapsedEventArgs e)
+        //{
+        //    currentTime = DateTime.Now.ToShortTimeString();
+        //    //lblClock.Text = currentTime;
+        //}
+
+        //private void UpdateClock()
+        //{
+
+        //}
+        #endregion
 
     }
 }

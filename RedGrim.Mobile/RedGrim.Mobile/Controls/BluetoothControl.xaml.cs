@@ -270,7 +270,7 @@ namespace RedGrim.Mobile.Controls
 
                     //Main gauge
                     await gaugeCommands.WriteSinglePID(gaugeCommands.MainGauge);
-                    gagBox1Value.Text = Convert.ToString(gaugeCommands.MainGauge.GaugeValue);
+                    gagMainValue.Text = Convert.ToString(gaugeCommands.MainGauge.GaugeValue);
                     await gagMainProgBar.ProgressTo((gaugeCommands.MainGauge.GaugeValue / gaugeCommands.MainGauge.Max), 200, Easing.Linear);
                     if (gaugeCommands.MainGauge.GaugeValue >= gaugeCommands.MainGauge.Warning) gagMainFrame.BorderColor = gagMainLabel.TextColor = gagMainUoM.TextColor = gagMainValue.TextColor = ColorMaster.ColorCritical;
                     else gagMainFrame.BorderColor = gagMainLabel.TextColor = gagMainUoM.TextColor = gagMainValue.TextColor = ColorMaster.ColorPrimary;
