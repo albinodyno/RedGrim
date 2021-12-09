@@ -25,7 +25,7 @@ namespace RedGrim.Mobile.Models
             btDeviceName = "";
             obdProtocol = "";
             elmDelay = 1000;
-            pidDelay = 300;
+            pidDelay = 250;
         }
     }
 }

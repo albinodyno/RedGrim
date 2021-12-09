@@ -48,7 +48,6 @@ namespace RedGrim.Mobile.Controls
         {
             InitializeComponent();
             ViewModel = new ViewModels.SampleViewModel();
-            //gagRadialMain.PointerPositionChanged += Radial_PointerPositionChanged;
             LoadAdapter();
         }
 
@@ -79,6 +78,7 @@ namespace RedGrim.Mobile.Controls
 
         private void pkrBluetoothPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ToggleMenu();
             ConnectDevice();
         }
         #endregion
@@ -254,7 +254,7 @@ namespace RedGrim.Mobile.Controls
 
         #region  Run Gauges
 
-        public async void RunGauges()
+        public async void RunGaugesTest()
         {
             loopPid = true;
             UpdateLog("Started Looping...");
@@ -315,11 +315,59 @@ namespace RedGrim.Mobile.Controls
             UpdateLog("...Stopped Looping");
         }
 
-        private async void UpdateGaugeValue()
+        public async void RunGauges()
         {
+            loopPid = true;
+            UpdateLog("Started Looping...");
+            while (loopPid)
+                try
+                {
+                    System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                    sw.Start();
 
+                    await gaugeCommands.WriteStackPID();
+
+                    //Main gauge
+                    gagMainValue.Text = Convert.ToString(gaugeCommands.gauges[0].GaugeValue);
+                    await gagMainProgBar.ProgressTo((gaugeCommands.gauges[0].GaugeValue / gaugeCommands.gauges[0].Max), 200, Easing.Linear);
+                    if (gaugeCommands.gauges[0].GaugeValue >= gaugeCommands.gauges[0].Warning) gagMainFrame.BorderColor = gagMainLabel.TextColor = gagMainUoM.TextColor = gagMainValue.TextColor = ColorMaster.ColorCritical;
+                    else gagMainFrame.BorderColor = gagMainLabel.TextColor = gagMainUoM.TextColor = gagMainValue.TextColor = ColorMaster.ColorPrimary;
+
+                    //Box Gauge 1
+                    gagBox1Value.Text = Convert.ToString(gaugeCommands.gauges[1].GaugeValue);
+                    if (gaugeCommands.gauges[1].GaugeValue >= gaugeCommands.gauges[1].Warning) gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = ColorMaster.ColorCritical;
+                    else gagBox1Frame.BorderColor = gagBox1Label.TextColor = gagBox1UoM.TextColor = gagBox1Value.TextColor = ColorMaster.ColorPrimary;
+
+                    //Box Gauge 2
+                    gagBox2Value.Text = Convert.ToString(gaugeCommands.gauges[2].GaugeValue);
+                    if (gaugeCommands.gauges[2].GaugeValue >= gaugeCommands.gauges[2].Warning) gagBox2Frame.BorderColor = gagBox2Label.TextColor = gagBox2UoM.TextColor = gagBox2Value.TextColor = ColorMaster.ColorCritical;
+                    else gagBox2Frame.BorderColor = gagBox2Label.TextColor = gagBox2UoM.TextColor = gagBox2Value.TextColor = ColorMaster.ColorPrimary;
+
+                    //Box Gauge 3
+                    gagBox3Value.Text = Convert.ToString(gaugeCommands.gauges[3].GaugeValue);
+                    if (gaugeCommands.gauges[3].GaugeValue >= gaugeCommands.gauges[3].Warning) gagBox3Frame.BorderColor = gagBox3Label.TextColor = gagBox3UoM.TextColor = gagBox3Value.TextColor = ColorMaster.ColorCritical;
+                    else gagBox3Frame.BorderColor = gagBox3Label.TextColor = gagBox3UoM.TextColor = gagBox3Value.TextColor = ColorMaster.ColorPrimary;
+
+                    //Box Gauge 4
+                    gagBox4Value.Text = Convert.ToString(gaugeCommands.gauges[4].GaugeValue);
+                    if (gaugeCommands.gauges[4].GaugeValue >= gaugeCommands.gauges[4].Warning) gagBox4Frame.BorderColor = gagBox4Label.TextColor = gagBox4UoM.TextColor = gagBox4Value.TextColor = ColorMaster.ColorCritical;
+                    else gagBox4Frame.BorderColor = gagBox4Label.TextColor = gagBox4UoM.TextColor = gagBox4Value.TextColor = ColorMaster.ColorPrimary;
+
+                    sw.Stop();
+                    UpdateLog($"-----Time to Execute: {Convert.ToString(sw.ElapsedMilliseconds)}");
+
+                    if (failCount > 10)
+                        loopPid = await TestConnection(false);
+                }
+                catch (Exception ex)
+                {
+                    FailedConnection($"Error at PID Loop - {ex.Message}");
+                    loopPid = false;
+                }
+
+            ResetGauges();
+            UpdateLog("...Stopped Looping");
         }
-
 
         public async void StopGauges()
         {
@@ -337,6 +385,7 @@ namespace RedGrim.Mobile.Controls
             gagBox3Value.Text = "---";
             gagBox4Value.Text = "---";
         }
+
         #endregion
 
         #region Successful/Failed Connection Handling

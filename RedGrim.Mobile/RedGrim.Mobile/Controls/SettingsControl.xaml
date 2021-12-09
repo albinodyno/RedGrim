@@ -51,12 +51,17 @@
 
             <!--Gauge Settings Page-->
             <StackLayout x:Name="GaugeSettingsPage" Grid.ColumnSpan="2" IsVisible="False" BackgroundColor="Black" VerticalOptions="FillAndExpand">
-                
                 <Frame Grid.ColumnSpan="2" BorderColor="Purple" BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
                     <StackLayout HorizontalOptions="CenterAndExpand">
-                        <Label FontSize="18" Text="Gauge Settings" TextColor="DarkGoldenrod" HorizontalOptions="CenterAndExpand"/>
-                        <Button x:Name="btnDebugMode" Text="Debug Mode" HorizontalOptions="CenterAndExpand" FontSize="24" Clicked="btnDebugMode_Clicked" TextColor="Cyan" BackgroundColor="Transparent" BorderColor="Cyan" BorderWidth="1"/>
-                        <Label x:Name="lblDebugMode" HorizontalOptions="CenterAndExpand" FontSize="18" Text="ON" TextColor="Cyan"/>
+
+                        <!--<Button x:Name="btnDebugMode" Text="Debug Mode" HorizontalOptions="CenterAndExpand" FontSize="18" Clicked="btnDebugMode_Clicked" TextColor="Cyan" BackgroundColor="Transparent" BorderColor="Cyan" BorderWidth="1"/>
+                        <Label x:Name="lblDebugMode" HorizontalOptions="CenterAndExpand" FontSize="18" Text="ON" TextColor="Cyan"/>-->
+                        <StackLayout Orientation="Horizontal">
+                            <Label HorizontalOptions="CenterAndExpand" FontSize="18" Text="Last Connected: " TextColor="Magenta"/>
+                            <Label x:Name="lblBTName" HorizontalOptions="CenterAndExpand" FontSize="18" Text="DEVICE" TextColor="Cyan"/>
+                            <Label x:Name="lblBTAddress" HorizontalOptions="CenterAndExpand" FontSize="18" Text="ADDRESS" TextColor="Cyan"/>
+                        </StackLayout>
+
                     </StackLayout>
                 </Frame>
 

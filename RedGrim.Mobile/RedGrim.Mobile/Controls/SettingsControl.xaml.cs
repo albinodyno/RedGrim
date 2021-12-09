@@ -131,14 +131,14 @@ namespace RedGrim.Mobile.Controls
             if (debugMode)
             {
                 debugMode = false;
-                lblDebugMode.TextColor = Color.OrangeRed;
-                lblDebugMode.Text = "OFF";
+                //lblDebugMode.TextColor = Color.OrangeRed;
+                //lblDebugMode.Text = "OFF";
             }
             else
             {
                 debugMode = true;
-                lblDebugMode.TextColor = Color.Cyan;
-                lblDebugMode.Text = "ON";
+                //lblDebugMode.TextColor = Color.Cyan;
+                //lblDebugMode.Text = "ON";
 
             }
         }
@@ -210,9 +210,22 @@ namespace RedGrim.Mobile.Controls
                 }
                 else
                     saveSettings = loadedSettings;
+            }
+            catch (Exception ex)
+            {
+                BluetoothControl.SystemLogEntry($"---Load Settings Failed: {ex.Message} \n  Loading Defauts...", false);
+                SaveData();
+                loadedSettings = saveSettings;
+            }
 
+            //Set values in UI
+            try
+            {
                 BluetoothControl.savedDeviceAddress = saveSettings.btDeviceAddress;
                 BluetoothControl.savedDeviceName = saveSettings.btDeviceName;
+
+                lblBTAddress.Text = saveSettings.btDeviceAddress;
+                lblBTName.Text = saveSettings.btDeviceName;
 
                 stpPIDDelay.Value = saveSettings.pidDelay;
                 stpELMDelay.Value = saveSettings.elmDelay;
@@ -220,9 +233,9 @@ namespace RedGrim.Mobile.Controls
                 lblPIDDelay.Text = Convert.ToString(saveSettings.pidDelay);
                 lblELMDelay.Text = Convert.ToString(saveSettings.elmDelay);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                BluetoothControl.SystemLogEntry($"---Load Settings Failed - {ex.Message}", false);
+
             }
         }
 
