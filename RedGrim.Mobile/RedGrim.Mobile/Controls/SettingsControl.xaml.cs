@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using RedGrim.Mobile.Models;
+using RedGrim.Mobile.Tools;
 
 namespace RedGrim.Mobile.Controls
 {
@@ -128,19 +129,19 @@ namespace RedGrim.Mobile.Controls
 
         private void btnDebugMode_Clicked(object sender, EventArgs e)
         {
-            if (debugMode)
-            {
-                debugMode = false;
-                //lblDebugMode.TextColor = Color.OrangeRed;
-                //lblDebugMode.Text = "OFF";
-            }
-            else
-            {
-                debugMode = true;
-                //lblDebugMode.TextColor = Color.Cyan;
-                //lblDebugMode.Text = "ON";
+            //if (debugMode)
+            //{
+            //    debugMode = false;
+            //    //lblDebugMode.TextColor = Color.OrangeRed;
+            //    //lblDebugMode.Text = "OFF";
+            //}
+            //else
+            //{
+            //    debugMode = true;
+            //    //lblDebugMode.TextColor = Color.Cyan;
+            //    //lblDebugMode.Text = "ON";
 
-            }
+            //}
         }
         
         private void btnDelaySave_Clicked(object sender, EventArgs e)
@@ -150,6 +151,8 @@ namespace RedGrim.Mobile.Controls
 
             saveSettings.pidDelay = Convert.ToInt32(stpPIDDelay.Value);
             saveSettings.elmDelay = Convert.ToInt32(stpELMDelay.Value);
+
+            saveSettings.theme = pkrTheme.SelectedIndex;
 
             SaveData();
 
@@ -164,6 +167,11 @@ namespace RedGrim.Mobile.Controls
         private void stpPIDDelay_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             lblPIDDelay.Text = Convert.ToString(stpPIDDelay.Value);
+        }
+
+        private void pkrTheme_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            saveSettings.theme = pkrTheme.SelectedIndex;
         }
 
         #endregion
@@ -232,6 +240,8 @@ namespace RedGrim.Mobile.Controls
 
                 lblPIDDelay.Text = Convert.ToString(saveSettings.pidDelay);
                 lblELMDelay.Text = Convert.ToString(saveSettings.elmDelay);
+
+                pkrTheme.SelectedIndex = saveSettings.theme;
             }
             catch(Exception ex)
             {
@@ -251,12 +261,19 @@ namespace RedGrim.Mobile.Controls
                 StreamWriter writer = File.CreateText(savePath);
                 writer.Write(jsonSettings);
                 writer.Close();
+                UpdateAfterSave();
                 BluetoothControl.SystemLogEntry("Settings saved successfully", false);
             }
             catch(Exception ex)
             {
                 BluetoothControl.SystemLogEntry("Failed to save settings", false);
             }
+        }
+
+        public static void UpdateAfterSave()
+        {
+            GaugeCommands.elmDelay = saveSettings.elmDelay;
+            GaugeCommands.pidDelay = saveSettings.pidDelay;
         }
 
 

@@ -254,7 +254,7 @@ namespace RedGrim.Mobile.Controls
 
         #region  Run Gauges
 
-        public async void RunGaugesTest()
+        public async void RunGauges()
         {
             loopPid = true;
             UpdateLog("Started Looping...");
@@ -315,7 +315,7 @@ namespace RedGrim.Mobile.Controls
             UpdateLog("...Stopped Looping");
         }
 
-        public async void RunGauges()
+        public async void RunGaugesTEST()
         {
             loopPid = true;
             UpdateLog("Started Looping...");

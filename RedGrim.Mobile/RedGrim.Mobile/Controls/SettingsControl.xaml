@@ -51,40 +51,44 @@
 
             <!--Gauge Settings Page-->
             <StackLayout x:Name="GaugeSettingsPage" Grid.ColumnSpan="2" IsVisible="False" BackgroundColor="Black" VerticalOptions="FillAndExpand">
-                <Frame Grid.ColumnSpan="2" BorderColor="Purple" BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
-                    <StackLayout HorizontalOptions="CenterAndExpand">
 
-                        <!--<Button x:Name="btnDebugMode" Text="Debug Mode" HorizontalOptions="CenterAndExpand" FontSize="18" Clicked="btnDebugMode_Clicked" TextColor="Cyan" BackgroundColor="Transparent" BorderColor="Cyan" BorderWidth="1"/>
-                        <Label x:Name="lblDebugMode" HorizontalOptions="CenterAndExpand" FontSize="18" Text="ON" TextColor="Cyan"/>-->
-                        <StackLayout Orientation="Horizontal">
-                            <Label HorizontalOptions="CenterAndExpand" FontSize="18" Text="Last Connected: " TextColor="Magenta"/>
+                <StackLayout Grid.ColumnSpan="2" BackgroundColor="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
+                    <StackLayout Orientation="Horizontal">
+                            <Label HorizontalOptions="CenterAndExpand" FontSize="18" Text="Last Connected: " TextColor="OrangeRed"/>
                             <Label x:Name="lblBTName" HorizontalOptions="CenterAndExpand" FontSize="18" Text="DEVICE" TextColor="Cyan"/>
                             <Label x:Name="lblBTAddress" HorizontalOptions="CenterAndExpand" FontSize="18" Text="ADDRESS" TextColor="Cyan"/>
                         </StackLayout>
-
                     </StackLayout>
-                </Frame>
 
-                <Frame Grid.ColumnSpan="2" BorderColor="Purple" BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
+
+                <Frame Grid.ColumnSpan="2" BorderColor="Gray" BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
                     <StackLayout HorizontalOptions="CenterAndExpand">
-                        <Label FontSize="18" Text="ELM/PID Delay" TextColor="DarkGoldenrod" HorizontalOptions="CenterAndExpand"/>
+                        <Label FontSize="18" Text="ELM/PID Delay" TextColor="OrangeRed" HorizontalOptions="CenterAndExpand"/>
                         <StackLayout Orientation="Horizontal">
-                            <Label x:Name="lblPIDDelay" FontSize="20" Text="---" TextColor="Cyan" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label x:Name="lblPIDDelay" FontSize="20" Text="---" TextColor="white" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                             <Stepper x:Name="stpPIDDelay" Minimum="0" Maximum="2000" Increment="50" ValueChanged="stpPIDDelay_ValueChanged"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <Label x:Name="lblELMDelay" FontSize="20" Text="---" TextColor="Cyan" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label x:Name="lblELMDelay" FontSize="20" Text="---" TextColor="white" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                             <Stepper x:Name="stpELMDelay" Minimum="0" Maximum="2000" Increment="50" ValueChanged="stpELMDelay_ValueChanged"/>
                         </StackLayout>
-                        <Button x:Name="btnDelaySave" Text="Save" HorizontalOptions="CenterAndExpand" FontSize="24" Clicked="btnDelaySave_Clicked" TextColor="Cyan" BackgroundColor="Transparent" BorderColor="Cyan" BorderWidth="1"/>
+                        <Picker x:Name="pkrTheme" Title="Theme" SelectedIndexChanged="pkrTheme_SelectedIndexChanged" TitleColor="OrangeRed" TextColor="OrangeRed">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Dark</x:String>
+                                    <x:String>Stealth</x:String>
+                                    <x:String>MOB</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
                     </StackLayout>
                 </Frame>
 
-                <Frame Grid.ColumnSpan="2" BorderColor="Purple" BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
+                <Frame Grid.ColumnSpan="2" BorderColor="Gray" BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
                     <StackLayout>
-                        <Label FontSize="18" Text="Defaults" TextColor="DarkGoldenrod" HorizontalOptions="CenterAndExpand"/>
                         <Button IsVisible="false" x:Name="btnSaveSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Save" Clicked="btnSaveSettings_Clicked" Background="Cyan" TextColor="Black"/>
-                        <Button x:Name="btnLoadSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Load" Clicked="btnLoadSettings_Clicked" Background="Cyan" TextColor="Black"/>
+                        <Button x:Name="btnLoadSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Load" Clicked="btnLoadSettings_Clicked" Background="OrangeRed" TextColor="Black"/>
+                        <Button x:Name="btnDelaySave" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Save" Clicked="btnDelaySave_Clicked" Background="Cyan" TextColor="Black"/>
                         <Button IsVisible="false" x:Name="btnResetSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Reset To Default" Clicked="btnResetSettings_Clicked" Background="OrangeRed" TextColor="Black"/>
                     </StackLayout>
                 </Frame>
