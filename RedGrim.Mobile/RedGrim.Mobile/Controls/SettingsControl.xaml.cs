@@ -242,6 +242,9 @@ namespace RedGrim.Mobile.Controls
                 lblELMDelay.Text = Convert.ToString(saveSettings.elmDelay);
 
                 pkrTheme.SelectedIndex = saveSettings.theme;
+
+                ColorMaster.ChangeTheme(saveSettings.theme);
+                BluetoothControl.SystemLogEntry(saveSettings.theme.ToString(), false);
             }
             catch(Exception ex)
             {
@@ -274,6 +277,8 @@ namespace RedGrim.Mobile.Controls
         {
             GaugeCommands.elmDelay = saveSettings.elmDelay;
             GaugeCommands.pidDelay = saveSettings.pidDelay;
+
+            
         }
 
 

@@ -49,6 +49,7 @@ namespace RedGrim.Mobile.Controls
             InitializeComponent();
             ViewModel = new ViewModels.SampleViewModel();
             LoadAdapter();
+            UpdateTheme();
         }
 
         #region Initial Bluetooth Setttings
@@ -522,6 +523,17 @@ namespace RedGrim.Mobile.Controls
             OBDErrorCodePage.IsVisible = false;
         }
 
+        private async void btnThemeChange_Clicked(object sender, EventArgs e)
+        {
+            if (SettingsControl.saveSettings.theme == 0) ColorMaster.ChangeTheme(1);
+            else if (SettingsControl.saveSettings.theme == 1) ColorMaster.ChangeTheme(2);
+            else ColorMaster.ChangeTheme(0);
+
+            await UpdateTheme();
+
+            SystemLogEntry($"Theme changed to {SettingsControl.saveSettings.theme}", false);
+        }
+
         #endregion
 
         #region Misc
@@ -565,6 +577,34 @@ namespace RedGrim.Mobile.Controls
             //}
         }
 
+        public async Task UpdateTheme()
+        {
+            gagMainFrame.BorderColor = ColorMaster.ColorPrimary;
+            gagBox1Frame.BorderColor = ColorMaster.ColorPrimary;
+            gagBox2Frame.BorderColor = ColorMaster.ColorPrimary;
+            gagBox3Frame.BorderColor = ColorMaster.ColorPrimary;
+            gagBox4Frame.BorderColor = ColorMaster.ColorPrimary;
+
+            gagMainLabel.TextColor = ColorMaster.ColorPrimary;
+            gagBox1Label.TextColor = ColorMaster.ColorPrimary;
+            gagBox2Label.TextColor = ColorMaster.ColorPrimary;
+            gagBox3Label.TextColor = ColorMaster.ColorPrimary;
+            gagBox4Label.TextColor = ColorMaster.ColorPrimary;
+
+            gagMainUoM.TextColor = ColorMaster.ColorPrimary;
+            gagBox1UoM.TextColor = ColorMaster.ColorPrimary;
+            gagBox2UoM.TextColor = ColorMaster.ColorPrimary;
+            gagBox3UoM.TextColor = ColorMaster.ColorPrimary;
+            gagBox4UoM.TextColor = ColorMaster.ColorPrimary;
+
+            gagMainValue.TextColor = ColorMaster.ColorPrimary;
+            gagBox1Value.TextColor = ColorMaster.ColorPrimary;
+            gagBox2Value.TextColor = ColorMaster.ColorPrimary;
+            gagBox3Value.TextColor = ColorMaster.ColorPrimary;
+            gagBox4Value.TextColor = ColorMaster.ColorPrimary;
+        }
+
+
 
 
         #endregion
@@ -607,7 +647,5 @@ namespace RedGrim.Mobile.Controls
         //}
 
         #endregion
-
-
     }
 }
