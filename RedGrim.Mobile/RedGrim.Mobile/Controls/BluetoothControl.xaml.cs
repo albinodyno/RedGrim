@@ -561,22 +561,6 @@ namespace RedGrim.Mobile.Controls
             log = log + "\r\n" + input;
         }
 
-        private void Radial_PointerPositionChanged(object sender, Syncfusion.SfGauge.XForms.PointerPositionChangedArgs args)
-        {
-            //try
-            //{
-            //    if (sender == gagRadialMain)
-            //    {
-            //        lblMainValue.Text = Convert.ToString(args.pointerValue);
-            //        return;
-            //    }
-            //}
-            //catch(Exception ex)
-            //{
-            //    SystemLogEntry(ex.Message, false);
-            //}
-        }
-
         public async Task UpdateTheme()
         {
             gagMainFrame.BorderColor = ColorMaster.ColorPrimary;
@@ -602,10 +586,9 @@ namespace RedGrim.Mobile.Controls
             gagBox2Value.TextColor = ColorMaster.ColorPrimary;
             gagBox3Value.TextColor = ColorMaster.ColorPrimary;
             gagBox4Value.TextColor = ColorMaster.ColorPrimary;
+
+            //imgIcon.Source = ColorMaster.MainImage.Source;
         }
-
-
-
 
         #endregion
 

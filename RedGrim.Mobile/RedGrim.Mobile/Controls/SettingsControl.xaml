@@ -72,7 +72,7 @@
                             <Label x:Name="lblELMDelay" FontSize="20" Text="---" TextColor="white" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                             <Stepper x:Name="stpELMDelay" Minimum="0" Maximum="2000" Increment="50" ValueChanged="stpELMDelay_ValueChanged"/>
                         </StackLayout>
-                        <Picker x:Name="pkrTheme" IsVisible="false" Title="Theme" SelectedIndexChanged="pkrTheme_SelectedIndexChanged" TitleColor="OrangeRed" TextColor="OrangeRed">
+                        <Picker x:Name="pkrTheme" IsVisible="true" IsEnabled="False" Title="Theme" SelectedIndexChanged="pkrTheme_SelectedIndexChanged" TitleColor="OrangeRed" TextColor="OrangeRed">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Dark</x:String>

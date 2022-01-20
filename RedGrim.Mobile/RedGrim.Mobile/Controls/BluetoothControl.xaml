@@ -44,7 +44,7 @@
 
             <!--Main Page img-->
             <StackLayout  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
-                <Image Source="splash.png" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/> 
+                <Image x:Name="imgIcon" Source="splash.png" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/> 
             </StackLayout>
 
             <Button x:Name="btnThemeChange" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" BackgroundColor="Transparent" BorderColor="Transparent"  BorderWidth="3" Clicked="btnThemeChange_Clicked" />

@@ -102,6 +102,12 @@ namespace RedGrim.Mobile.Controls
 
             tbkAuxStatus.Text = "No Connection";
             tbkAuxStatus.TextColor = Color.OrangeRed;
+
+            Aux1Off();
+            Aux2Off();
+            Aux3Off();
+            Aux4Off();
+
             BluetoothControl.SystemLogEntry($"AUX - {error}", false);
         }
 
@@ -122,97 +128,111 @@ namespace RedGrim.Mobile.Controls
 
         #endregion
 
-
-        #region ON/OFF Buttons
+        #region ON/OFF Button Events
         //ON
-        private void btnAux1On_Clicked(object sender, EventArgs e)
+        private void btnAux1On_Clicked(object sender, EventArgs e) { Aux1On(); }
+        private void btnAux2On_Clicked(object sender, EventArgs e) { Aux2On(); }
+        private void btnAux3On_Clicked(object sender, EventArgs e) { Aux3On(); }
+        private void btnAux4On_Clicked(object sender, EventArgs e) { Aux4On(); }
+
+        //OFF
+        private void btnAux1Off_Clicked(object sender, EventArgs e) { Aux1Off(); }
+        private void btnAux2Off_Clicked(object sender, EventArgs e) { Aux2Off(); }
+        private void btnAux3Off_Clicked(object sender, EventArgs e) { Aux3Off(); }
+        private void btnAux4Off_Clicked(object sender, EventArgs e) { Aux4Off(); }
+
+        #endregion
+
+        #region Button Methods
+
+        //ON
+        private void Aux1On()
         {
             btnAux1On.IsVisible = false;
             btnAux1Off.IsVisible = true;
             if (connected)
             {
                 SendCommand("1");
-                bdr1.BorderColor = ColorMaster.ColorText;
+                bdr1.BorderColor = ColorMaster.ColorOn;
             }
             else
-                bdr1.BorderColor = ColorMaster.ColorCritical;
+                bdr1.BorderColor = ColorMaster.ColorOnSecondary;
         }
 
-        private void btnAux2On_Clicked(object sender, EventArgs e)
+        private void Aux2On()
         {
             btnAux2On.IsVisible = false;
             btnAux2Off.IsVisible = true;
             if (connected)
             {
                 SendCommand("2");
-                bdr2.BorderColor = ColorMaster.ColorText;
+                bdr2.BorderColor = ColorMaster.ColorOn;
             }
             else
-                bdr2.BorderColor = ColorMaster.ColorCritical;
+                bdr2.BorderColor = ColorMaster.ColorOnSecondary;
         }
 
-        private void btnAux3On_Clicked(object sender, EventArgs e)
+        private void Aux3On()
         {
             btnAux3On.IsVisible = false;
             btnAux3Off.IsVisible = true;
             if (connected)
             {
                 SendCommand("3");
-                bdr3.BorderColor = ColorMaster.ColorText;
+                bdr3.BorderColor = ColorMaster.ColorOn;
             }
             else
-                bdr3.BorderColor = ColorMaster.ColorCritical;
+                bdr3.BorderColor = ColorMaster.ColorOnSecondary;
         }
 
-        private void btnAux4On_Clicked(object sender, EventArgs e)
+        private void Aux4On()
         {
             btnAux4On.IsVisible = false;
             btnAux4Off.IsVisible = true;
             if (connected)
             {
                 SendCommand("4");
-                bdr4.BorderColor = ColorMaster.ColorText;
+                bdr4.BorderColor = ColorMaster.ColorOn;
             }
             else
-                bdr4.BorderColor = ColorMaster.ColorCritical;
+                bdr4.BorderColor = ColorMaster.ColorOnSecondary;
         }
 
+
         //OFF
-        private void btnAux1Off_Clicked(object sender, EventArgs e)
+        private void Aux1Off()
         {
             btnAux1Off.IsVisible = false;
             btnAux1On.IsVisible = true;
-            bdr1.BorderColor = Color.LightGray;
+            bdr1.BorderColor = ColorMaster.ColorOff;
             if (connected) SendCommand("5");
         }
 
-        private void btnAux2Off_Clicked(object sender, EventArgs e)
+        private void Aux2Off()
         {
             btnAux2Off.IsVisible = false;
             btnAux2On.IsVisible = true;
-            bdr2.BorderColor = Color.LightGray;
+            bdr2.BorderColor = ColorMaster.ColorOff;
             if (connected) SendCommand("6");
         }
 
-        private void btnAux3Off_Clicked(object sender, EventArgs e)
+        private void Aux3Off()
         {
             btnAux3Off.IsVisible = false;
             btnAux3On.IsVisible = true;
-            bdr3.BorderColor = Color.LightGray;
+            bdr3.BorderColor = ColorMaster.ColorOff;
             if (connected) SendCommand("7");
         }
 
-        private void btnAux4Off_Clicked(object sender, EventArgs e)
+        private void Aux4Off()
         {
             btnAux4Off.IsVisible = false;
             btnAux4On.IsVisible = true;
-            bdr4.BorderColor = Color.LightGray;
+            bdr4.BorderColor = ColorMaster.ColorOff;
             if (connected) SendCommand("8");
         }
 
+
         #endregion
-
-
-
     }
 }
