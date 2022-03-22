@@ -15,10 +15,10 @@
 
             <ScrollView Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand">
                 <StackLayout>
-                    <Button x:Name="btnGaugeSettings" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="Gauge Settings" Clicked="btnGaugeSettings_Clicked"  Background="Cyan" TextColor="Black"/>
-                    <Button x:Name="btnShowLog" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="OBD Log" Clicked="btnShowLog_Clicked" Background="Cyan" TextColor="Black" Margin="2"/>
-                    <Button x:Name="btnShowErrorLog" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" Text="System Logs" Clicked="btnShowErrorLog_Clicked" Background="Cyan" TextColor="Black" Margin="0,0,0,40"/>
-                    <Label x:Name="lblVersionNumber" VerticalOptions="StartAndExpand" WidthRequest="230" HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Version Number" FontSize="20" Background="Black" TextColor="OrangeRed"/>
+                    <Button x:Name="btnGaugeSettings" VerticalOptions="StartAndExpand" WidthRequest="400" HeightRequest="100" HorizontalOptions="Center" Text="Gauge Settings" Clicked="btnGaugeSettings_Clicked"  Background="Cyan" TextColor="Black"/>
+                    <Button x:Name="btnShowLog" VerticalOptions="StartAndExpand" WidthRequest="400" HeightRequest="100" HorizontalOptions="Center" Text="OBD Log" Clicked="btnShowLog_Clicked" Background="Cyan" TextColor="Black" Margin="2"/>
+                    <Button x:Name="btnShowErrorLog" VerticalOptions="StartAndExpand" WidthRequest="400" HeightRequest="100" HorizontalOptions="Center" Text="System Logs" Clicked="btnShowErrorLog_Clicked" Background="Cyan" TextColor="Black" Margin="0,0,0,40"/>
+                    <Label x:Name="lblVersionNumber" VerticalOptions="StartAndExpand" WidthRequest="400" HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Version Number" FontSize="20" Background="Black" TextColor="OrangeRed"/>
                 </StackLayout>
             </ScrollView>
 

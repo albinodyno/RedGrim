@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
 
         <!--Side Menu-->
-        <Frame Grid.Row="1" Grid.Column="5" Grid.RowSpan="2" BorderColor="Cyan" BackgroundColor="Transparent" Padding="0" CornerRadius="10">
+        <Frame Grid.Row="1" Grid.Column="5" Grid.RowSpan="2" BorderColor="Gray" BackgroundColor="Transparent" Padding="0" CornerRadius="10">
             
         <Grid x:Name="pnlSideMenu">
                 <Grid.RowDefinitions>
@@ -36,10 +36,9 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf102;" FontSize="40"  Background="transparent" TextColor="Cyan" x:Name="btnConnectAll" Clicked="btnConnectAll_Clicked"/>
-
-                <Button Grid.Row="1" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf3fd;" FontSize="40" Background="transparent" TextColor="Cyan" x:Name="btnBTSetup" Clicked="btnBTSetup_Clicked"/>
-                <Button Grid.Row="2" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf0e7;" FontSize="40" Background="transparent" TextColor="Cyan" x:Name="btnAuxLaunch" Clicked="btnAuxLaunch_Clicked"/>
+                <Button Grid.Row="0" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf102;" FontSize="40"  Background="transparent" TextColor="Gray" x:Name="btnConnectAll" Clicked="btnConnectAll_Clicked"/>
+                <Button Grid.Row="1" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf3fd;" FontSize="40" Background="transparent" TextColor="Gray" x:Name="btnBTSetup" Clicked="btnBTSetup_Clicked"/>
+                <Button Grid.Row="2" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf0e7;" FontSize="40" Background="transparent" TextColor="Gray" x:Name="btnAuxLaunch" Clicked="btnAuxLaunch_Clicked"/>
                 <!--<Button Grid.Row="3" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf5a0;" FontSize="48" Background="transparent" TextColor="Cyan" x:Name="btnMapLaunch" Clicked="btnMapLaunch_Clicked"/>-->
                 <Button Grid.Row="3" FontFamily="{StaticResource FontAwesomeSolid}" Text="&#xf013;" FontSize="40" Background="transparent" TextColor="OrangeRed" x:Name="btnSettingsLaunch" Clicked="btnSettingsLaunch_Clicked"/>
            

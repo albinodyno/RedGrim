@@ -39,7 +39,7 @@ namespace RedGrim.Mobile.Tools
                     break;
             }
 
-            MainImage.Source = ImageSource.FromFile("splash.png");
+            //MainImage.Source = ImageSource.FromFile("splash.png");
 
             SettingsControl.saveSettings.theme = input;
             SettingsControl.SaveData();   
@@ -53,6 +53,7 @@ namespace RedGrim.Mobile.Tools
             ColorCritical = Color.OrangeRed;
             ColorLabel = Color.White;
             ColorText = Color.DarkGoldenrod;
+            MainImage.Source = ImageSource.FromFile("redgrimGC.png");
         }
 
         public static void StealthTheme()
@@ -63,6 +64,7 @@ namespace RedGrim.Mobile.Tools
             ColorCritical = Color.OrangeRed;
             ColorLabel = Color.White;
             ColorText = Color.White;
+            MainImage.Source = ImageSource.FromFile("redgrimGO.png");
         }
 
         public static void MobTheme()
@@ -73,6 +75,7 @@ namespace RedGrim.Mobile.Tools
             ColorCritical = Color.OrangeRed;
             ColorLabel = Color.White;
             ColorText = Color.White;
+            MainImage.Source = ImageSource.FromFile("redgrimGW.png");
         }
     }
 }

@@ -141,7 +141,7 @@
 
             <!--BT Status-->
             <Button Grid.Row="2" Grid.Column="2" x:Name="tbkBTStatus" TextColor="Magenta" BorderColor="Transparent" CornerRadius="5" BorderWidth="1" FontSize="12"  BackgroundColor="Transparent" Text="No Connection" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
-            <Button Grid.Row="2" Grid.Column="3" x:Name="btnAutoConnect" TextColor="Cyan" BorderColor="Cyan" CornerRadius="5" BorderWidth="1" FontSize="12" Background="Transparent" Text="OBD Connect" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Clicked="btnAutoConnect_Clicked"/>
+            <Button Grid.Row="2" Grid.Column="3" x:Name="btnAutoConnect" TextColor="White" BorderColor="White" CornerRadius="5" BorderWidth="1" FontSize="12" Background="Transparent" Text="OBD Connect" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Clicked="btnAutoConnect_Clicked"/>
 
             <!--BT Settings Panel-->
             <Frame x:Name="pnlBTSettings" Grid.Column="2" Grid.RowSpan="3" Grid.ColumnSpan="2" IsVisible="false" VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" Background="Black" BorderColor="OrangeRed" CornerRadius="5">

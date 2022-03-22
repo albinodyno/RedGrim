@@ -14,7 +14,7 @@ namespace RedGrim.Mobile.Droid
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "12.1.0.11")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "12.2.0.155")]
 	public partial class Resource
 	{
 		
@@ -16617,16 +16617,25 @@ namespace RedGrim.Mobile.Droid
 			public const int notify_panel_notification_icon_bg = 2131165381;
 			
 			// aapt resource value: 0x7F0700C6
-			public const int splash = 2131165382;
+			public const int redgrimGC = 2131165382;
 			
 			// aapt resource value: 0x7F0700C7
-			public const int test_custom_background = 2131165383;
+			public const int redgrimGO = 2131165383;
 			
 			// aapt resource value: 0x7F0700C8
-			public const int tooltip_frame_dark = 2131165384;
+			public const int redgrimGW = 2131165384;
 			
 			// aapt resource value: 0x7F0700C9
-			public const int tooltip_frame_light = 2131165385;
+			public const int splash = 2131165385;
+			
+			// aapt resource value: 0x7F0700CA
+			public const int test_custom_background = 2131165386;
+			
+			// aapt resource value: 0x7F0700CB
+			public const int tooltip_frame_dark = 2131165387;
+			
+			// aapt resource value: 0x7F0700CC
+			public const int tooltip_frame_light = 2131165388;
 			
 			static Drawable()
 			{

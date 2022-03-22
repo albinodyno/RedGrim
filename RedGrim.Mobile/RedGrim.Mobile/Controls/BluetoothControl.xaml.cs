@@ -587,7 +587,7 @@ namespace RedGrim.Mobile.Controls
             gagBox3Value.TextColor = ColorMaster.ColorPrimary;
             gagBox4Value.TextColor = ColorMaster.ColorPrimary;
 
-            //imgIcon.Source = ColorMaster.MainImage.Source;
+            imgIcon.Source = ColorMaster.MainImage.Source;
         }
 
         #endregion
