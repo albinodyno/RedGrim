@@ -13,8 +13,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Toolkit" Version="7.0.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Syncfusion.Xamarin.SfGauge" Version="19.1.0.69" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Plugin.BLE" Version="2.2.0-pre5" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2012" />
@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <Reference Include="Mono.Android">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v12.0\Mono.Android.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v7.1\Mono.Android.dll</HintPath>
     </Reference>
   </ItemGroup>
 

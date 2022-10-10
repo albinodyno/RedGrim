@@ -1,4 +1,5 @@
-﻿using Android.Bluetooth;
+﻿//using Android.Bluetooth;
+//using Android.Widget;
 using Java.Util;
 using RedGrim.Mobile.Models;
 using RedGrim.Mobile.Tools;
@@ -9,22 +10,29 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Plugin.BLE;
+using Plugin.BLE.Abstractions.Contracts;
 
 namespace RedGrim.Mobile.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BluetoothControl : ContentView
     {
-        public ViewModels.SampleViewModel ViewModel
-        {
-            get => BindingContext as ViewModels.SampleViewModel;
-            set => BindingContext = value;
-        }
+        //public ViewModels.SampleViewModel ViewModel
+        //{
+        //    get => BindingContext as ViewModels.SampleViewModel;
+        //    set => BindingContext = value;
+        //}
 
+       public static string plat = Device.RuntimePlatform;
 
-        BluetoothAdapter adapter;
-        BluetoothSocket socket;
-        BluetoothDevice device;
+        IAdapter adp;
+        IBluetoothLE ble;
+
+        Android.Bluetooth.BluetoothAdapter adapter;
+        Android.Bluetooth.BluetoothSocket socket;
+        Android.Bluetooth.BluetoothDevice device;
+
         GaugeCommands gaugeCommands;
 
         public static string savedDeviceAddress = "";
@@ -47,7 +55,7 @@ namespace RedGrim.Mobile.Controls
         public BluetoothControl()
         {
             InitializeComponent();
-            ViewModel = new ViewModels.SampleViewModel();
+            //ViewModel = new ViewModels.SampleViewModel();
             LoadAdapter();
             UpdateTheme();
         }
@@ -57,12 +65,19 @@ namespace RedGrim.Mobile.Controls
         {
             try
             {
-                adapter = BluetoothAdapter.DefaultAdapter;
-                if (adapter == null)
-                    throw new Exception("No Bluetooth adapter found.");
+                if(BluetoothControl.plat == "Android")
+                {
+                    adapter = Android.Bluetooth.BluetoothAdapter.DefaultAdapter;
+                    if (adapter == null)
+                        throw new Exception("No Bluetooth adapter found.");
 
-                if (!adapter.IsEnabled)
-                    throw new Exception("Bluetooth adapter is not enabled.");
+                    if (!adapter.IsEnabled)
+                        throw new Exception("Bluetooth adapter is not enabled.");
+                }
+
+                adp = CrossBluetoothLE.Current.Adapter;
+                ble = CrossBluetoothLE.Current;
+
             }
             catch(Exception ex)
             {
@@ -73,8 +88,13 @@ namespace RedGrim.Mobile.Controls
         public void LoadDevices()
         {
             if (adapter.IsEnabled)
-                foreach (BluetoothDevice d in adapter.BondedDevices)
-                pkrBluetoothPicker.Items.Add(d.Name);
+                foreach (Android.Bluetooth.BluetoothDevice d in adapter.BondedDevices)
+                    pkrBluetoothPicker.Items.Add(d.Name);
+
+            //if (adp.IsScanning) await adp.StopScanningForDevicesAsync();
+
+                //foreach (IDevice d in adapter.DiscoveredDevices )
+                //    pkrBluetoothPicker.Items.Add(d.Name);
         }
 
         private void pkrBluetoothPicker_SelectedIndexChanged(object sender, EventArgs e)
@@ -94,6 +114,15 @@ namespace RedGrim.Mobile.Controls
 
             try
             {
+                //savedDeviceName = SettingsControl.loadedSettings.btDeviceName;
+                //savedDeviceAddress = SettingsControl.loadedSettings.btDeviceAddress;
+
+                //tbkBTStatus.Text = savedDeviceName + "...";
+
+                //device = (from bd in adapter.BondedDevices where bd.Name == savedDeviceName select bd).FirstOrDefault();
+                //if (device == null) throw new Exception("not in list of available devices");
+                //await ConnectionHandling();
+
                 savedDeviceName = SettingsControl.loadedSettings.btDeviceName;
                 savedDeviceAddress = SettingsControl.loadedSettings.btDeviceAddress;
 

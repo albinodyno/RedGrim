@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:RedGrim.Mobile.Controls"
-             xmlns:gauge="clr-namespace:Syncfusion.SfGauge.XForms;assembly=Syncfusion.SfGauge.XForms"
+             xmlns:controls="clr-namespace:RedGrim.Mobile.Controls"         
              x:Class="RedGrim.Mobile.Controls.BluetoothControl">
+            <!--xmlns:gauge="clr-namespace:Syncfusion.SfGauge.XForms;assembly=Syncfusion.SfGauge.XForms"-->
+    
   <ContentView.Content>
         <Grid x:Name="grdGauges" Margin="3">
             <Grid.ColumnDefinitions>
@@ -44,7 +45,7 @@
 
             <!--Main Page img-->
             <StackLayout  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
-                <Image x:Name="imgIcon" Source="splash.png" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/> 
+                <Image x:Name="imgIcon" Source="splash.png" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/> 
             </StackLayout>
 
             <Button x:Name="btnThemeChange" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" BackgroundColor="Transparent" BorderColor="Transparent"  BorderWidth="3" Clicked="btnThemeChange_Clicked" />
